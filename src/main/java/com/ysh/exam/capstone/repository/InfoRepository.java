@@ -14,5 +14,6 @@ public interface InfoRepository {
 	@Select("SELECT * FROM info ORDER BY id ASC")
 	public List<Info> getRooms();
 	
+
 	
 }

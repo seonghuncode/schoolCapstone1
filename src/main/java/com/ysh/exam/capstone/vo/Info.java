@@ -16,5 +16,6 @@ public class Info {
 	 private int humadity;
 	 private int roomId;
 	
+	 
 
 }

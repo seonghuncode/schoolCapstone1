@@ -13,9 +13,10 @@ import com.ysh.exam.capstone.vo.Room;
 @Mapper
 public interface RoomNameRepository {
 
+
 	
-	@Insert("INSERT INTO room SET regDate = NOW(), roomName = #{roomName}") 
-	public void writeRoomName(@Param("roomName") String roomname);
+	@Insert("INSERT INTO room SET regDate = NOW(), roomName = #{roomName}, pm = #{pm}, temperature = #{temperature}, humadity = #{humadity}")
+	public void writeRoomName(@Param("roomName") String roomname,@Param("pm") String pm, @Param("temperature") String temperature, @Param("humadity") String humadity);
 	
 	
 	@Select("SELECT LAST_INSERT_ID()")
@@ -25,6 +26,8 @@ public interface RoomNameRepository {
 	public Room getRoom(@Param("roomName") String roomName);
 
 
+	@Select("SELECT * FROM room ORDER BY id ASC")
+	public List<Room> getRooms();
 	
 	
 	/*

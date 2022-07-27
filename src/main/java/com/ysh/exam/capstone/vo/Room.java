@@ -8,10 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Room {
-
+    
     private int id;
-    private String regDate;
     private String roomName;
+    private String regDate;    
+    private String pm;
+    private String temperature;
+    private String humadity;
 	
 
 }
