@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ysh.exam.capstone.repository.RoomNameRepository;
-import com.ysh.exam.capstone.vo.Info;
 import com.ysh.exam.capstone.vo.Room;
 
 @Service

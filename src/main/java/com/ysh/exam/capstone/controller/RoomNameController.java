@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ysh.exam.capstone.service.RoomNameService;
-import com.ysh.exam.capstone.vo.Info;
 import com.ysh.exam.capstone.vo.Room;
 
 
