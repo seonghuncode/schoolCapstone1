@@ -7,15 +7,15 @@ spring:
       suffix: .jsp
   datasource:
     #driver-class-name: com.mysql.cj.jdbc.Driver #아래의 JDBC가 mysql의존성 주입에 대한 부분, 127.0.01 ==> DB위치 , 포트번호, mysql의 데이터베이스 이름
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy #
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy 
     url: jdbc:log4jdbc:mysql://127.0.0.1:3306/machine?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
     username: ysh  #아이디
     password: ysh123   #비번
 mybatis:
   type-aliases-package: com.ysh.exam.capstone.vo  #value object가 있는 주소를 적는다
-#custom:
-#  logging:
-#    dir: log
-#    level: debug #이 세개는 로깅관련해서 사용한다(DB쿼리문등-콘솔에 나오는)
-#    #로그에 과련된 공통 설정 파일(src/main.resources에 logback-spring.xml에서 사용)
-##의존성 주입하고 사용하기
+custom:
+  logging:
+    dir: log
+    level: debug #이 세개는 로깅관련해서 사용한다(DB쿼리문등-콘솔에 나오는)
+    #로그에 과련된 공통 설정 파일(src/main.resources에 logback-spring.xml에서 사용)
+#의존성 주입하고 사용하기
