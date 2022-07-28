@@ -53,6 +53,12 @@ public class RoomNameService {
 	}
 
 
+
+	public void doDelete(String roomname) {
+		roomNameRepository.doDelete(roomname);
+	}
+
+
 	
 
 	

@@ -81,7 +81,24 @@ public class RoomNameController {
 	public List<Room> showRooms() {
 	//전체 roomname에 대한 정보를 보여준다.
 		return roomNameService.getRooms();
+	}
 	
+	@RequestMapping("/machine/room/doDelete")
+	@ResponseBody
+	public String doDelete(String roomname) {
+		
+		Room room = roomNameService.getRoom(roomname);
+		
+		if(roomname == null || roomname.trim().length() == 0) {
+			return "삭제할 방 이름을 입력해 주세요";
+		}
+		if(room == null) {
+			return roomname + "은 존재하지 않는 방 입니다.";
+		}
+		
+		roomNameService.doDelete(roomname);
+		
+		return roomname + "이 삭제 되었습니다";
 	}
 	
 	

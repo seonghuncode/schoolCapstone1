@@ -2,6 +2,7 @@ package com.ysh.exam.capstone.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,6 +28,9 @@ public interface RoomNameRepository {
 
 	@Select("SELECT * FROM room ORDER BY id ASC")
 	public List<Room> getRooms();
+
+	@Delete("DELETE FROM room WHERE roomName = #{roomName}")
+	public void doDelete(@Param("roomName") String roomname);
 	
 	
 	/*
