@@ -84,6 +84,20 @@
 			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 			<version>1.16</version>
 		</dependency>
+		
+		<!-- 스프링 부트에는 톰켓이 내장 되어 있는데 여기에 JSP엔진이 빠져 있기에 추가 -->
+		<!-- JSP 엔진 -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JSTL : JSP확장팩 같은 느낌-->  
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
 
 	</dependencies>
 
