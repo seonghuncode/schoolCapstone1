@@ -20,8 +20,8 @@ public class RoomNameService {
 	
 	
 
-	public int writeRoomName(String roomname, String pm, String temperature, String humadity) {
-		roomNameRepository.writeRoomName(roomname, pm, temperature, humadity);
+	public int writeRoomName(String roomname) {
+		roomNameRepository.writeRoomName(roomname);
 		return roomNameRepository.getLastInsertId();
 	}
 

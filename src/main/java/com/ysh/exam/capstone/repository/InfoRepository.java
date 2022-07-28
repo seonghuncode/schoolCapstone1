@@ -8,29 +8,19 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.ysh.exam.capstone.vo.Info;
 import com.ysh.exam.capstone.vo.Room;
 
 @Mapper
-public interface RoomNameRepository {
+public interface InfoRepository {
 
 
+
+
+	@Select("SELECT * FROM info ORDER BY id ASC")
+	public List<Info> showAllinfo();
 	
-	@Insert("INSERT INTO room SET regDate = NOW(), roomName = #{roomName}")
-	public void writeRoomName(@Param("roomName") String roomname);
-	
-	
-	@Select("SELECT LAST_INSERT_ID()")
-	public int getLastInsertId();
 
-	@Select("SELECT * FROM room WHERE roomName = #{roomName}")
-	public Room getRoom(@Param("roomName") String roomName);
-
-
-	@Select("SELECT * FROM room ORDER BY id ASC")
-	public List<Room> getRooms();
-
-	@Delete("DELETE FROM room WHERE roomName = #{roomName}")
-	public void doDelete(@Param("roomName") String roomname);
 	
 	
 	/*
