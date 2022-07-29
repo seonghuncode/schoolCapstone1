@@ -19,16 +19,21 @@ public interface InfoRepository {
 
 //	@Select("SELECT * FROM info ORDER BY id ASC")
 //	public List<Info> showAllinfo();
+
 	
+	//우선 두고 필요 없는 기능이면 없애기
 	@Select("""
 			SELECT A.*,
 			M.roomName AS joinName
 			FROM info AS A
 			LEFT JOIN room AS M
 			ON A.roomId = M.id
-			ORDER BY A.id DESC
+			ORDER BY A.id ASC
 			""")
 	public List<Info> showAllinfo();
+	
+	
+
 	
 
 	

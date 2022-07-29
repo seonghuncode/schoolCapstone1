@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.ysh.exam.capstone.vo.Info;
 import com.ysh.exam.capstone.vo.Room;
 
 @Mapper
@@ -26,8 +27,21 @@ public interface RoomNameRepository {
 	public Room getRoom(@Param("roomName") String roomName);
 
 
-	@Select("SELECT * FROM room ORDER BY id ASC")
+//	@Select("SELECT * FROM room ORDER BY id ASC")
+//	public List<Room> getRooms();
+	
+	@Select("""
+			SELECT A.*,
+			M.pm AS joinPm,
+			M.temperature AS joinTemperature,
+			M.humadity AS joinHumadity
+			FROM room AS A
+			LEFT JOIN info AS M
+			ON A.infoId = M.id
+			ORDER BY A.id ASC
+			""")
 	public List<Room> getRooms();
+	
 
 	@Delete("DELETE FROM room WHERE roomName = #{roomName}")
 	public void doDelete(@Param("roomName") String roomname);

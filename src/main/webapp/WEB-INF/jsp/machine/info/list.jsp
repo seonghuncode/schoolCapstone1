@@ -27,6 +27,9 @@
         <th>번호</th>
         <th>방이름</th>
         <th>등록 날짜</th>
+        <th>미세먼지</th>
+        <th>온도</th>
+        <th>습도</th>
       </tr>
     </thead>
     <tbody>
@@ -38,6 +41,9 @@
           </td>
           <!-- <td>${room.roomName}</td>  -->
           <td>${room.regDate.substring(2, 16) }</td>
+          <td>${room.joinPm}</td>
+          <td>${room.joinTemperature}</td>
+          <td>${room.joinHumadity}</td>
       </c:forEach>
       </tr>
 

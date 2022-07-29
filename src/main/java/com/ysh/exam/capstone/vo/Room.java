@@ -12,7 +12,12 @@ public class Room {
     private int id;
     private String roomName;
     private String regDate;    
+    private int infoId;
 
+    
+    private String joinPm;
+	private String joinTemperature;
+	private String joinHumadity;
 	
 
 }
