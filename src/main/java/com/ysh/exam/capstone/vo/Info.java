@@ -14,6 +14,9 @@ public class Info {
     private String pm;
     private String temperature;
     private String humadity;
+    private int roomId;
+    
+    private String joinName;
 	
 
 }

@@ -17,7 +17,17 @@ public interface InfoRepository {
 
 
 
-	@Select("SELECT * FROM info ORDER BY id ASC")
+//	@Select("SELECT * FROM info ORDER BY id ASC")
+//	public List<Info> showAllinfo();
+	
+	@Select("""
+			SELECT A.*,
+			M.roomName AS joinName
+			FROM info AS A
+			LEFT JOIN room AS M
+			ON A.roomId = M.id
+			ORDER BY A.id DESC
+			""")
 	public List<Info> showAllinfo();
 	
 

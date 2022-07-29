@@ -33,6 +33,11 @@ public interface RoomNameRepository {
 	public void doDelete(@Param("roomName") String roomname);
 	
 	
+
+
+
+	
+	
 	/*
 		//INSERT INTO article SET regDate = NOW(), updateDate = NOW(), title = ?, body = ?
 		//@Insert("INSERT INTO article SET regDate = NOW(), updateDate = NOW(), title = #{title}, `body` = #{body}")

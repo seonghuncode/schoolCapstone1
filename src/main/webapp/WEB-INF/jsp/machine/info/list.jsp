@@ -57,11 +57,12 @@
     <tbody>
       <c:forEach var="info" items="${AllInfo}">
         <tr>
-          <td>${info.id}}</td>
+          <td>${info.id}</td>
           <td>${info.updateDate}</td>
           <td>${info.pm}</td>
           <td>${info.temperature}</td>
           <td>${info.humadity}</td>
+          <td>${info.joinName}</td>
       </c:forEach>
       </tr>
     </tbody>
