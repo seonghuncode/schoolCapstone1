@@ -77,8 +77,6 @@ public class RoomNameController {
 		List<Room> rooms = roomNameService.getRooms();
 		model.addAttribute("rooms", rooms);
 		
-		
-		
 		return "/machine/info/list";
 	}
 	

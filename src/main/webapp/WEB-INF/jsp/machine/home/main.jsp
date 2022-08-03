@@ -9,7 +9,7 @@
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-      foot, head로 메인페이지 만들기
+      캡스톤 주제 : 로봇 청소기, 롯봇 공기 청정기
   </div>
 </section>
 

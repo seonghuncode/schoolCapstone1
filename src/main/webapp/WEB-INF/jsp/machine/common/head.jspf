@@ -30,7 +30,7 @@
   <header>
     <div class="flex h-20 container mx-auto">
       <a href="/" class="flex items-center px-3">
-        <span>로고<i class="fa-solid fa-tree-city"></i></span>
+        <span><i class="fa-solid fa-tree-city"></i>사이트 이름<i class="fa-solid fa-tree-city"></i></span>
       </a>
 
       <div class="flex-grow"></div>
@@ -43,13 +43,18 @@
           </a>
         </li>
         <li>
-          <a href="/usr/article/list" class="h-full flex px-3 items-center hover:underline">
-            <span>리스트</span>
+          <a href="/machine/member/join" class="h-full flex px-3 items-center hover:underline">
+            <span>회원가입</span>
           </a>
         </li>
         <li>
-          <a href="/usr/member/login" class="h-full flex px-3 items-center hover:underline">
+          <a href="/machine/member/login" class="h-full flex px-3 items-center hover:underline">
             <span>로그인</span>
+          </a>
+        </li>
+         <li>
+          <a href="/machine/room/showRooms" class="h-full flex px-3 items-center hover:underline">
+            <span>데이터 정보</span>
           </a>
         </li>
       </ul>
