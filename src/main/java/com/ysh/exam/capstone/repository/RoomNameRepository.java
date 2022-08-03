@@ -23,7 +23,17 @@ public interface RoomNameRepository {
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
 
-	@Select("SELECT * FROM room WHERE roomName = #{roomName}")
+//	@Select("SELECT * FROM room WHERE roomName = #{roomName}")
+	@Select("""
+			SELECT A.*,
+			M.pm AS joinPm,
+			M.temperature AS joinTemperature,
+			M.humadity AS joinHumadity
+			FROM room AS A
+			LEFT JOIN info AS M
+			ON A.infoId = M.roomId
+			WHERE roomName = #{roomName}
+			""")
 	public Room getRoom(@Param("roomName") String roomName);
 
 

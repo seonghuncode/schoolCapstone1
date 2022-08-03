@@ -77,14 +77,14 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		
+
 		<!-- 로거를 사용하기 위한 의존성 주입 -->
 		<dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>
 			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 			<version>1.16</version>
 		</dependency>
-		
+
 		<!-- 스프링 부트에는 톰켓이 내장 되어 있는데 여기에 JSP엔진이 빠져 있기에 추가 -->
 		<!-- JSP 엔진 -->
 		<dependency>
@@ -93,21 +93,28 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- JSTL : JSP확장팩 같은 느낌-->  
+		<!-- JSTL : JSP확장팩 같은 느낌 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
-		
-		
+
+
 		<!-- SQL 로거 -->
 		<dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>
 			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 			<version>1.16</version>
 		</dependency>
-		
-	
+
+
+		<!-- 타임리프 라이브러리를 사용하기 위한 ui를 가지고 오는 코드 -->
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+		</dependency>
+
+
 
 	</dependencies>
 

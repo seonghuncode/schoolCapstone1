@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <c:set var="pageTitle" value="데이터 리스트" />
 
 <!-- 불러오기 -->
@@ -10,7 +11,7 @@
 
 <div class="mt-5">
   <div class="container mx-auto px-3">
-  
+
 
     <table border="1" class="table">
       <thead>
@@ -26,25 +27,33 @@
       <tbody>
         <c:forEach var="room" items="${rooms}">
           <tr class="table-info">
+
+          
+
+
             <td scope="row">${room.id }</td>
             <td>
-              <a href="../room/doDetail?roomName=${room.roomName }"> ${room.roomName} </a>
+              <!-- <a href="../room/doDetail?roomName=${room.roomName }"> ${room.roomName} </a>   -->
+              <a href="../room/doDetail?roomName=${room.roomName}"> ${room.roomName} </a>
             </td>
             <!-- <td>${room.roomName}</td>  -->
             <td>${room.regDate.substring(2, 16) }</td>
             <td>${room.joinPm}</td>
             <td>${room.joinTemperature}</td>
             <td>${room.joinHumadity}</td>
-        </tr>
+          </tr>
+
+
+
         </c:forEach>
 
       </tbody>
     </table>
-    
-    
-    
-    
-<!--
+
+
+
+
+    <!--
     <table border="1">
       <thead>
         <tr>
@@ -69,11 +78,11 @@
     </table>
     
      -->
-     
- 
-    
-  
-    
+
+
+
+
+
 
   </div>
 </div>

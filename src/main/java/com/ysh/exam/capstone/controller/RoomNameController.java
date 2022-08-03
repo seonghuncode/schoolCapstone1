@@ -75,6 +75,7 @@ public class RoomNameController {
 	public String showRooms(Model model) {
 	//전체 roomname에 대한 정보를 보여준다.
 		List<Room> rooms = roomNameService.getRooms();
+		
 		model.addAttribute("rooms", rooms);
 		
 		return "/machine/info/list";
@@ -100,20 +101,21 @@ public class RoomNameController {
 	
 	
 	@RequestMapping("/machine/room/doDetail")
-	public String doDetail(Model model, String roomname) {
+	public String doDetail(Model model, String roomName) {
 		
-		if(roomname == null || roomname.trim().length() == 0) {
+		if(roomName == null || roomName.trim().length() == 0) {
 			return "자세히 보고 싶은 방 이름을 입력해 주세요";
 		}
 		
-		Room rooms = roomNameService.getRoom(roomname);
-		model.addAttribute("rooms", rooms);
+		Room room = roomNameService.getRoom(roomName);
+		model.addAttribute("room", room);
 		
 		return "/machine/info/detail";
 	}
 	
-	//방 이름 하나당 습도,온도,미세먼지의 정보는 1대 다관계에 있다.
-	//테이블을 두개로 나눈다(방이름에는 셍성날짜 id, 정보에는 온도, 습도 ,미세먼지)
+	
+	
+	
 	
 	
 	
