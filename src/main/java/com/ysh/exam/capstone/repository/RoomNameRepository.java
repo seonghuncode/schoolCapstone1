@@ -37,7 +37,7 @@ public interface RoomNameRepository {
 			M.humadity AS joinHumadity
 			FROM room AS A
 			LEFT JOIN info AS M
-			ON A.infoId = M.id
+			ON A.infoId = M.roomId
 			ORDER BY A.id ASC
 			""")
 	public List<Room> getRooms();
