@@ -20,13 +20,13 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.1);
+  background: white;
 }
 
 .login {
   width: 30%;
   height: 600px;
-  background: white;
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   display: flex;
   justify-content: center;

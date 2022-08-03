@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
 </head>
 <body>
+
+ -->
+
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set var="pageTitle" value="로그인 페이지" />
+<c:set var="cssType" value="/resource/login.css" />
+
+<!-- 불러오기 -->
+<%@ include file="../common/head.jspf" %>
+
+
+
+
 <form>
   <div class="wrap">
     <div class="login">
@@ -36,5 +54,4 @@
   
  
 
-</body>
-</html>
+<%@ include file="../common/foot.jspf" %>
