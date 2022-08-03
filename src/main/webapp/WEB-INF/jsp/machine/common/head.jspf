@@ -28,38 +28,47 @@
 <body>
 
   <header>
-    <div class="flex h-20 container mx-auto">
-      <a href="/" class="flex items-center px-3">
-        <span><i class="fa-solid fa-tree-city"></i>사이트 이름<i class="fa-solid fa-tree-city"></i></span>
-      </a>
+    <div class="bg-red-300 mt-1 rounded-xl">
+      <div class="flex h-16 container mx-auto">
+        <a href="/" class="flex items-center px-3">
+          <span>
+            <i class="fa-solid fa-tree-city"></i>
+            사이트 이름
+            <i class="fa-solid fa-tree-city"></i>
+          </span>
+        </a>
 
-      <div class="flex-grow"></div>
+        <div class="flex-grow"></div>
 
-      <ul class="flex">
-        <li>
-          <a href="/" class="h-full flex px-3 items-center  hover:underline">
-            <!-- 부모의 높이를 가지고 온다 -->
-            <span>홈</span>
-          </a>
-        </li>
-        <li>
-          <a href="/machine/member/join" class="h-full flex px-3 items-center hover:underline">
-            <span>회원가입</span>
-          </a>
-        </li>
-        <li>
-          <a href="/machine/member/login" class="h-full flex px-3 items-center hover:underline">
-            <span>로그인</span>
-          </a>
-        </li>
-         <li>
-          <a href="/machine/room/showRooms" class="h-full flex px-3 items-center hover:underline">
-            <span>데이터 정보</span>
-          </a>
-        </li>
-      </ul>
 
+        <ul class="flex nav nav-tabs m-2">
+          <li class="nav-item">
+            <a href="/" class="nav-link nav-link h-full flex px-3 items-center  hover:underline"
+              aria-current="page">
+              <!-- 부모의 높이를 가지고 온다 -->
+              <span>홈</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/machine/member/join" class="nav-link nav-link h-full flex px-3 items-center  hover:underline">
+              <span>회원가입</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/machine/member/login" class="nav-link h-full flex px-3 items-center hover:underline">
+              <span>로그인</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/machine/room/showRooms" class="nav-link h-full flex px-3 items-center hover:underline">
+              <span>데이터 정보</span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
     </div>
+
 
   </header>
 
