@@ -2,17 +2,15 @@ package com.ysh.exam.capstone.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ysh.exam.capstone.service.InfoService;
 import com.ysh.exam.capstone.service.RoomNameService;
-import com.ysh.exam.capstone.vo.Info;
 import com.ysh.exam.capstone.vo.Room;
 
 
@@ -76,10 +74,14 @@ public class RoomNameController {
 	//전체 roomname에 대한 정보를 보여준다.
 		List<Room> rooms = roomNameService.getRooms();
 		
+		
 		model.addAttribute("rooms", rooms);
 		
 		return "/machine/info/list";
 	}
+	
+	
+	//machine/room/showRooms에서 동일 방에 대한 다수의 데이터를 평균치로 보여주는 기능으로 수정
 	
 	@RequestMapping("/machine/room/doDelete")
 	@ResponseBody
