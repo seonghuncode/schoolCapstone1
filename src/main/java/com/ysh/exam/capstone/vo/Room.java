@@ -18,6 +18,7 @@ public class Room {
     private String joinPm;
 	private String joinTemperature;
 	private String joinHumadity;
+	private String joinUpdateDate;
 	
 
 }

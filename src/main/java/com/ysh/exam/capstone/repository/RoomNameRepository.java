@@ -42,7 +42,8 @@ public interface RoomNameRepository {
 			SELECT A.*,
 			M.pm AS joinPm,
 			M.temperature AS joinTemperature,
-			M.humadity AS joinHumadity
+			M.humadity AS joinHumadity,
+			M.updateDate AS joinUpdateDate
 			FROM room AS A
 			LEFT JOIN info AS M
 			ON A.infoId = M.roomId
