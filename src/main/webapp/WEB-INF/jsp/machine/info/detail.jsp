@@ -14,8 +14,9 @@
   <c:set var="room1Name" value="${room.roomName }" />
   <c:set var="room1RegDate" value="${room.regDate.substring(2, 16) }" />
 </c:forEach>
+
 <div class="container mx-auto px-3 mt-5 alert alert-primary justify-between" role="alert">
-<h3 class="inline-block align-middle">${room1Name}</h3>
+<h3 class="inline-block align-middle">위치 : ${room1Name}</h3>
 <span class="float-right inline-block align-middle mt-2">방 생성 날짜 : ${room1RegDate}</span>
 </div>
 
@@ -40,7 +41,9 @@
   </div>
 </div>
 
-
+<div class="container mx-auto px-3 mt-5">
+<button type="button" class="btn btn-light" onclick="history.back();">뒤로 가기</button>
+</div>
 
 
 <%@ include file="../common/foot.jspf"%>
