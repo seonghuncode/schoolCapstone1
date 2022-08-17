@@ -102,6 +102,20 @@ public class RoomNameController {
 	}
 	
 	
+//	@RequestMapping("/machine/room/doDetail")
+//	public String doDetail(Model model, String roomName) {
+//		
+//		if(roomName == null || roomName.trim().length() == 0) {
+//			return "자세히 보고 싶은 방 이름을 입력해 주세요";
+//		}
+//		
+//		Room room = roomNameService.getRoom(roomName);
+//		model.addAttribute("room", room);
+//		
+//		return "/machine/info/detail";
+//	}
+	
+	
 	@RequestMapping("/machine/room/doDetail")
 	public String doDetail(Model model, String roomName) {
 		
@@ -109,7 +123,7 @@ public class RoomNameController {
 			return "자세히 보고 싶은 방 이름을 입력해 주세요";
 		}
 		
-		Room room = roomNameService.getRoom(roomName);
+		List<Room> room = roomNameService.getRoomInfo(roomName);
 		model.addAttribute("room", room);
 		
 		return "/machine/info/detail";

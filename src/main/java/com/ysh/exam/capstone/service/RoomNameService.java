@@ -31,6 +31,11 @@ public class RoomNameService {
 		
 		return roomNameRepository.getRoom(roomname);
 	}
+	
+	public List<Room> getRoomInfo(String roomname) {
+		
+		return roomNameRepository.getRoomInfo(roomname);
+	}
 
 
 

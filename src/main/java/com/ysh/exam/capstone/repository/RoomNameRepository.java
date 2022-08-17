@@ -35,6 +35,20 @@ public interface RoomNameRepository {
 			WHERE roomName = #{roomName}
 			""")
 	public Room getRoom(@Param("roomName") String roomName);
+	
+	
+	
+	@Select("""
+			SELECT A.*,
+			M.pm AS joinPm,
+			M.temperature AS joinTemperature,
+			M.humadity AS joinHumadity
+			FROM room AS A
+			LEFT JOIN info AS M
+			ON A.infoId = M.roomId
+			WHERE roomName = #{roomName}
+			""")
+	public List<Room> getRoomInfo(@Param("roomName") String roomName);
 
 
 //	@Select("SELECT * FROM room ORDER BY id ASC")
