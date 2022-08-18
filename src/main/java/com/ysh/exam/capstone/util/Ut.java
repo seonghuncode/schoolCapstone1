@@ -57,24 +57,6 @@ public class Ut {
 	}
 	
 	
-	public static String jsReplace(String msg) {
-		if (msg == null) {
-			msg = "";
-		}
-
-		String uri = "/machine/member/login";
-				
-	
-		return Ut.f("""
-				<script>
-				const msg = '%s'.trim();
-				if ( msg.length > 0 ) {
-				    alert(msg);
-				}
-				location.replace('%s');
-				</script>
-				""", msg, uri);
-	}
 
 	
 	
