@@ -61,6 +61,11 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/machine/member/doLogout" class="nav-link h-full flex px-3 items-center hover:underline">
+              <span>로그아웃</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/machine/room/showRooms" class="nav-link h-full flex px-3 items-center hover:underline">
               <span>데이터 정보</span>
             </a>

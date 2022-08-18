@@ -85,10 +85,12 @@ public class UsrMemberController {
 //			따라서 위처럼 데이터를 모든 회원 정보를 출력하기 위해 위처럼 바꾸었다.
 
 	}
+	
+	
 
 	@RequestMapping("/machine/member/doLogout")
 	@ResponseBody
-	public ResultData doLogout(HttpSession httpSession) {
+	public String doLogout(HttpSession httpSession) {
 		boolean isLogined = false;
 
 		if (httpSession.getAttribute("loginedMemberId") == null) {
@@ -96,12 +98,14 @@ public class UsrMemberController {
 		}
 
 		if (isLogined) {
-			return ResultData.from("S-1", "이미 로그아웃 상태 입니다.");
+//			return ResultData.from("S-1", "이미 로그아웃 상태 입니다.");
+			return Ut.jsReplace(Ut.f("이미 로그아웃 상태 입니다.", "/"));
 		}
 
 		httpSession.removeAttribute("loginedMemberId");
 
-		return ResultData.from("S-2", "로그아웃 되었습니다.");
+//		return ResultData.from("S-2", "로그아웃 되었습니다.");
+		return Ut.jsReplace(Ut.f("로그아웃 되었습니다.", "/"));
 
 	}
 
