@@ -35,11 +35,11 @@
       </div>
       <div class="col-12">
         <label for="inputloginPw" class="form-label">loginPw</label>
-        <input name="loginPw" type="text" class="form-control" id="inputloginPw" placeholder="사용할 비밀번호를 입력해 주세요">
+        <input name="loginPw" type="password" class="form-control" id="inputloginPw" placeholder="사용할 비밀번호를 입력해 주세요">
       </div>
       <div class="col-12">
         <label for="inputloginPw2" class="form-label">loginPw</label>
-        <input name="loginPw2" type="text" class="form-control" id="inputloginPw2" placeholder="비밀번호 확인을 위해 한번더 입력해 주세요">
+        <input name="loginPw2" type="password" class="form-control" id="inputloginPw2" placeholder="비밀번호 확인을 위해 한번더 입력해 주세요">
       </div>
       <div class="col-12">
         <label for="inputCellPhoneNum" class="form-label">cellphoneNum</label>

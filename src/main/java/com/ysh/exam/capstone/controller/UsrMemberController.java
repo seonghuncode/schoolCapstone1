@@ -29,7 +29,7 @@ public class UsrMemberController {
 	@ResponseBody
 //	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
 //			String email) {
-	public Object doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
+	public Object doJoin(String loginId, String loginPw,String loginPw2, String name, String nickname, String cellphoneNo,
 			String email) {
 
 		if (Ut.empty(name)) {
@@ -52,12 +52,15 @@ public class UsrMemberController {
 			return Ut.jsReplace("loginId(을)를 입력해 주세요", "/machine/usr/join");
 
 		}
+		if (Ut.empty(loginPw)) {
+//			return ResultData.from("F-2", "loginPw(을)를 입력해 주세요.");
+			return Ut.jsReplace("loginPw(을)를 입력해 주세요.", "/machine/member/join");
+		}  
+		if (loginPw != loginPw2) {
+//			return ResultData.from("F-2", "loginPw(을)를 입력해 주세요.");
+			return Ut.jsReplace("비밀번호가 일치 하지 않습니다. 재확인 해주세요", "/machine/member/join");
 
-//		if (Ut.empty(loginPw)) {
-////			return ResultData.from("F-2", "loginPw(을)를 입력해 주세요.");
-//			return Ut.jsReplace(Ut.f("loginPw(을)를 입력해 주세요.", "/machine/member/join"));
-//
-//		}  ==> 비밀번호 재확인 기능 만들면 활성화 시키기
+		}  
 
 		if (Ut.empty(cellphoneNo)) {
 //			return ResultData.from("F-5", "cellphoneNo(을)를 입력해 주세요.");
