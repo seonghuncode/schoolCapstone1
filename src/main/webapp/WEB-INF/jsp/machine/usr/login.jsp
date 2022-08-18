@@ -21,16 +21,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
+
 <c:set var="pageTitle" value="로그인 페이지" />
 <c:set var="cssType" value="/resource/login.css" />
 
 <!-- 불러오기 -->
-<%@ include file="../common/head.jspf" %>
+<%@ include file="../common/head.jspf"%>
 
 
 
 
-<form>
+<form class="table-box-type-1" method="POST" action="../member/doLogin">
   <div class="wrap">
     <div class="login">
       <h2>Log-in</h2>
@@ -44,14 +46,16 @@
       </div>
       <div class="submit">
         <input type="submit" value="submit">
+        <a href="/" type="button" class="btn btn-light float-right mt-24"> 뒤로 가기 </a>
       </div>
-      <div id="back2">
-      <button type="submit">뒤로 가기</button>
-      </div>
+      <div id="back2"></div>
     </div>
   </div>
-  </form>
-  
- 
+</form>
 
-<%@ include file="../common/foot.jspf" %>
+
+
+
+
+
+<%@ include file="../common/foot.jspf"%>

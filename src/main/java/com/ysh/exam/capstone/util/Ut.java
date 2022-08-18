@@ -31,6 +31,36 @@ public class Ut {
 		//loginId하나 혹은 name, email두개가 들어 올 수 있기 때문에 Object... args를 사용하면 ==> 뒤에 있는것이 n이든 간에 배열에 들어 간다. 
 		return String.format(format, args);
 	}//이 구조는 나중에 복사 붙여 넣기 해서 사용할 수 았으면 된다
+		
+	
+	
+	
+	//컨트롤러 에서 @ResponseBody를 빼지 않고 원하는 페이지로 이동 시켜 주는 기능
+	public static String jsReplace(String msg, String uri) {
+		if (msg == null) {
+			msg = "";
+		}
 
+		if (uri == null) {
+			uri = "";
+		}
+
+		return Ut.f("""
+				<script>
+				const msg = '%s'.trim();
+				if ( msg.length > 0 ) {
+				    alert(msg);
+				}
+				location.replace('%s');
+				</script>
+				""", msg, uri);
+	}
+
+	
+	
 }
+
+
+
+
 

@@ -19,13 +19,12 @@ public class UsrMemberController {
 	public UsrMemberController(MemberService memberService) {
 		this.memberService = memberService;
 	}
-	
+
 	@RequestMapping("/machine/member/join")
-	public String showJoin() { 
+	public String showJoin() {
 		return "/machine/usr/join";
 	}
-	
-	
+
 	@RequestMapping("/machine/member/dojoin")
 	@ResponseBody
 //	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
@@ -35,7 +34,7 @@ public class UsrMemberController {
 
 		if (Ut.empty(loginId)) {
 			return ResultData.from("F-1", "loginId(을)를 입력해 주세요");
-		
+
 		}
 
 		if (Ut.empty(loginPw)) {
@@ -45,22 +44,22 @@ public class UsrMemberController {
 
 		if (Ut.empty(name)) {
 			return ResultData.from("F-3", "name(을)를 입력해 주세요.");
-		
+
 		}
 
 		if (Ut.empty(nickname)) {
 			return ResultData.from("F-4", "nickname(을)를 입력해 주세요.");
-	
+
 		}
 
 		if (Ut.empty(cellphoneNo)) {
 			return ResultData.from("F-5", "cellphoneNo(을)를 입력해 주세요.");
-		
+
 		}
 
 		if (Ut.empty(email)) {
 			return ResultData.from("F-6", "email(을)를 입력해 주세요.");
-		
+
 		}
 
 		// joinRd에 들어 있는 데이터
@@ -68,7 +67,7 @@ public class UsrMemberController {
 		// 회원가입이 완료 되었습니다.
 		// 7
 		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
-		
+
 		// Interger을 적는 이유는 아래서 joinRd앞에 형변환 (int)를 사용하지 않기 위해서
 
 		if (joinRd.isFail()) {
@@ -80,11 +79,6 @@ public class UsrMemberController {
 		Member member = memberService.getMemberById(joinRd.getData1());
 //		return ResultData.newData(joinRd, "member", member);
 		return ResultData.newData(joinRd, "member", member);
-		
-		
-	
-		
-		
 
 //			return joinRd; 
 //			만약 이렇게 하면 회원가입이 완료 되었다는 메세지와 함께  데이터에는 getLasdtInsertId가들어가게 된다
@@ -110,17 +104,18 @@ public class UsrMemberController {
 		return ResultData.from("S-2", "로그아웃 되었습니다.");
 
 	}
-	
-	
+
 	@RequestMapping("/machine/member/login")
-	public String showLogin() {
+	public String showLogin(HttpSession httpSession) {
 		return "/machine/usr/login";
 	}
+
+
 
 	// 로그인 기능 만들기
 	@RequestMapping("/machine/member/doLogin")
 	@ResponseBody // 스프링 에서는 적어주기만 하면 자동으로 세션이 들어 온다
-	public ResultData doLogin(HttpSession httpSession, String loginId, String loginPw) {
+	public Object doLogin(HttpSession httpSession, String loginId, String loginPw) {
 
 		boolean isLogined = false;
 
@@ -153,7 +148,9 @@ public class UsrMemberController {
 
 		httpSession.setAttribute("loginedMemberId", member.getId());
 
-		return ResultData.from("S-1", Ut.f("%s님 횐영 합니다.", member.getNickname()));
+//		return ResultData.from("S-1", Ut.f("%s님 횐영 합니다.", member.getNickname()));
+		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
+		
 
 	}
 
