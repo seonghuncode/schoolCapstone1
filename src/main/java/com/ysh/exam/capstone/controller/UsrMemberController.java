@@ -125,25 +125,30 @@ public class UsrMemberController {
 		}
 
 		if (isLogined) {
-			return ResultData.from("F-5", "이미 로그인 되어 있습니다.");
+//			return ResultData.from("F-5", "이미 로그인 되어 있습니다.");
+			return Ut.jsReplace(Ut.f("이미 로그인 되어 있습니다."));
 		}
 
 		if (Ut.empty(loginId)) {
-			return ResultData.from("F-1", "loginId를 입력해 주세요");
+//			return ResultData.from("F-1", "loginId를 입력해 주세요");
+			return Ut.jsReplace(Ut.f("loginId를 입력해 주세요"));
 		}
 
 		if (Ut.empty(loginPw)) {
-			return ResultData.from("F-2", "loginPw(을)를 입력해 주세요.");
+//			return ResultData.from("F-2", "loginPw(을)를 입력해 주세요.");
+			return Ut.jsReplace(Ut.f("loginPw(을)를 입력해 주세요."));
 		}
 
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		if (member == null) {
-			return ResultData.from("F-3", "존재하지 않는 loginId입니다");
+//			return ResultData.from("F-3", "존재하지 않는 loginId입니다");
+			return Ut.jsReplace(Ut.f("존재하지 않는 loginId입니다"));
 		}
 
 		if (member.getLoginPw().equals(loginPw) == false) {
-			return ResultData.from("F-4", "비밀번호가 일치 하지 않습니다.");
+//			return ResultData.from("F-4", "비밀번호가 일치 하지 않습니다.");
+			return Ut.jsReplace(Ut.f("비밀번호가 일치 하지 않습니다."));
 		}
 
 		httpSession.setAttribute("loginedMemberId", member.getId());
