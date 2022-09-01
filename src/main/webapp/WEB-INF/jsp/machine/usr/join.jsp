@@ -19,7 +19,7 @@
     <form class="row g-3 m-20"  method="POST" action="../member/dojoin">
       <div class="col-12">
         <label for="inputName" class="form-label">name</label>
-        <input name="name" type="text" class="form-control" id="inputName" placeholder="사용할 이름을 입력해 주세요">
+        <input name="name" type="text" class="form-control" id="inputName" placeholder="사용할 이름을 입력해 주세요" >
       </div>
       <div class="col-12">
         <label for="nickname" class="form-label">nickname</label>

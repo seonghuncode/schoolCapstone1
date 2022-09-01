@@ -34,39 +34,48 @@ public class UsrMemberController {
 
 		if (Ut.empty(name)) {
 //			return ResultData.from("F-3", "name(을)를 입력해 주세요.");
-			return Ut.jsReplace("name(을)를 입력해 주세요.", "/machine/member/join");
+//			return Ut.jsReplace("name(을)를 입력해 주세요.", "/machine/member/join"); //기존 문제인 양식을 잘못 입력하면 모든 입력 값이 날라가 다시 입력해야 하기때문에 수정
+			return Ut.test1("name(을)를 입력해 주세요.");
 			
 		}
 		if (Ut.empty(nickname)) {
 //			return ResultData.from("F-4", "nickname(을)를 입력해 주세요.");
-			return Ut.jsReplace("nickname(을)를 입력해 주세요.", "../member/dojoin");
+//			return Ut.jsReplace("nickname(을)를 입력해 주세요.", "../member/dojoin");
+			return Ut.test1("nickname(을)를 입력해 주세요.");
 			
 		}
 		if (Ut.empty(email)) {
 //			return ResultData.from("F-6", "email(을)를 입력해 주세요.");
-			return Ut.jsReplace("email(을)를 입력해 주세요.", "/machine/member/join");
+//			return Ut.jsReplace("email(을)를 입력해 주세요.", "/machine/member/join");
+			return Ut.test1("email(을)를 입력해 주세요.");
 			
 		}
 		if (Ut.empty(loginId)) {
 //			return ResultData.from("F-1", "loginId(을)를 입력해 주세요");
-			return Ut.jsReplace("loginId(을)를 입력해 주세요", "/machine/usr/join");
+//			return Ut.jsReplace("loginId(을)를 입력해 주세요", "/machine/usr/join");
+			return Ut.test1("email(을)를 입력해 주세요.");
 
 		}
 		if (Ut.empty(loginPw)) {
 //			return ResultData.from("F-2", "loginPw(을)를 입력해 주세요.");
-			return Ut.jsReplace("loginPw(을)를 입력해 주세요.", "/machine/member/join");
+//			return Ut.jsReplace("loginPw(을)를 입력해 주세요.", "/machine/member/join");
+			return Ut.test1("loginPw(을)를 입력해 주세요.");
 		}  
-		if (loginPw != loginPw2) {
+		if (!loginPw.equals(loginPw2)) {
 //			return ResultData.from("F-2", "loginPw(을)를 입력해 주세요.");
-			return Ut.jsReplace("비밀번호가 일치 하지 않습니다. 재확인 해주세요", "/machine/member/join");
+//			return Ut.jsReplace("비밀번호가 일치 하지 않습니다. 재확인 해주세요", "/machine/member/join");
+			return Ut.test1("비밀번호가 일치 하지 않습니다. 재확인 해주세요");
 
 		}  
+	
 
 		if (Ut.empty(cellphoneNo)) {
 //			return ResultData.from("F-5", "cellphoneNo(을)를 입력해 주세요.");
-			return Ut.jsReplace("cellphoneNo(을)를 입력해 주세요.", "/machine/member/join");
+//			return Ut.jsReplace("cellphoneNo(을)를 입력해 주세요.", "/machine/member/join");
+			return Ut.test1("cellphoneNo(을)를 입력해 주세요.");
 
 		}
+	
 
 
 		// joinRd에 들어 있는 데이터
@@ -79,7 +88,7 @@ public class UsrMemberController {
 
 		if (joinRd.isFail()) {
 //			return (ResultData) joinRd;
-			return Ut.jsReplace(Ut.f("%s", joinRd.getMsg()), "/machine/member/join");
+			return Ut.test1(Ut.f("%s", joinRd.getMsg()));
 			
 		}
 

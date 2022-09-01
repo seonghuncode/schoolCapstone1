@@ -57,6 +57,26 @@ public class Ut {
 	}
 	
 	
+	//위의jsReplace의 경우 회원가입시 입력폼을 잘못 입력하면 모든 정보를 다시 입력해야 하기 때문에 입력한 정보가 input text에 남아 있게 하기 위해서 뒤로가기 기능으로 사용
+	public static String test1(String msg) {
+		if (msg == null) {
+			msg = "";
+		}
+
+		
+
+		return Ut.f("""
+				<script>
+				const msg = '%s'.trim();
+				if ( msg.length > 0 ) {
+				    alert(msg);
+				}
+				history.back();
+				</script>
+				""", msg);
+	}
+	
+	
 
 	
 	
