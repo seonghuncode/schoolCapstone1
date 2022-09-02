@@ -50,7 +50,10 @@
         <button type="submit" class="btn btn-primary">회원가입</button>
         <button type="button" class="btn btn-primary" onclick="history.back();">뒤로 가기</button>
       </div>
+      
+          
     </form>
+    
 
   </div>
 </div>

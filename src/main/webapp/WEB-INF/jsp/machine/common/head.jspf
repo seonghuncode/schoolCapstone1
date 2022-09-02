@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- jstl문법을 사용하기 위해 선언 -->
 <!DOCTYPE html>
 
 <html>
@@ -28,7 +29,7 @@
 </head>
 <body>
 
-  <header>
+  <header> 
     <div class="bg-red-300 mt-1 rounded-xl">
       <div class="flex h-16 container mx-auto">
         <a href="/" class="flex items-center px-3">
@@ -50,26 +51,34 @@
               <span>홈</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="/machine/member/join" class="nav-link nav-link h-full flex px-3 items-center  hover:underline">
-              <span>회원가입</span>
-            </a>
-          </li>
+          <c:if test="${sessionScope.loginedMemberId eq null}">  <!-- 로그인이 안되어 있을때만 보여줌 -->
+            <li class="nav-item">
+              <a href="/machine/member/join" class="nav-link nav-link h-full flex px-3 items-center  hover:underline">
+                <span>회원가입</span>
+              </a>
+            </li>
+          </c:if>
+          <c:if test="${sessionScope.loginedMemberId eq null}"> <!-- 로그인이 안되어 있을때만 보여주기 위한 기능 -->
           <li class="nav-item">
             <a href="/machine/member/login" class="nav-link h-full flex px-3 items-center hover:underline">
               <span>로그인</span>
             </a>
           </li>
+          </c:if>
+          <c:if test="${sessionScope.loginedMemberId > 0}"> <!-- 로그인이 되어 있을때만 보여줌 -->
           <li class="nav-item">
             <a href="/machine/member/doLogout" class="nav-link h-full flex px-3 items-center hover:underline">
               <span>로그아웃</span>
             </a>
           </li>
+          </c:if>
+          <c:if test="${sessionScope.loginedMemberId > 0}"> <!-- 로그인이 되어 있을때만 보여줌 -->
           <li class="nav-item">
             <a href="/machine/room/showRooms" class="nav-link h-full flex px-3 items-center hover:underline">
               <span>데이터 정보</span>
             </a>
           </li>
+          </c:if>
         </ul>
 
       </div>
