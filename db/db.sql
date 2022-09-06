@@ -30,6 +30,16 @@ SET roomName = "주방",
 regDate = NOW(),
 infoId = "3";
 
+INSERT INTO room
+SET roomName = "내방",
+regDate = NOW(),
+infoId = "4";
+
+INSERT INTO room
+SET roomName = "안방",
+regDate = NOW(),
+infoId = "5";
+
 SELECT * FROM room;
 
 
@@ -91,6 +101,44 @@ SET updateDate = NOW(),
 pm = "21",
 temperature = "23",
 humadity = "44",
+roomId = "5";
+
+
+
+INSERT INTO info
+SET updateDate = NOW(),
+pm = "20",
+temperature = "26",
+humadity = "31",
+roomId = "1";
+
+INSERT INTO info
+SET updateDate = NOW(),
+pm = "10",
+temperature = "27",
+humadity = "40",
+roomId = "4";
+
+INSERT INTO info
+SET updateDate = NOW(),
+pm = "31",
+temperature = "19",
+humadity = "27",
+roomId = "4";
+
+
+INSERT INTO info
+SET updateDate = NOW(),
+pm = "31",
+temperature = "27",
+humadity = "33",
+roomId = "5";
+
+INSERT INTO info
+SET updateDate = NOW(),
+pm = "28",
+temperature = "26",
+humadity = "28",
 roomId = "5";
 
 SELECT * FROM info;
@@ -189,8 +237,7 @@ WHERE memberId = 0;
 			ORDER BY A.id ASC
 	
 
-
-
+	
 
 
 

@@ -2,6 +2,8 @@ package com.ysh.exam.capstone.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +15,9 @@ import com.ysh.exam.capstone.vo.ResultData;
 
 @Controller
 public class UsrMemberController {
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	private MemberService memberService;
 
@@ -53,7 +58,7 @@ public class UsrMemberController {
 		if (Ut.empty(loginId)) {
 //			return ResultData.from("F-1", "loginId(을)를 입력해 주세요");
 //			return Ut.jsReplace("loginId(을)를 입력해 주세요", "/machine/usr/join");
-			return Ut.test1("email(을)를 입력해 주세요.");
+			return Ut.test1("loginId(을)를 입력해 주세요.");
 
 		}
 		if (Ut.empty(loginPw)) {
@@ -162,8 +167,12 @@ public class UsrMemberController {
 			return Ut.jsReplace("존재하지 않는 loginId입니다", "/machine/member/login");
 		}
 
-		if (member.getLoginPw().equals(loginPw) == false) {
-//			return ResultData.from("F-4", "비밀번호가 일치 하지 않습니다.");
+//		if (member.getLoginPw().equals(loginPw) == false) {
+////			return ResultData.from("F-4", "비밀번호가 일치 하지 않습니다.");
+//			return Ut.jsReplace("비밀번호가 일치 하지 않습니다.", "/machine/member/login");
+//		}
+		//비밀번호 암호화 저장후 불러올때 암호화 해독후 비교
+		if (!passwordEncoder.matches(loginPw, member.getLoginPw())) {
 			return Ut.jsReplace("비밀번호가 일치 하지 않습니다.", "/machine/member/login");
 		}
 

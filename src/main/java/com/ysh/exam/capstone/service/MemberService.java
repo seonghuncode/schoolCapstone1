@@ -40,11 +40,16 @@ public class MemberService {
 		if (oldMember != null) { // == 존재한다면
 			return ResultData.from("F-8", Ut.f("해당 이름(%s)과 이메일(%s)은 이미 사용중 입니다.", name, email));
 		}
-
-//		user.setPassword(passwordEncoder.encode(password)); // 클래스를 만들었기 때문에 이렇게 사용 가능
-//		userRepository.save(user);
+		//중복 이메일 존재해도 회원가입 가능한 오류 잡기
+		System.out.println("==================================================================================================");
+		System.out.println("==================================================================================================");
+		System.out.println(name);
+		System.out.println(email);
+		System.out.println(oldMember);
+		
 
 //		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email);
+		//회원가입시 비밀번호 암호화 하여 저장
 		loginPw = passwordEncoder.encode(loginPw);
 		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 
@@ -64,5 +69,6 @@ public class MemberService {
 	public Member getMemberById(int id) {
 		return memberRepository.getMemberById(id);
 	}
+	
 
 }
