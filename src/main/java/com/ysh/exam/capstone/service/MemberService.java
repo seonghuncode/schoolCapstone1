@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor //final을 사용하기 위해 필요한 어노테이션
 public class MemberService {
 
 //	private MemberRepository memberRepository;
@@ -21,9 +21,9 @@ public class MemberService {
 //	public MemberService(MemberRepository memberRepository) {
 //		this.memberRepository = memberRepository;
 //	}
-	private final MemberRepository memberRepository;
+	private final MemberRepository memberRepository; //아래 final을 사용하기 위해서는 @RequiredArgsConstructor어노테이션을 사용해야 하기때문에 위처럼 선언이 불가능 한다
 	
-	private final PasswordEncoder passwordEncoder; // 암호화를 사용하기 위해 선언해준다
+	private final PasswordEncoder passwordEncoder; // 암호화를 사용하기 위해 선언해준다 final을 붙여 주지 않으면 오류가 생긴다
 
 	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
 			String email) {
