@@ -114,6 +114,12 @@
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
 
+		<!-- 비밀번호를 암호화 하기 위한 의존성 주입 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
 
 
 	</dependencies>
