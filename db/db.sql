@@ -175,12 +175,13 @@ delDate DATETIME COMMENT '탈퇴날짜'  #탈퇴들 안했으면 데이터기 �
 );
 
 
-#회원, 테스트 데이터 생성(관리자 회원)
+
+#회원, 테스트 데이터 생성(관리자 회원) -> 비밀번호 admin
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'admin',
-loginPw = 'admin',
+loginPw = '$2a$10$oTs/i8Mqmphh2ppBBWicKe1imBT7.UR72kPo77CcL/141nOywtl4q',
 authLevel = 7,
 `name` = '관리자',
 nickname = '관리자',
@@ -189,12 +190,12 @@ email = 'test1@naver.com';
 
 
 
-#회원, 테스트 데이터 생성(일반 회원)
+#회원, 테스트 데이터 생성(일반 회원) -> 비밀번호 user1
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'user1',
-loginPw = 'user1',
+loginPw = '$2a$10$IcM4zuGqYpJo20GVtxFwluG9fmr.VvfU8o9F./xr4.uYpr/kNn0oW',
 authLevel = 3, #default 가 3이기 때문에 안넣어도 된다
 `name` = '사용자1',
 nickname = '사용자1',
@@ -207,7 +208,7 @@ INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'user2',
-loginPw = 'user2',
+loginPw = '$2a$10$BWArnymnSKQ9HdK1z.P/1ul6W82KObrv90HoaH09XzLclu0ZfIB2i',
 `name` = '사용자2',
 nickname = '사용자2',
 cellphoneNo = '01033333333',
