@@ -11,8 +11,10 @@ CREATE TABLE room(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     roomName CHAR(100) NOT NULL,
     regDate DATETIME NOT NULL,
-    infoId INT(10) UNSIGNED NOT NULL
+    infoId INT(10) UNSIGNED NULL 
 );
+#기존 infoId는 unsigned not null이였지만 방을 추가시 조인을 할때 indoId외 rooId를 매치 시킬때 새로 만들어지는 방에 대해서는 infoId가 null이 되어 오류가 발생
+#임시적으로 null로 바꾸어 오류 나오지 않게(사로만드는 방의infoId가 null값이면 나중에 rooId외 매칭이 될수 없다.)
 
 #테스트 데이터
 INSERT INTO room

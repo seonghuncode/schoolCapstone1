@@ -72,6 +72,13 @@
             </a>
           </li>
           </c:if>
+            <c:if test="${sessionScope.loginedMemberId > 0}"> <!-- 로그인이 되어 있을때만 보여줌 -->
+          <li class="nav-item">
+            <a href="/machine/room/add" class="nav-link h-full flex px-3 items-center hover:underline">
+              <span>방 만들기</span>
+            </a>
+          </li>
+          </c:if>
           <c:if test="${sessionScope.loginedMemberId > 0}"> <!-- 로그인이 되어 있을때만 보여줌 -->
           <li class="nav-item">
             <a href="/machine/room/showRooms" class="nav-link h-full flex px-3 items-center hover:underline">
