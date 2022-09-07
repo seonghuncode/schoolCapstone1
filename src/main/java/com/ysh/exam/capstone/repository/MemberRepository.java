@@ -50,9 +50,23 @@ public interface MemberRepository {
 			SELECT *
 			FROM `member` AS M
 			WHERE M.name = #{name}
-			AND M.email = #{email}
 			""")
-	Member getMemberByNameAndEmail(@Param("name") String name, @Param("email")  String email);
+	Member getMemberByName(@Param("name") String name);
+	
+	
+	@Select("""
+			SELECT *
+			FROM `member` AS M
+			WHERE M.email = #{email}
+			""")
+	Member getMemberByEmail(@Param("email") String email);
+	
+	@Select("""
+			SELECT *
+			FROM `member` AS M
+			WHERE M.nickname = #{nickname}
+			""")
+	Member getMemberByNickName(@Param("nickname") String nickname);
 	
 
 		

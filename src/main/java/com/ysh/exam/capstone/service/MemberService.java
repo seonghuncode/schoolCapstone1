@@ -35,17 +35,24 @@ public class MemberService {
 		}
 
 		// 이름+이메일 중복 체크
-		oldMember = getMemberByNameAndEmail(name, email);
+		oldMember = getMemberByName(name);
 
 		if (oldMember != null) { // == 존재한다면
-			return ResultData.from("F-8", Ut.f("해당 이름(%s)과 이메일(%s)은 이미 사용중 입니다.", name, email));
+			return ResultData.from("F-8", Ut.f("해당 이름(%s)은 이미 사용중 입니다.", name));
 		}
-		//중복 이메일 존재해도 회원가입 가능한 오류 잡기
-		System.out.println("==================================================================================================");
-		System.out.println("==================================================================================================");
-		System.out.println(name);
-		System.out.println(email);
-		System.out.println(oldMember);
+		
+		//위에서 이름, 이메일 주복 체크 에서 중복된 이름은 잘 잡는데 반해 중복된 이메일을 잡지 못 해서 email만 따로 다시 만들어 주었다.
+		oldMember = getMemberByEmail(email);
+
+		if (oldMember != null) { // == 존재한다면
+			return ResultData.from("F-8", Ut.f("해당 이메일(%s)은 이미 사용중 입니다.", email));
+		}
+		
+		oldMember = getMemberByNickName(nickname);
+
+		if (oldMember != null) { // == 존재한다면
+			return ResultData.from("F-8", Ut.f("해당 닉네임(%s)은 이미 사용중 입니다.", nickname));
+		}
 		
 
 //		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email);
@@ -57,9 +64,17 @@ public class MemberService {
 
 		return ResultData.from("S-1", "회원가입이 완료 되었습니다.", "id", id);
 	}
+	
+	private Member getMemberByNickName(String nickname) {
+		return memberRepository.getMemberByNickName(nickname);
+	}
 
-	private Member getMemberByNameAndEmail(String name, String email) {
-		return memberRepository.getMemberByNameAndEmail(name, email);
+	private Member getMemberByEmail(String email) {
+		return memberRepository.getMemberByEmail(email);
+	}
+	
+	private Member getMemberByName(String name) {
+		return memberRepository.getMemberByName(name);
 	}
 
 	public Member getMemberByLoginId(String loginId) {
