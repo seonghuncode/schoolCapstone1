@@ -71,7 +71,15 @@ public interface RoomNameRepository {
 	@Delete("DELETE FROM room WHERE roomName = #{roomName}")
 	public void doDelete(@Param("roomName") String roomname);
 	
-	
+
+	//방을 방들 경우 방 이름을 입력 했을때 해당 방에 대한 데이터가 다수 이면 하나의 값만 받아야 하는데 여러 값이 나오면서 getRoom에서 값을 담을 수 없어 오류가 발생
+	//조인한 상태에서 찾은것이 아니라 room테이블 자체에서만 조회한다.(room자체해는 중복되는 방이 없기 때문)
+	@Select("""
+			SELECT *
+			FROM room 
+			WHERE roomName = #{roomName}
+			""")
+	public Room getSameRooms(@Param("roomName") String roomName);
 
 
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ysh.exam.capstone.service.RoomNameService;
+import com.ysh.exam.capstone.util.Ut;
 import com.ysh.exam.capstone.vo.Room;
 
 @Controller
@@ -43,16 +44,19 @@ public class RoomNameController {
 		int id = roomNameService.checkExist(roomname);
 
 		if (roomname == null || roomname.trim().length() == 0) {
-			return "추가 할 방 이름을 입력해 주세요";
+//			return "추가 할 방 이름을 입력해 주세요";
+			return Ut.jsReplace(Ut.f("추가할 방 이름을 입력해 주세요"), "/machine/room/add");
 		}
 
 		if (id == -1) {
-			return roomname + "은 이미 존재 하는 이름 입니다.";
+//			return roomname + "은 이미 존재 하는 이름 입니다.";
+			return Ut.jsReplace(Ut.f("%s는 이미 존재 하는 방 이름 입니다.", roomname), "/machine/room/add");
 		}
 
 		roomNameService.writeRoomName(roomname);
 
-		return "%s이(가) 추가 되었습니다".formatted(roomname);
+//		return "%s이(가) 추가 되었습니다".formatted(roomname);
+		return Ut.jsReplace(Ut.f("%s방이 추가 되었습니다.", roomname), "/");
 	}
 
 	@RequestMapping("/machine/room/getRoom")
