@@ -91,18 +91,21 @@ public class RoomNameController {
 	@ResponseBody
 	public String doDelete(String roomname) {
 
-		Room room = roomNameService.getRoom(roomname);
+		int id = roomNameService.checkExist(roomname);
 
 		if (roomname == null || roomname.trim().length() == 0) {
-			return "삭제할 방 이름을 입력해 주세요";
+//			return "삭제할 방 이름을 입력해 주세요";
+			return Ut.jsReplace(Ut.f("삭제할 방 이름을 선택해 주세요"), "/machine/room/showRooms");
 		}
-		if (room == null) {
-			return roomname + "은 존재하지 않는 방 입니다.";
+		if (id != -1) {
+//			return roomname + "은 존재하지 않는 방 입니다.";
+			return Ut.jsReplace(Ut.f("%s방은 존재 하지 않는 방 입니다.", roomname), "/machine/room/showRooms");
 		}
 
 		roomNameService.doDelete(roomname);
 
-		return roomname + "이 삭제 되었습니다";
+//		return roomname + "이 삭제 되었습니다";
+		return Ut.jsReplace(Ut.f("%s방이 삭제 되었습니다.", roomname), "/machine/room/showRooms");
 	}
 
 //	@RequestMapping("/machine/room/doDetail")

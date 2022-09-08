@@ -50,7 +50,6 @@
 
             </c:forEach>
 
-            <span class="badge rounded-pill text-bg-success">Success</span>
           </div>
         </div>
         <!-- 현재 존재 하는 방에 대한 이름 나열 -->
