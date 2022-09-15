@@ -56,4 +56,9 @@ public class RoomNameService {
 		roomNameRepository.doDelete(roomname);
 	}
 
+	public void doModify(int roomId, String roomnameNew) {
+		roomNameRepository.doModify(roomId, roomnameNew);
+		
+	}
+
 }

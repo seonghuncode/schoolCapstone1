@@ -133,5 +133,39 @@ public class RoomNameController {
 
 		return "/machine/info/detail";
 	}
+	
+	//수정 하기 기능
+	@RequestMapping("/machine/room/modify")
+	public String Modify(Model model, String roomname) {
+
+		Room room = roomNameService.getSameRooms(roomname);
+
+		model.addAttribute("room", room);
+		
+		return "/machine/info/modify";
+		
+	}
+	
+	
+	@RequestMapping("/machine/room/doModify")
+	@ResponseBody
+	public String doModify(String roomnameOld, String roomnameNew) {
+		int id = roomNameService.checkExist(roomnameNew);
+		if (id == -1) {
+//			return Ut.jsReplace(Ut.f("%s는 이미 존재 하는 방 이름 입니다.", roomnameNew), "/machine/room/modify");
+			return Ut.test1("이미 존재 하는 방 이름 입니다.");
+		}
+		
+		Room room = roomNameService.getSameRooms(roomnameOld);
+		int roomId = room.getId();
+		
+		roomNameService.doModify(roomId,  roomnameNew);
+		
+		return Ut.jsReplace(Ut.f("%s이(가)  %s로 수정 되었습니다.", roomnameOld, roomnameNew), "/machine/room/showRooms");
+	}
+	
+	
+	
+	
 
 }

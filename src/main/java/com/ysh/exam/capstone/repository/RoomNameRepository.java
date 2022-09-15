@@ -81,6 +81,11 @@ public interface RoomNameRepository {
 			""")
 	public Room getSameRooms(@Param("roomName") String roomName);
 
+	@Select("""
+			UPDATE room SET roomName = #{roomnameNew} WHERE id = #{roomId}
+			""")
+	public void doModify(@Param("roomId") int roomId, @Param("roomnameNew") String roomnameNew);
+
 
 
 	
