@@ -46,4 +46,31 @@
 </div>
 
 
+<!--  -->
+
+<div class="container mx-auto px-3 mt-5">
+  <nav aria-label="Page navigation example" class="d-flex justify-content-end">
+    <ul class="pagination">
+      <c:if test="${page.prev}">
+        <li class="page-item">
+          <a href="?roomName=${room1}&page=${page.pageParam.page-1}" class="page-link">이전</a>
+        </li>
+      </c:if>
+
+      <c:forEach var="pageNum" begin="${page.startPage }" end="${page.endPage}" step="1">
+        <li class="page-item ${pageNum == page.pageParam.page? "active" : "" }">
+          <a class="page-link" href="?roomName=${room1}&page=${pageNum }">${pageNum }</a>
+        </li>
+      </c:forEach>
+
+      <c:if test="${page.next}">
+        <li class="page-item">
+          <a href="?roomName=${room1}&page=${page.pageParam.page+1}" class="page-link">다음</a>
+        </li>
+      </c:if>
+    </ul>
+  </nav>
+</div>
+
+
 <%@ include file="../common/foot.jspf"%>

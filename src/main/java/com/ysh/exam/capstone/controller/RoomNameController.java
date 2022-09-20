@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ysh.exam.capstone.dto.PageDTO;
+import com.ysh.exam.capstone.dto.PageParam;
 import com.ysh.exam.capstone.service.RoomNameService;
 import com.ysh.exam.capstone.util.Ut;
 import com.ysh.exam.capstone.vo.Room;
-
-
-
-
 
 @Controller
 public class RoomNameController {
@@ -33,7 +31,7 @@ public class RoomNameController {
 
 	@RequestMapping("/machine/room/add")
 	public String add(Model model) {
-		//현재 존재 하는 방 이름들을 보여주기 위해 넘겨 준다
+		// 현재 존재 하는 방 이름들을 보여주기 위해 넘겨 준다
 		List<Room> rooms = roomNameService.getRooms();
 
 		model.addAttribute("rooms", rooms);
@@ -124,39 +122,40 @@ public class RoomNameController {
 //		
 //		return "/machine/info/detail";
 //	}
-	
-	
-	
-
 
 	@RequestMapping("/machine/room/doDetail")
-	public String doDetail(Model model, String roomName) {
+	public String doDetail(Model model, String roomName, PageParam page) {
 
 		if (roomName == null || roomName.trim().length() == 0) {
 			return "자세히 보고 싶은 방 이름을 입력해 주세요";
 		}
-		
-	
 
-		List<Room> room = roomNameService.getRoomInfo(roomName);
+		int total = roomNameService.getTotalCount(roomName, page);
+
+		PageDTO pageDTO = new PageDTO(page, total);
+		model.addAttribute("page", pageDTO);
+
+//		List<Room> room = roomNameService.getRoomInfo(roomName);
+//		model.addAttribute("room", room);
+		
+		List<Room> room = roomNameService.getRoomInfoPaging(roomName, page.getStart(), page.getAmount());
 		model.addAttribute("room", room);
 
 		return "/machine/info/detail";
 	}
-	
-	//수정 하기 기능
+
+	// 수정 하기 기능
 	@RequestMapping("/machine/room/modify")
 	public String Modify(Model model, String roomname) {
 
 		Room room = roomNameService.getSameRooms(roomname);
 
 		model.addAttribute("room", room);
-		
+
 		return "/machine/info/modify";
-		
+
 	}
-	
-	
+
 	@RequestMapping("/machine/room/doModify")
 	@ResponseBody
 	public String doModify(String roomnameOld, String roomnameNew) {
@@ -165,17 +164,13 @@ public class RoomNameController {
 //			return Ut.jsReplace(Ut.f("%s는 이미 존재 하는 방 이름 입니다.", roomnameNew), "/machine/room/modify");
 			return Ut.test1("이미 존재 하는 방 이름 입니다.");
 		}
-		
+
 		Room room = roomNameService.getSameRooms(roomnameOld);
 		int roomId = room.getId();
-		
-		roomNameService.doModify(roomId,  roomnameNew);
-		
+
+		roomNameService.doModify(roomId, roomnameNew);
+
 		return Ut.jsReplace(Ut.f("%s이(가)  %s로 수정 되었습니다.", roomnameOld, roomnameNew), "/machine/room/showRooms");
 	}
-	
-	
-	
-	
 
 }

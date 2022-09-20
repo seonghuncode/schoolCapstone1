@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.ysh.exam.capstone.dto.PageParam;
 import com.ysh.exam.capstone.repository.RoomNameRepository;
 import com.ysh.exam.capstone.vo.Room;
 
@@ -59,6 +60,14 @@ public class RoomNameService {
 	public void doModify(int roomId, String roomnameNew) {
 		roomNameRepository.doModify(roomId, roomnameNew);
 
+	}
+
+	public int getTotalCount(String roomName, PageParam page) {
+		return roomNameRepository.getTotalCount(roomName, page);
+	}
+
+	public List<Room> getRoomInfoPaging(String roomName, int start, int amount) {
+		return roomNameRepository.getRoomInfoPaging(roomName, start, amount);
 	}
 
 

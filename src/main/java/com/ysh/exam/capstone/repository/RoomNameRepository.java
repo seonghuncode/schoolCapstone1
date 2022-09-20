@@ -102,7 +102,7 @@ public interface RoomNameRepository {
 			WHERE roomName = #{roomName}
 			LIMIT #{start}, #{amount}
 			""")
-	public List<Room> getRoomInfoTest(@Param("roomName") String roomName, @Param("start") int start, @Param("amount") int amount);
+	public List<Room> getRoomInfoPaging(@Param("roomName") String roomName, @Param("start") int start, @Param("amount") int amount);
 
 	/*
 	 * //INSERT INTO article SET regDate = NOW(), updateDate = NOW(), title = ?,
