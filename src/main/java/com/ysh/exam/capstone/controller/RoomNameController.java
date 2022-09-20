@@ -1,16 +1,20 @@
 package com.ysh.exam.capstone.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ysh.exam.capstone.service.RoomNameService;
 import com.ysh.exam.capstone.util.Ut;
 import com.ysh.exam.capstone.vo.Room;
+
+
+
+
 
 @Controller
 public class RoomNameController {
@@ -120,6 +124,10 @@ public class RoomNameController {
 //		
 //		return "/machine/info/detail";
 //	}
+	
+	
+	
+
 
 	@RequestMapping("/machine/room/doDetail")
 	public String doDetail(Model model, String roomName) {
@@ -127,6 +135,8 @@ public class RoomNameController {
 		if (roomName == null || roomName.trim().length() == 0) {
 			return "자세히 보고 싶은 방 이름을 입력해 주세요";
 		}
+		
+	
 
 		List<Room> room = roomNameService.getRoomInfo(roomName);
 		model.addAttribute("room", room);

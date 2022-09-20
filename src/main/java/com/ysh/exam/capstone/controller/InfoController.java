@@ -7,10 +7,14 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ysh.exam.capstone.service.InfoService;
 import com.ysh.exam.capstone.vo.Info;
-import com.ysh.exam.capstone.vo.Room;
+
+
+
+
 
 
 @Controller
@@ -34,7 +38,6 @@ public class InfoController {
 		
 		return "/machine/info/list";
 	}
-	
 	
 	
 
