@@ -89,7 +89,6 @@ public interface RoomNameRepository {
 				""")
 	public int getTotalCount(@Param("roomName") String roomName, PageParam page);
 
-	
 	@Select("""
 			SELECT A.*,
 			M.pm AS joinPm,
@@ -100,9 +99,85 @@ public interface RoomNameRepository {
 			LEFT JOIN info AS M
 			ON A.infoId = M.roomId
 			WHERE roomName = #{roomName}
+			ORDER BY A.id ASC
 			LIMIT #{start}, #{amount}
 			""")
-	public List<Room> getRoomInfoPaging(@Param("roomName") String roomName, @Param("start") int start, @Param("amount") int amount);
+	public List<Room> getRoomInfoPaging(@Param("roomName") String roomName, @Param("start") int start,
+			@Param("amount") int amount);
+
+	@Select("""
+				SELECT A.*,
+				M.pm AS joinPm,
+				M.temperature AS joinTemperature,
+				M.humadity AS joinHumadity,
+				M.updateDate AS joinUpdateDate
+				FROM room AS A
+				LEFT JOIN info AS M
+				ON A.infoId = M.roomId
+				WHERE roomName = #{searchText,jdbcType=VARCHAR} AND
+				regDate LIKE CONCAT('%', #{roomName,jdbcType=VARCHAR}, '%')
+				ORDER BY A.id ASC
+				LIMIT #{start,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}
+				""")
+	public List<Room> findeRegDate(@Param("roomName") String roomName, @Param("searchText") String searchText, @Param("start") int start,
+			@Param("amount") int amount);
+	// 검색 기능에서 날짜에 대한 해당 검색어만 찾아오는 기능
+	//roomName에 계속 searchText, searchText자리에 roomName이들어가는 오류가 발생해서 반대로 작성 
+
+	
+	@Select("""
+			SELECT A.*,
+			M.pm AS joinPm,
+			M.temperature AS joinTemperature,
+			M.humadity AS joinHumadity,
+			M.updateDate AS joinUpdateDate
+			FROM room AS A
+			LEFT JOIN info AS M
+			ON A.infoId = M.roomId
+			WHERE roomName = #{searchText,jdbcType=VARCHAR} AND
+			M.pm LIKE CONCAT('%', #{roomName,jdbcType=VARCHAR}, '%')
+			ORDER BY A.id ASC
+			LIMIT #{start,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}
+			""")
+	public List<Room> findjoinPm(@Param("roomName") String roomName, @Param("searchText") String searchText, @Param("start") int start,
+			@Param("amount") int amount);
+
+	@Select("""
+			SELECT A.*,
+			M.pm AS joinPm,
+			M.temperature AS joinTemperature,
+			M.humadity AS joinHumadity,
+			M.updateDate AS joinUpdateDate
+			FROM room AS A
+			LEFT JOIN info AS M
+			ON A.infoId = M.roomId
+			WHERE roomName = #{roomName,jdbcType=VARCHAR} AND
+			M.temperature LIKE CONCAT('%', #{searchText,jdbcType=VARCHAR}, '%')
+			ORDER BY A.id ASC
+			LIMIT #{start,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}
+			""")
+	public List<Room> findejoinTemperature(String searchText, String roomName, int start, int amount);
+	
+
+	@Select("""
+			SELECT A.*,
+			M.pm AS joinPm,
+			M.temperature AS joinTemperature,
+			M.humadity AS joinHumadity,
+			M.updateDate AS joinUpdateDate
+			FROM room AS A
+			LEFT JOIN info AS M
+			ON A.infoId = M.roomId
+			WHERE roomName = #{roomName,jdbcType=VARCHAR} AND
+			M.humadity LIKE CONCAT('%', #{searchText,jdbcType=VARCHAR}, '%')
+			ORDER BY A.id ASC
+			LIMIT #{start,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}
+			""")
+	public List<Room> findjoinHumidity(String searchText, String roomName, int start, int amount);
+	
+	
+	
+	
 
 	/*
 	 * //INSERT INTO article SET regDate = NOW(), updateDate = NOW(), title = ?,

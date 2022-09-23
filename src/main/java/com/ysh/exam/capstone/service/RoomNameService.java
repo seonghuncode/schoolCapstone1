@@ -70,6 +70,24 @@ public class RoomNameService {
 		return roomNameRepository.getRoomInfoPaging(roomName, start, amount);
 	}
 
+	//검색 기능에서 날짜에 대한 해당 검색어만  찾아오는 기능
+	public List<Room> findRegDate(String searchText, String roomName, int start, int amount) {
+		return roomNameRepository.findeRegDate(searchText, roomName, start, amount);
+		
+	}
+	//검색 기능 에서 미세먼지에 대한 검색 값만 가지고 오는 코드
+	public List<Room> findjoinPm(String searchText, String roomName, int start, int amount) {
+		return roomNameRepository.findjoinPm(searchText, roomName, start, amount);
+	}
+	//검색 기능에서 온도를 검색 했을때 해당 값에 속한 값만 불러온다
+	public List<Room> findjoinTemperature(String searchText, String roomName, int start, int amount) {
+		return roomNameRepository.findejoinTemperature(searchText, roomName, start, amount);
+	}
+
+	public List<Room> findjoinHumidity(String searchText, String roomName, int start, int amount) {
+		return roomNameRepository.findjoinHumidity(searchText, roomName, start, amount);
+	}
+
 
 	
 
