@@ -21,6 +21,7 @@ public class MachineHomeController {
 	
 	@RequestMapping("/")
 	public String showRoot() {
+		
 		return "redirect:/machine/home/main";
 		
 		//url에서 "/"이러한 주소로 들어오면 자동으로 /usr/home/main으로 이동한다

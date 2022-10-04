@@ -3,15 +3,18 @@
 
 <c:set var="pageTitle" value="메인 페이지" />
 
+<!-- scss경로 -->
+<c:set var="cssType" value="/resource/login.css" />
+
 <!-- 불러오기 -->
-<%@ include file="../common/head.jspf" %>
+<%@ include file="../common/head.jspf"%>
 
 
 <section class="mt-5">
-  <div class="container mx-auto px-3">
-      캡스톤 주제 : 로봇 청소기, 롯봇 공기 청정기
-  </div>
+  <div class="container mx-auto px-3">캡스톤 주제 : 로봇 청소기, 롯봇 공기 청정기</div>
 </section>
 
 
-<%@ include file="../common/foot.jspf" %>
+
+
+<%@ include file="../common/foot.jspf"%>
