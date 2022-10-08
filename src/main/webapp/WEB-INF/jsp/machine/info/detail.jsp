@@ -48,9 +48,6 @@
 <!--  -->
 
 
-
-
-
 <div class="container mx-auto px-3 mt-5 alert alert-primary justify-between" role="alert">
   <h3 class="inline-block align-middle">위치 : ${room1Name}</h3>
   <span class="float-right inline-block align-middle mt-2">방 생성 날짜 : ${room1RegDate}</span>
@@ -58,6 +55,8 @@
 
 <div class="mt-5">
   <div class="container mx-auto px-3">
+  
+  <!-- 그래프 기능 추가 하기 -->
 
 
     <c:forEach var="room" items="${room}">

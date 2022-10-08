@@ -12,5 +12,7 @@ public interface RetrofitService {
 	// @GET( EndPoint-자원위치(URI) )
    	@GET("posts/{post}")
  	Call<PostResult> getPosts(@Path("post") String post);
+   	
+   
    	 
 }

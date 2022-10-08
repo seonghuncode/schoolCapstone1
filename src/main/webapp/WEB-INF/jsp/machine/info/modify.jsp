@@ -23,6 +23,31 @@
       <input type="submit" class="btn btn-primary form-control mt-3" value="방 이름 변경 하기">
     </form>
   </div>
+   <!-- 반복문을 돌려서 존재하는 방 이름을 나열 한다 -->
+        <div class="mt-10 card">
+          <div class="card-body">
+            현재 존재 하는 방 이름 :
+            <!-- 방이름 값을 저장고 아래 반복문에서 중복된 방이 나올경우 예외처리 -->
+            <c:set var="checkRoomName" value="-1" />
+
+            <c:forEach var="room" items="${rooms}" varStatus="status">
+              <!-- 이중반복문으로 공통 방이 있는지 확인 -->
+              <c:set var="roomId" value="${room.id}" />
+              <!-- 우선 첫 번째 반복문 에서 id하나를 변수에 넣어 다음 반복문을 처음 부터 끝까지 돌리면서 비교하기 위해 변수 선언 -->
+
+              <!--  중복되는 방이름이 있다면 출력 하지 마라!! -->
+              <!-- id값을 오름차순으로 하기 때문에 나중에 이미나온 변수값이 나중에 다시 나와 누락될 일이 없다-->
+              <c:if test="${room.roomName ne checkRoomName}">
+                <span class="m-1 text-red-400">${room.roomName}</span>
+              </c:if>
+              <c:set var="checkRoomName" value="${room.roomName}" />
+              <!-- 초기에는 checkRoomName에 값이 없기에 중복이 안되게 한후 한번 그 다음 부터 값을 넣어 중복이 않되도록 한다 -->
+
+            </c:forEach>
+
+          </div>
+        </div>
+        <!-- 현재 존재 하는 방에 대한 이름 나열 -->
 </div>
 
 

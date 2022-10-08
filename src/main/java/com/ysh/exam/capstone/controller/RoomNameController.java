@@ -202,6 +202,10 @@ public class RoomNameController {
 	public String Modify(Model model, String roomname) {
 
 		Room room = roomNameService.getSameRooms(roomname);
+		List<Room> rooms = roomNameService.getRooms(); //하단 현존하는 방 이름을 보여주기 위한 기능
+
+		model.addAttribute("rooms", rooms);
+
 
 		model.addAttribute("room", room);
 
@@ -220,6 +224,7 @@ public class RoomNameController {
 
 		Room room = roomNameService.getSameRooms(roomnameOld);
 		int roomId = room.getId();
+		
 
 		roomNameService.doModify(roomId, roomnameNew);
 
@@ -261,6 +266,15 @@ public class RoomNameController {
 		}
 
 		return "여기 까지 오는 오류 발생시 return 수정(jsp로 보내는 return만 가능)";
+	}
+	
+	@RequestMapping("/show/graph")
+	public String show(Model model) {	// 전체 roomname에 대한 정보를 보여준다.
+		List<Room> rooms = roomNameService.getRooms();
+
+		model.addAttribute("rooms", rooms);
+		model.addAttribute("test", "test" );
+		return "/machine/test/graph";
 	}
 
 }
