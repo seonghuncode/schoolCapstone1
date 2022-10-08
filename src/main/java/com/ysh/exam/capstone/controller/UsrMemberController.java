@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,6 +25,9 @@ public class UsrMemberController {
 	public UsrMemberController(MemberService memberService) {
 		this.memberService = memberService;
 	}
+	
+	//로그인 하면 해당 로그인 아이디 변수에 넣어 두기 --> 추후 로그인한 유저 정보를 DB에서 가지고 올때 사용하기 위함
+	String userLoginId = "";
 
 	@RequestMapping("/machine/member/join")
 	public String showJoin() {
@@ -176,11 +180,36 @@ public class UsrMemberController {
 		if (!passwordEncoder.matches(loginPw, member.getLoginPw())) {
 			return Ut.jsReplace("비밀번호가 일치 하지 않습니다.", "/machine/member/login");
 		}
+		
+		userLoginId = loginId;
 
 		httpSession.setAttribute("loginedMemberId", member.getId());
 
 //		return ResultData.from("S-1", Ut.f("%s님 횐영 합니다.", member.getNickname()));
 		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
+
+	}
+	
+	//유저 정보를 보여주기 위해 유저 정보를 가지고 오는 기능
+	@RequestMapping("/machine/member/getUser")
+	public Object getUserInformation(HttpSession httpSession, Model model) {
+		
+		//현재 세션으로 로그인 여부를 판단한다
+		boolean isLogined = false;
+		if (httpSession.getAttribute("loginedMemberId") == null) {
+			isLogined = true;
+		}
+		if (isLogined) {
+			 Ut.jsReplace("현재 로그아웃 되어 있습니다. 가능을 사용하기 위해 먼저 로그인을 해주세요.", "/"); //로그인이 되어 있어야 해당 기능을 요청 할 수 있기 때문에 해당 문제에 대해 return을 할 필요가 없다. 
+		}
+		
+		String loginId = userLoginId; //loginId는 로그인시 변수에 저장 하여 따로 저장을 해둔다
+		if(loginId == null) {
+			return Ut.jsReplace("loginId값이 비어 있습니다. 다시 확인해 주세요", "/");
+		}
+		
+		//loginId를 받아서 DB에서 해당 로그인 아이디와 매치되는 유저 정보를 가지고 와서 return 해준다
+		return  memberService.getMemberByLoginId(loginId);
 
 	}
 

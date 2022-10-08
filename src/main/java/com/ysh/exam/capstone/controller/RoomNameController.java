@@ -2,10 +2,12 @@ package com.ysh.exam.capstone.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -13,6 +15,7 @@ import com.ysh.exam.capstone.dto.PageDTO;
 import com.ysh.exam.capstone.dto.PageParam;
 import com.ysh.exam.capstone.service.RoomNameService;
 import com.ysh.exam.capstone.util.Ut;
+import com.ysh.exam.capstone.vo.Member;
 import com.ysh.exam.capstone.vo.Room;
 
 @Controller
@@ -24,22 +27,38 @@ public class RoomNameController {
 		this.roomNameService = machineService;
 	}
 
+	@Autowired
+	private UsrMemberController usrMemberController;
+
 	@RequestMapping("/machine/room/main")
 	@ResponseBody
 	public String showMain() {
 		return "안녕하세요!!!";
 	}
 
-	@RequestMapping("/machine/room/add")
-	public String add(Model model) {
+	@RequestMapping("/machine/room/information")
+	public String add(Model model, HttpSession httpSession) {
 		// 현재 존재 하는 방 이름들을 보여주기 위해 넘겨 준다
 		List<Room> rooms = roomNameService.getRooms();
-
 		model.addAttribute("rooms", rooms);
 
-		return "/machine/info/addroom";
+		// 유저 정보를 jsp파일로 보내준다.
+		Member user = (Member) usrMemberController.getUserInformation(httpSession, model);
+		model.addAttribute("user", user);
+
+		// 현재 세션으로 로그인 여부를 판단한다
+		boolean isLogined = false;
+		if (httpSession.getAttribute("loginedMemberId") == null) {
+			isLogined = true;
+		}
+		if (isLogined) {
+			return Ut.jsReplace("현재 로그아웃 되어 있습니다. 가능을 사용하기 위해 먼저 로그인을 해주세요.", "/");
+		}
+
+		return "/machine/info/information";
 	}
 
+	// 현재 사용 하지 않는 기능
 	@RequestMapping("/machine/room/doAdd")
 	@ResponseBody
 	public String doAdd(String roomname) {
@@ -150,7 +169,7 @@ public class RoomNameController {
 			model.addAttribute("room", searchRegdate);
 			if (searchRegdate.isEmpty()) {
 				// 값이 없을 경우 jsp의 오류 페이지를 띄우고 다시 detail화면으로 해당 값을 가지고 보내주기 위해서
-				String msg = "[" + searchText +  "] 가 포함되는 정보는 존재 하지 않습니다.";
+				String msg = "[" + searchText + "] 가 포함되는 정보는 존재 하지 않습니다.";
 				model.addAttribute("msg", msg);
 				return "/machine/info/emptysearch";
 			}
@@ -161,7 +180,7 @@ public class RoomNameController {
 			model.addAttribute("room", searchjoinPm);
 			if (searchjoinPm.isEmpty()) {
 				// 값이 없을 경우 jsp의 오류 페이지를 띄우고 다시 detail화면으로 해당 값을 가지고 보내주기 위해서
-				String msg = "[" + searchText +  "] 가 포함되는 정보는 존재 하지 않습니다.";
+				String msg = "[" + searchText + "] 가 포함되는 정보는 존재 하지 않습니다.";
 				model.addAttribute("msg", msg);
 				return "/machine/info/emptysearch";
 			}
@@ -172,7 +191,7 @@ public class RoomNameController {
 			model.addAttribute("room", searchjoinTemperature);
 			if (searchjoinTemperature.isEmpty()) {
 				// 값이 없을 경우 jsp의 오류 페이지를 띄우고 다시 detail화면으로 해당 값을 가지고 보내주기 위해서
-				String msg = "[" + searchText +  "] 가 포함되는 정보는 존재 하지 않습니다.";
+				String msg = "[" + searchText + "] 가 포함되는 정보는 존재 하지 않습니다.";
 				model.addAttribute("msg", msg);
 				return "/machine/info/emptysearch";
 			}
@@ -183,12 +202,12 @@ public class RoomNameController {
 			model.addAttribute("room", searchjoinHumidity);
 			if (searchjoinHumidity.isEmpty()) {
 				// 값이 없을 경우 jsp의 오류 페이지를 띄우고 다시 detail화면으로 해당 값을 가지고 보내주기 위해서
-				String msg = "[" + searchText +  "] 가 포함되는 정보는 존재 하지 않습니다.";
+				String msg = "[" + searchText + "] 가 포함되는 정보는 존재 하지 않습니다.";
 				model.addAttribute("msg", msg);
 				return "/machine/info/emptysearch";
 			}
 			return "/machine/info/detail";
-			//원래 페이지 기능 으로 기본적으로 선택이 안되어 있을 경우 전체 데이터를 불러오는 코드
+			// 원래 페이지 기능 으로 기본적으로 선택이 안되어 있을 경우 전체 데이터를 불러오는 코드
 		} else {
 			List<Room> room = roomNameService.getRoomInfoPaging(roomName, page.getStart(), page.getAmount());
 			model.addAttribute("room", room);
@@ -202,10 +221,9 @@ public class RoomNameController {
 	public String Modify(Model model, String roomname) {
 
 		Room room = roomNameService.getSameRooms(roomname);
-		List<Room> rooms = roomNameService.getRooms(); //하단 현존하는 방 이름을 보여주기 위한 기능
+		List<Room> rooms = roomNameService.getRooms(); // 하단 현존하는 방 이름을 보여주기 위한 기능
 
 		model.addAttribute("rooms", rooms);
-
 
 		model.addAttribute("room", room);
 
@@ -224,11 +242,10 @@ public class RoomNameController {
 
 		Room room = roomNameService.getSameRooms(roomnameOld);
 		int roomId = room.getId();
-		
 
 		roomNameService.doModify(roomId, roomnameNew);
 
-		return Ut.jsReplace(Ut.f("%s이(가)  %s로 수정 되었습니다.", roomnameOld, roomnameNew), "/machine/room/showRooms");
+		return Ut.jsReplace(Ut.f("%s이(가)  %s로 수정 되었습니다.", roomnameOld, roomnameNew), "/machine/room/information");
 	}
 
 	// 검색 기능 만들기
@@ -267,13 +284,13 @@ public class RoomNameController {
 
 		return "여기 까지 오는 오류 발생시 return 수정(jsp로 보내는 return만 가능)";
 	}
-	
+
 	@RequestMapping("/show/graph")
-	public String show(Model model) {	// 전체 roomname에 대한 정보를 보여준다.
+	public String show(Model model) { // 전체 roomname에 대한 정보를 보여준다.
 		List<Room> rooms = roomNameService.getRooms();
 
 		model.addAttribute("rooms", rooms);
-		model.addAttribute("test", "test" );
+		model.addAttribute("test", "test");
 		return "/machine/test/graph";
 	}
 
