@@ -30,6 +30,7 @@
           <th scope="col">온도</th>
           <th scope="col">습도</th>
           <th scope="col">데이터 갯수</th>
+          <th scope="col">통계 보기</th>
           <th scope="col">삭제 / 수정</th>
         </tr>
       </thead>
@@ -86,6 +87,14 @@
                 <fmt:formatNumber value="${totalHumadity/cnt}" pattern=".00" />
               </td>
               <td>${cnt}</td>
+              <td>
+                <a href="/machine/room/showGraph?roomname=${room.roomName}" type="button" class="btn btn-success">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pie-chart-fill" viewBox="0 0 16 16">
+                    <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"></path>
+                    </svg>
+                  
+                </a>
+              </td>
               <td>
                 <a href="/machine/room/doDelete?roomname=${room.roomName}" type="button" class="btn btn-outline-danger">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
