@@ -57,7 +57,7 @@
           <div class="form-control" grid text-center aria-label="nickname">${user.nickname}</div>
         </div>
         <div class="col">
-          유저 닉네임
+          유저 이메일
           <div class="form-control grid text-center" aria-label="email">${user.email}</div>
         </div>
         <div class="col">
