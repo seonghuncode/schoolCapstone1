@@ -31,6 +31,7 @@ public class InfoController {
 	
 	
 	@RequestMapping("/machine/info/showAllInfo")
+	@ResponseBody
 	public String showAllinfo(Model model) {
 	//전체 roomname에 대한 정보를 보여준다.
 		List<Info> AllInfo = infoService.showAllinfo();
