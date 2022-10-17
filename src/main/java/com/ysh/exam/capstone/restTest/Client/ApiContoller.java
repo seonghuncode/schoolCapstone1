@@ -59,5 +59,10 @@ public class ApiContoller {
 	 public Object test() {
 		 return restTemplateService.test();
 	 }
+	 
+	 @GetMapping("/login")
+	 public Object doLogin() {
+		 return restTemplateService.login();
+	 }
 
 }
