@@ -60,9 +60,17 @@ public class ApiContoller {
 		 return restTemplateService.test();
 	 }
 	 
+	 //준석 서버
 	 @GetMapping("/login")
 	 public Object doLogin() {
 		 return restTemplateService.login();
+	 }
+	 
+	 //다영님 서버
+	 @GetMapping("/join")
+	 public Object doJoin() {
+			
+		 return restTemplateService.join();
 	 }
 
 }
