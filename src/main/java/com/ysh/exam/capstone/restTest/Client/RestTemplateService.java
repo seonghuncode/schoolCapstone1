@@ -1,6 +1,7 @@
 package com.ysh.exam.capstone.restTest.Client;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
@@ -19,14 +20,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class RestTemplateService {
-	
+
 	// The method init(KeyManager[], TrustManager[], SecureRandom) ==> https로 요청을 할
 	// 경우 key값을 설정해 주는 설정을 해주어야 한다.
 	// 원인은 사설 인증서의 경우에 신뢰하는 인증 기관 목록(keystore)에 없어서 발생한다.
 	// ------------------------------------------------------------------------------
-	//https오류를 무시 하기 위한 코드 - 원래는 보안상 인증키를 추가해주는 것이 좋다
+	// https오류를 무시 하기 위한 코드 - 원래는 보안상 인증키를 추가해주는 것이 좋다
 	private ignoreHttps ignoreHttps;
-
 
 	// http://localhost/api/server/hello
 	// response
@@ -52,8 +52,7 @@ public class RestTemplateService {
 	// api.add_resource(userJoin, "/userJoin/<'string:id'>/<'string:pw'>")
 	// request객체에 body붙여서 보내면 response를 보내준다
 	public userJoin login() { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
-		URI uri = UriComponentsBuilder.fromUriString("http://203.250.133.144:8080")
-				.path("/userJoin/{id}/{pw}")
+		URI uri = UriComponentsBuilder.fromUriString("http://203.250.133.144:8080").path("/userJoin/{id}/{pw}")
 //				.queryParam("id", "steve")
 //				.queryParam("pw", "df")
 				.encode().build().expand("123", "123").toUri();
@@ -75,16 +74,12 @@ public class RestTemplateService {
 		return result.getBody();
 	}
 
-
 	// post 구현
 	public UserResponse post() {
 		// http://localhost:9090/api/server/user/{userId}/name/{userName}
 
 		URI uri = UriComponentsBuilder.fromUriString("http://localhost:8081")
-				.path("/api/server/user/{userId}/name/{userName}")
-				.encode()
-				.build()
-				.expand(11, "steve") // uri
+				.path("/api/server/user/{userId}/name/{userName}").encode().build().expand(11, "steve") // uri
 																										// :http://localhost:8081/api/server/user/11/name/steve
 				.toUri();
 
@@ -105,10 +100,9 @@ public class RestTemplateService {
 
 		return response.getBody();
 	}
-	
-	
-	
-	// 다영님 서버 연결 https://203.250.133.171:8000/register ==> // 다시 전송할때는 모든 정보가 달라야 오류가X
+
+	// 다영님 서버 연결 https://203.250.133.171:8000/register ==> // 다시 전송할때는 모든 정보가 달라야
+	// 오류가X
 //	{
 //	  "nickname": "string",
 //	  "login_id": "string",
@@ -117,24 +111,21 @@ public class RestTemplateService {
 //	  "email": "user@example.com",
 //	  "phone": "string"
 //	}
-	
+
 //	/register/{login_id}/{login_pw}/{nickname}/{name}/{email}/{phone}
 
 	public userJoin join() { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
-		
-		//https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
 		ignoreHttps.ignore();
-		
-			
-		
-		
+
+		// 데이터 보낼때 중복 값 보내면 에러
 		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
 				.path("/register/{login_id}/{login_pw}/{nickname}/{name}/{email}/{phone}")
 //				.queryParam("id", "steve")
 //				.queryParam("pw", "df")
-				.encode()
-				.build()
-				.expand("유성dfdㅀㅎㅎㄹfddddf훈", "12dffddfㅎㅎddgㅀㅀfdf3","123fㅀㅀㅎㅎgfgddfddf","seonㅀㅀdddㅎdffdg","tesddㅎfdfdㅀㅀdft@naver.com","01ㅎ0dddfㅀdf2df")
+				.encode().build().expand("유성dfdㅀㅎㅎdfㄹfㄱddddf훈", "12dffddㄱfㅎdfㅎddgㅀㅀfdf3", "123fㅀㅀdㄱfㅎㅎgfgddfddf",
+						"seonㅀㄹㅀddfddㅎdffdg", "tesddㅎfdfddㄹfㅀㅀdft@naver.com", "01ㄹdfㅎ0dddfㅀdf2df")
 				.toUri();
 		System.out.println(uri.toString());
 
@@ -153,8 +144,30 @@ public class RestTemplateService {
 
 		return result.getBody();
 	}
-	
-	
+
+	// 다영님 서버 allroominfo기능 --> https://203.250.133.171:8000/allRoomInfo/
+	//현재 받아올 경우 json형태가 다르다고 오류 발생
+	public allRoomInfo allRoomInfo() { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
+
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+		ignoreHttps.ignore();
+
+		// 데이터 보낼때 중복 값 보내면 에러
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000").path("/allRoomInfo").encode()
+				.build().toUri();
+		System.out.println(uri.toString());
+
+		RestTemplate restTemplate = new RestTemplate();
+//        String result = restTemplate.getForObject(uri, String.class);
+		// json 형태로 받자!
+		ResponseEntity<allRoomInfo> result = restTemplate.getForEntity(uri, allRoomInfo.class);
+//        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+
+		return result.getBody();
+	}
 
 	public Object test() {
 		URI uri = UriComponentsBuilder.fromUriString("http://localhost:8081")

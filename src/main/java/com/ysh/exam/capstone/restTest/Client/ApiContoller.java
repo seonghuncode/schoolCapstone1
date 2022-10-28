@@ -12,6 +12,7 @@ import com.ysh.exam.capstone.vo.Member;
 @RestController
 @RequestMapping("/api/client")
 public class ApiContoller {
+	
 
 	private final RestTemplateService restTemplateService;
 
@@ -69,8 +70,14 @@ public class ApiContoller {
 	 //다영님 서버
 	 @GetMapping("/join")
 	 public Object doJoin() {
-			
 		 return restTemplateService.join();
+	 }
+	 
+	 //다영님 서버
+	 @GetMapping("/allRoomInfo")
+	 public Object allRoomInfo() {
+		 System.out.println(restTemplateService.allRoomInfo());
+		 return restTemplateService.allRoomInfo();
 	 }
 
 }

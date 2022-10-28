@@ -34,7 +34,9 @@ class login{
 @NoArgsConstructor
 @ToString
 class userJoin{
-
-	
     private String result;
 }
+
+
+
+
