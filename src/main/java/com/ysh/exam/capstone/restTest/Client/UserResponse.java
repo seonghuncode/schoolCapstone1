@@ -27,17 +27,19 @@ public class UserResponse {
 @NoArgsConstructor
 @ToString
 class allRoomInfo{
-	
+
 	
     private int id;
     private String created_at;
     private String room_name;
-    private String user_id;
-    private String temp;
-    private String humidify;
-    private String findedust;
+    private int user_id;
+    private int temp;
+    private int humidify;
+    private int findedust;
     private String ledcolor;
 }
+
+
 
 
 

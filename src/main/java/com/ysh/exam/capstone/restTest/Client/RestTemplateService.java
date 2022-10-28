@@ -7,13 +7,16 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.reactive.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ysh.exam.capstone.restTest.ignoreHttps;
 
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.build.Plugin.Engine.Summary;
 
 //Service!!!
 
@@ -146,21 +149,24 @@ public class RestTemplateService {
 	}
 
 	// 다영님 서버 allroominfo기능 --> https://203.250.133.171:8000/allRoomInfo/
-	//현재 받아올 경우 json형태가 다르다고 오류 발생
-	public allRoomInfo allRoomInfo() { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
+	//현재 받아올 경우 json형태가 다르다고 오류 발생 -> 받아오는 것을 [] 배열로 감싸 배열 형태로 받고 리턴해주면 오류 해결
+	public allRoomInfo[] allRoomInfo() { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
 
 		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
 		ignoreHttps.ignore();
 
 		// 데이터 보낼때 중복 값 보내면 에러
-		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000").path("/allRoomInfo").encode()
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+				.path("/allRoomInfo")
+				.encode()
 				.build().toUri();
 		System.out.println(uri.toString());
 
 		RestTemplate restTemplate = new RestTemplate();
 //        String result = restTemplate.getForObject(uri, String.class);
 		// json 형태로 받자!
-		ResponseEntity<allRoomInfo> result = restTemplate.getForEntity(uri, allRoomInfo.class);
+
+		ResponseEntity<allRoomInfo[]> result = restTemplate.getForEntity(uri, allRoomInfo[].class);
 //        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
 
 		System.out.println(result.getStatusCode());
