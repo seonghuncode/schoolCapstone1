@@ -68,7 +68,7 @@
           
           //--------------------------------------------------------------------------
 
-
+	//꺾은선 그래프 구조(연습 데이터)
 	google.load("visualization", "1", {
 		packages : [ "corechart" ]
 	});
@@ -83,12 +83,29 @@
 				[ 'Year', 'Sales', 'Expenses' ], [ '2004', 1000, 400 ],
 				[ '2005', 1170, 460 ], [ '2006', 660, 1120 ],
 				[ '2007', 1030, 540 ] ]);
+		  var data3 = google.visualization.arrayToDataTable([
+	          ['Year', 'Sales', 'Expenses', 'Profit'],
+	          ['2014', 1000, 400, 200],
+	          ['2015', 1170, 460, 250],
+	          ['2016', 660, 1120, 300],
+	          ['2017', 1030, 540, 350]
+	        ]);
+
 		var options = {
 			title : 'Company Performance'
 		};
 		var options2 = {
 			title : 'Company Performance'
 		};
+		
+		 var options3 = {
+		          chart: {
+		            title: 'Company Performance',
+		            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+		          },
+		          bars: 'horizontal' // Required for Material Bar Charts.
+		        };
+		
 		var chart = new google.visualization.LineChart(document
 				.getElementById('chart_div'));
 		chart.draw(data, options);
@@ -97,6 +114,9 @@
 				.getElementById('chart_div2'));
 		chart2.draw(data2, options2);
 		console.log("실행");
+		
+		 var chart3 = new google.charts.Bar(document.getElementById('barchart_material1'));
+		 chart3.draw(data3, options3);
 	}
 	
 	//------------------------------------------------------------
@@ -114,6 +134,34 @@
 
           </c:forEach>
           
+          //---------------------------------------------------------------------------------------------------------------------
+          //막대 그래프 구조(연습 데이터)
+          google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses', 'Profit'],
+          ['2014', 1000, 400, 200],
+          ['2015', 1170, 460, 250],
+          ['2016', 660, 1120, 300],
+          ['2017', 1030, 540, 350]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Company Performance',
+            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+          },
+          bars: 'horizontal' // Required for Material Bar Charts.
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material1'));
+
+        chart.draw(data, options);
+      }
+      
+      //-------------------------------------------------------------------------------------------------------
+          
 </script>
 
 
@@ -125,6 +173,7 @@
 <div class="container mt-3">
   <div id="chart_div" style="width: 900px; height: 500px;"></div>
   <div id="chart_div2" style="width: 900px; height: 500px;"></div>
+  <div id="barchart_material1" style="width: 900px; height: 500px;"></div>
 </div>
 
 

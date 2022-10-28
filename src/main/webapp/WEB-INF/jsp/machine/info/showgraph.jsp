@@ -49,14 +49,21 @@
       console.log(<fmt:formatNumber value="${totalHumadity/cnt}" pattern=".00" />)
       ${cnt}
       
-      <!-- 그래프 부분 코그 -->
+      <!--원형 그래프 부분 코그 -->
       google.load("visualization", "1", {
   		packages : [ "corechart" ]
   	});
   	google.setOnLoadCallback(drawChart);
+  	<!--원형 그래프 부분 코그 -->
+  	
+  	<!-- 꺾은선 그래프 부분 -->
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+    <!-- 꺾은선 그래프 부분 -->
 
   	function drawChart() {
   		
+  		<!--원형 그래프 부분 코그 -->
   		var data = google.visualization.arrayToDataTable([
 				['방이름', '미세먼지', '온도', '습도' ], 
 				[ '미세먼지', parseFloat("${totalPm/cnt}"), parseFloat("${totalTemperature/cnt}"), parseFloat("${totalHumadity/cnt}") ],
@@ -64,16 +71,37 @@
 				[ '습도', parseFloat("${totalHumadity/cnt}"), parseFloat("${totalTemperature/cnt}"), parseFloat("${totalHumadity/cnt}") ] ]);
 
   		var options = {
-  			title : '${nowRoomName}에 대한 통계'
+  			title : '${nowRoomName}에 대한 통계(백분율)'
   		};
   		
   		var chart = new google.visualization.PieChart(document
   				.getElementById('chart_div'));
   		chart.draw(data, options);
+  		<!--원형 그래프 부분 코그 -->
+  		//
+  		
+  			<!-- 꺾은선 그래프 부분 -->
+  	  var data2 = google.visualization.arrayToDataTable([
+    	  ['방이름', '미세먼지', '온도', '습도' ], 
+			[ '${nowRoomName}', parseFloat("${totalPm/cnt}"), parseFloat("${totalTemperature/cnt}"), parseFloat("${totalHumadity/cnt}") ],
+			 ]);
 
+      var options2 = {
+        chart: {
+          title: '${nowRoomName}에 대한 통계',
+          subtitle: '미세먼지, 온도, 습도에 대한 수치',
+        },
+        bars: 'horizontal' // Required for Material Bar Charts.
+      };
+
+      var chart2 = new google.charts.Bar(document.getElementById('barchart_material1'));
+
+      chart2.draw(data2, options2);
+  	<!-- 꺾은선 그래프 부분 -->
   		
   	}
-  	<!-- 그래프 부분 코그 -->
+  
+
 
 
 </script>
@@ -81,7 +109,10 @@
 
 
 <div class="container mt-3">
-  <div id="chart_div" style="width: 1000px; height: 600px;"></div>
+  <div class="flex items-center">
+    <span id="chart_div" style="width: 700px; height: 500px;"></span>
+    <span id="barchart_material1" style="width: 500px; height: 200px;"></span>
+  </div>
   <a href="/" type="button" class="btn btn-warning float-right mt-1"> 뒤로 가기 </a>
 </div>
 
