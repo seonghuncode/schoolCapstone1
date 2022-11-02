@@ -104,14 +104,18 @@ public class UsrMemberController {
 		//--------------------------------------다영님 서버랑 연결하기 위해서 추가한 코드
 //		매개변수로 보내줘야 하는 값들 String login_id, String login_pw, String nickname, String name, String email, String phone
 		Object result = restTemplateService.join(loginId, loginPw, nickname, name, email, cellphoneNo);
-		System.out.println("=====================================================================");
-		System.out.println("=====================================================================");
-		System.out.println("=====================================================================");
-		System.out.println(result);
+		if(result == "userJoin(result=FALSE)") {
+			return Ut.test1("이미 존재하는 회원 정보 입니다. 회원 정보를 변경 후 재시도 해주세요!!");
+		}
 		
 		//--------------------------------------다영님 서버랑 연결하기 위해서 추가한 코드
-		
-		return Ut.jsReplace(Ut.f("%s님 회원가입이 완료 되었습니다.", nickname), "/");
+		System.out.println("=============================================================");
+		System.out.println("=============================================================");
+		System.out.println("=============================================================");
+		System.out.println(result);
+		System.out.println(result);  //현재 false가 오면 경고창을 보내주어야 하는데 false를 읽어들이지 못하고 있다.
+		return(result);
+//		return Ut.jsReplace(Ut.f("%s님 회원가입이 완료 되었습니다.", nickname), "/");
 	
 
 	}
