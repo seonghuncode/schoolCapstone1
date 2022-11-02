@@ -29,13 +29,6 @@ class login{
     private String loginId;
     private String loginPw;
 }
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-class userJoin{
-    private String result;
-}
 
 
 

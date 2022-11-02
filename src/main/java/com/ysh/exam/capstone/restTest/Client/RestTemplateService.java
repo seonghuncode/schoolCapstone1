@@ -221,8 +221,12 @@ public class RestTemplateService {
 		ResponseEntity<userJoin> result = restTemplate.postForEntity(uri, req, userJoin.class);
 //        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
 
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		System.out.println(result.getStatusCode());
 		System.out.println(result.getBody());
+		
 
 		return result.getBody();
 	}
@@ -250,7 +254,7 @@ public class RestTemplateService {
 
 		System.out.println(result.getStatusCode());
 		System.out.println(result.getBody());
-
+		
 		return result.getBody();
 	}
 

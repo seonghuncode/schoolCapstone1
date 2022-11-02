@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ysh.exam.capstone.restTest.Client.RestTemplateService;
+import com.ysh.exam.capstone.restTest.Client.UserRequest;
+import com.ysh.exam.capstone.restTest.Client.userJoin;
 import com.ysh.exam.capstone.service.MemberService;
 import com.ysh.exam.capstone.util.Ut;
 import com.ysh.exam.capstone.vo.Member;
@@ -19,7 +21,7 @@ public class UsrMemberController {
 	
 	@Autowired //@Autowired는 의존성 주입을 할 때 사용하는 Annotation으로 의존 객체의 타입에 해당하는 bean을 찾아 주입하는 역할을 한다.
 	private RestTemplateService restTemplateService;
-
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -103,19 +105,14 @@ public class UsrMemberController {
 		
 		//--------------------------------------다영님 서버랑 연결하기 위해서 추가한 코드
 //		매개변수로 보내줘야 하는 값들 String login_id, String login_pw, String nickname, String name, String email, String phone
-		Object result = restTemplateService.join(loginId, loginPw, nickname, name, email, cellphoneNo);
-		if(result == "userJoin(result=FALSE)") {
+		userJoin answer = restTemplateService.join(loginId, loginPw, nickname, name, email, cellphoneNo);
+		if(answer.getResult().equals("FALSE")) {
 			return Ut.test1("이미 존재하는 회원 정보 입니다. 회원 정보를 변경 후 재시도 해주세요!!");
 		}
 		
 		//--------------------------------------다영님 서버랑 연결하기 위해서 추가한 코드
-		System.out.println("=============================================================");
-		System.out.println("=============================================================");
-		System.out.println("=============================================================");
-		System.out.println(result);
-		System.out.println(result);  //현재 false가 오면 경고창을 보내주어야 하는데 false를 읽어들이지 못하고 있다.
-		return(result);
-//		return Ut.jsReplace(Ut.f("%s님 회원가입이 완료 되었습니다.", nickname), "/");
+		
+		return Ut.jsReplace(Ut.f("%s님 회원가입이 완료 되었습니다.", nickname), "/");
 	
 
 	}
