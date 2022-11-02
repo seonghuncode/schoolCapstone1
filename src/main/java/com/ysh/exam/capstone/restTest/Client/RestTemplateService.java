@@ -104,76 +104,7 @@ public class RestTemplateService {
 		return response.getBody();
 	}
 
-	// 다영님 서버 연결 https://203.250.133.171:8000/register ==> // 다시 전송할때는 모든 정보가 달라야
-	// 오류가X
-//	{
-//	  "nickname": "string",
-//	  "login_id": "string",
-//	  "login_pw": "string",
-//	  "name": "string",
-//	  "email": "user@example.com",
-//	  "phone": "string"
-//	}
 
-//	/register/{login_id}/{login_pw}/{nickname}/{name}/{email}/{phone}
-
-	public userJoin join() { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
-
-		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
-		ignoreHttps.ignore();
-
-		// 데이터 보낼때 중복 값 보내면 에러
-		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-				.path("/register/{login_id}/{login_pw}/{nickname}/{name}/{email}/{phone}")
-//				.queryParam("id", "steve")
-//				.queryParam("pw", "df")
-				.encode().build().expand("유성dfdㅀㅎㅎdfㄹfㄱddddf훈", "12dffddㄱfㅎdfㅎddgㅀㅀfdf3", "123fㅀㅀdㄱfㅎㅎgfgddfddf",
-						"seonㅀㄹㅀddfddㅎdffdg", "tesddㅎfdfddㄹfㅀㅀdft@naver.com", "01ㄹdfㅎ0dddfㅀdf2df")
-				.toUri();
-		System.out.println(uri.toString());
-
-		login req = new login();
-		req.setLoginId("admin");
-		req.setLoginPw("admin");
-
-		RestTemplate restTemplate = new RestTemplate();
-//        String result = restTemplate.getForObject(uri, String.class);
-		// json 형태로 받자!
-		ResponseEntity<userJoin> result = restTemplate.postForEntity(uri, req, userJoin.class);
-//        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
-
-		System.out.println(result.getStatusCode());
-		System.out.println(result.getBody());
-
-		return result.getBody();
-	}
-
-	// 다영님 서버 allroominfo기능 --> https://203.250.133.171:8000/allRoomInfo/
-	//현재 받아올 경우 json형태가 다르다고 오류 발생 -> 받아오는 것을 [] 배열로 감싸 배열 형태로 받고 리턴해주면 오류 해결
-	public allRoomInfo[] allRoomInfo() { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
-
-		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
-		ignoreHttps.ignore();
-
-		// 데이터 보낼때 중복 값 보내면 에러
-		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-				.path("/allRoomInfo")
-				.encode()
-				.build().toUri();
-		System.out.println(uri.toString());
-
-		RestTemplate restTemplate = new RestTemplate();
-//        String result = restTemplate.getForObject(uri, String.class);
-		// json 형태로 받자!
-
-		ResponseEntity<allRoomInfo[]> result = restTemplate.getForEntity(uri, allRoomInfo[].class);
-//        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
-
-		System.out.println(result.getStatusCode());
-		System.out.println(result.getBody());
-
-		return result.getBody();
-	}
 
 	public Object test() {
 		URI uri = UriComponentsBuilder.fromUriString("http://localhost:8081")
@@ -246,6 +177,81 @@ public class RestTemplateService {
 		log.info("{}", response.getBody());
 
 		return response;
+	}
+	
+	
+	//-------------------------------------------------------------------------------------------------------------------------다영님 서버 연결 부분
+	// 다영님 서버 연결 https://203.250.133.171:8000/register ==> // 다시 전송할때는 모든 정보가 달라야
+	// 오류가X
+//	{
+//	  "nickname": "string",
+//	  "login_id": "string",
+//	  "login_pw": "string",
+//	  "name": "string",
+//	  "email": "user@example.com",
+//	  "phone": "string"
+//	}
+
+//	/register/{login_id}/{login_pw}/{nickname}/{name}/{email}/{phone}
+
+	
+	public userJoin join(String login_id, String login_pw, String nickname, String name, String email, String phone) { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
+
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+		ignoreHttps.ignore();
+
+		// 데이터 보낼때 중복 값 보내면 에러
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+//				.path("/register/{login_id}/{login_pw}/{nickname}/{name}/{email}/{phone}")
+//				.encode().build().expand("유성dfdfㅀㅎㅎdfㄹfㄱddddf훈", "12dffddㄱfㅎdffㅎddgㅀㅀfdf3", "123fㅀㅀdㄱfㅎㅎgfgddffddf",
+//						"seonㅀㄹㅀddfdfdㅎdffdg", "tesddㅎfdfddㄹfㅀㅀdft@naver.fcom", "01ㄹdfㅎ0dddfㅀfdf2df")
+				.path("/register/{login_id}/{login_pw}/{nickname}/{name}/{email}/{phone}")
+				.encode().build().expand(login_id, login_pw, nickname,
+						name, email, phone)
+				.toUri();
+		System.out.println(uri.toString());
+
+		login req = new login();
+		req.setLoginId("admin");
+		req.setLoginPw("admin");
+
+		RestTemplate restTemplate = new RestTemplate();
+//        String result = restTemplate.getForObject(uri, String.class);
+		// json 형태로 받자!
+		ResponseEntity<userJoin> result = restTemplate.postForEntity(uri, req, userJoin.class);
+//        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+
+		return result.getBody();
+	}
+
+	// 다영님 서버 allroominfo기능 --> https://203.250.133.171:8000/allRoomInfo/
+	//현재 받아올 경우 json형태가 다르다고 오류 발생 -> 받아오는 것을 [] 배열로 감싸 배열 형태로 받고 리턴해주면 오류 해결
+	public allRoomInfo[] allRoomInfo() { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
+
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+		ignoreHttps.ignore();
+
+		// 데이터 보낼때 중복 값 보내면 에러
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+				.path("/allRoomInfo")
+				.encode()
+				.build().toUri();
+		System.out.println(uri.toString());
+
+		RestTemplate restTemplate = new RestTemplate();
+//        String result = restTemplate.getForObject(uri, String.class);
+		// json 형태로 받자!
+
+		ResponseEntity<allRoomInfo[]> result = restTemplate.getForEntity(uri, allRoomInfo[].class);
+//        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+
+		return result.getBody();
 	}
 
 }

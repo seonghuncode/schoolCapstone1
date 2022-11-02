@@ -70,7 +70,14 @@ public class ApiContoller {
 	 //다영님 서버
 	 @GetMapping("/join")
 	 public Object doJoin() {
-		 return restTemplateService.join();
+		 
+		 String login_id = "1234";
+		 String login_pw = "1234";
+		 String nickname = "1234";
+		 String name = "1234";
+		 String email = "1234";
+		 String phone = "1234";
+		 return restTemplateService.join( login_id, login_pw, nickname, name, email,phone);
 	 }
 	 
 	 //다영님 서버
