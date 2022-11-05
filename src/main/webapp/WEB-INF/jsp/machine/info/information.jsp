@@ -89,13 +89,15 @@
 
             <!--  중복되는 방이름이 있다면 출력 하지 마라!! -->
             <!-- id값을 오름차순으로 하기 때문에 나중에 이미나온 변수값이 나중에 다시 나와 누락될 일이 없다-->
-            <c:if test="${room.roomName ne checkRoomName}">
+            
+           
+            <c:if test="${room.room_name ne checkRoomName}">
               <tr>
                 <th scope="row">${num}</th>
                 <td>${room.id }</td>
-                <td>${room.roomName }</td>
+                <td>${room.room_name }</td> <!--  다영님 서버 컬럼명으로 수정 -->
                 <td>
-                  <a href="/machine/room/modify?roomname=${room.roomName}" type="button" class="btn btn-outline-primary">
+                  <a href="/machine/room/modify?roomname=${room.room_name}" type="button" class="btn btn-outline-primary"> <!--  다영님 서버 컬럼명으로 수정 -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                       class="bi bi-ui-checks" viewBox="0 0 16 16">
                   <path
@@ -107,7 +109,7 @@
               <c:set var="num" value="${num + 1}" />
             </c:if>
 
-            <c:set var="checkRoomName" value="${room.roomName}" />
+            <c:set var="checkRoomName" value="${room.room_name}" /> <!--  다영님 서버 컬럼명으로 수정 -->
             <!-- 초기에는 checkRoomName에 값이 없기에 중복이 안되게 한후 한번 그 다음 부터 값을 넣어 중복이 않되도록 한다 -->
 
           </c:forEach>

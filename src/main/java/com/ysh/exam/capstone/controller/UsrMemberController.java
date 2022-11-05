@@ -209,6 +209,7 @@ public class UsrMemberController {
 																				// 대해 return을 할 필요가 없다.
 		}
 
+		//userLoginId는 로그인시 변수에 저장해 두어 놓은 현재 로그인 되어 있는 id값이 들어가 있디.
 		String loginId = userLoginId; // loginId는 로그인시 변수에 저장 하여 따로 저장을 해둔다
 		if (loginId == null) {
 			return Ut.jsReplace("loginId값이 비어 있습니다. 다시 확인해 주세요", "/");

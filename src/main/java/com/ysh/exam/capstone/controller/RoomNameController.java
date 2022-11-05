@@ -13,6 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ysh.exam.capstone.dto.PageDTO;
 import com.ysh.exam.capstone.dto.PageParam;
+import com.ysh.exam.capstone.restTest.Client.RestTemplateService;
+import com.ysh.exam.capstone.restTest.Client.allRoomInfo;
 import com.ysh.exam.capstone.service.RoomNameService;
 import com.ysh.exam.capstone.util.Ut;
 import com.ysh.exam.capstone.vo.Member;
@@ -20,6 +22,9 @@ import com.ysh.exam.capstone.vo.Room;
 
 @Controller
 public class RoomNameController {
+	
+	@Autowired
+	private RestTemplateService restTemplateService;
 
 	private RoomNameService roomNameService;
 
@@ -38,9 +43,15 @@ public class RoomNameController {
 
 	@RequestMapping("/machine/room/information")
 	public String add(Model model, HttpSession httpSession) {
+		//--------------------------------------------------------------------------------
 		// 현재 존재 하는 방 이름들을 보여주기 위해 넘겨 준다
-		List<Room> rooms = roomNameService.getRooms();
+//		List<Room> rooms = roomNameService.getRooms();
+//		model.addAttribute("rooms", rooms);
+		//==>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>위의 내 서버 에서 다영님 서버에 저장된 방들을 불러오는 것으로 수정 하기
+		allRoomInfo[] rooms = restTemplateService.allRoomInfo();
 		model.addAttribute("rooms", rooms);
+		
+		//--------------------------------------------------------------------------------
 
 		// 유저 정보를 jsp파일로 보내준다.
 		Member user = (Member) usrMemberController.getUserInformation(httpSession, model);
