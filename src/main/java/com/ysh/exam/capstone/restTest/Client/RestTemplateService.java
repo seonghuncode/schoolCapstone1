@@ -50,32 +50,32 @@ public class RestTemplateService {
 		return result.getBody();
 	}
 
-	// 준석 서버로 get방식으로 로그인 요청 203.250.133.144:8080/userJoin / string 으로 "true" ,
-	// "false"로 반환
-	// api.add_resource(userJoin, "/userJoin/<'string:id'>/<'string:pw'>")
-	// request객체에 body붙여서 보내면 response를 보내준다
-	public userJoin login() { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
-		URI uri = UriComponentsBuilder.fromUriString("http://203.250.133.144:8080").path("/userJoin/{id}/{pw}")
-//				.queryParam("id", "steve")
-//				.queryParam("pw", "df")
-				.encode().build().expand("123", "123").toUri();
-		System.out.println(uri.toString());
-
-		login req = new login();
-		req.setLoginId("admin");
-		req.setLoginPw("admin");
-
-		RestTemplate restTemplate = new RestTemplate();
-//        String result = restTemplate.getForObject(uri, String.class);
-		// json 형태로 받자!
-		ResponseEntity<userJoin> result = restTemplate.getForEntity(uri, userJoin.class);
-//        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
-
-		System.out.println(result.getStatusCode());
-		System.out.println(result.getBody());
-
-		return result.getBody();
-	}
+//	// 준석 서버로 get방식으로 로그인 요청 203.250.133.144:8080/userJoin / string 으로 "true" ,
+//	// "false"로 반환
+//	// api.add_resource(userJoin, "/userJoin/<'string:id'>/<'string:pw'>")
+//	// request객체에 body붙여서 보내면 response를 보내준다
+//	public userJoin login() { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
+//		URI uri = UriComponentsBuilder.fromUriString("http://203.250.133.144:8080").path("/userJoin/{id}/{pw}")
+////				.queryParam("id", "steve")
+////				.queryParam("pw", "df")
+//				.encode().build().expand("123", "123").toUri();
+//		System.out.println(uri.toString());
+//
+//		login req = new login();
+//		req.setLoginId("admin");
+//		req.setLoginPw("admin");
+//
+//		RestTemplate restTemplate = new RestTemplate();
+////        String result = restTemplate.getForObject(uri, String.class);
+//		// json 형태로 받자!
+//		ResponseEntity<userJoin> result = restTemplate.getForEntity(uri, userJoin.class);
+////        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+//
+//		System.out.println(result.getStatusCode());
+//		System.out.println(result.getBody());
+//
+//		return result.getBody();
+//	}
 
 	// post 구현
 	public UserResponse post() {
@@ -106,35 +106,35 @@ public class RestTemplateService {
 
 
 
-	public Object test() {
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:8081")
-				.path("/api/server/machine/member/doLogin?loginId={loginId}&loginPw={loginPw}").encode().build()
-				.expand("admin", "admin") // 파라미터로 넘겨줄 값
-				.toUri();
-
-		System.out.println("uri :" + uri);
-
-		// http body -> object -> object mapper -> json -> rest template -> http body
-		// json
-//         UserRequest req = new UserRequest();
-//    	 Member req = new Member();
-		login req = new login();
-		req.setLoginId("admin");
-		req.setLoginPw("admin");
-
-		// req.setLoginId("dsg"); //원하는 요청 값
-
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<Object> response = restTemplate.postForEntity(uri, req, Object.class); // 리턴받고 싶은 객체.class가 온다
-		// uri에 req object를 보내서 응답은 UserResponse.class타입으로 받을 것이다!!
-
-		System.out.println(response.getStatusCode());
-		System.out.println(response.getHeaders());
-		System.out.println(response.getBody());
-
-		return response.getBody();
-
-	}
+//	public Object test() {
+//		URI uri = UriComponentsBuilder.fromUriString("http://localhost:8081")
+//				.path("/api/server/machine/member/doLogin?loginId={loginId}&loginPw={loginPw}").encode().build()
+//				.expand("admin", "admin") // 파라미터로 넘겨줄 값
+//				.toUri();
+//
+//		System.out.println("uri :" + uri);
+//
+//		// http body -> object -> object mapper -> json -> rest template -> http body
+//		// json
+////         UserRequest req = new UserRequest();
+////    	 Member req = new Member();
+//		login req = new login();
+//		req.setLoginId("admin");
+//		req.setLoginPw("admin");
+//
+//		// req.setLoginId("dsg"); //원하는 요청 값
+//
+//		RestTemplate restTemplate = new RestTemplate();
+//		ResponseEntity<Object> response = restTemplate.postForEntity(uri, req, Object.class); // 리턴받고 싶은 객체.class가 온다
+//		// uri에 req object를 보내서 응답은 UserResponse.class타입으로 받을 것이다!!
+//
+//		System.out.println(response.getStatusCode());
+//		System.out.println(response.getHeaders());
+//		System.out.println(response.getBody());
+//
+//		return response.getBody();
+//
+//	}
 
 	// restTemplage exchange 구현
 	public ResponseEntity exchange() {
@@ -212,8 +212,8 @@ public class RestTemplateService {
 		System.out.println(uri.toString());
 
 		login req = new login();
-		req.setLoginId("admin");
-		req.setLoginPw("admin");
+//		req.setLoginId("admin");
+//		req.setLoginPw("admin");
 
 		RestTemplate restTemplate = new RestTemplate();
 //        String result = restTemplate.getForObject(uri, String.class);
@@ -257,5 +257,32 @@ public class RestTemplateService {
 		
 		return result.getBody();
 	}
+	
+	//다영님 서버 로그인 기능
+	public login doLogin(String login_id, String login_pw) {
+		ignoreHttps.ignore();
+		
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+				.path("/login/{login_id}/{login_pw}")
+				.encode()
+				.build()
+				.expand(login_id, login_pw)
+				.toUri();
+		System.out.println(uri.toString());
+		
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<login> result = restTemplate.getForEntity(uri, login.class);
+		
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+		
+		return result.getBody();
+		
+	}
+	
+	
+	
+	
 
 }

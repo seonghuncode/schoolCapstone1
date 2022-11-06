@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ysh.exam.capstone.restTest.Client.RestTemplateService;
 import com.ysh.exam.capstone.restTest.Client.UserRequest;
+import com.ysh.exam.capstone.restTest.Client.login;
 import com.ysh.exam.capstone.restTest.Client.userJoin;
 import com.ysh.exam.capstone.service.MemberService;
 import com.ysh.exam.capstone.util.Ut;
@@ -170,28 +171,33 @@ public class UsrMemberController {
 			return Ut.jsReplace("loginPw(을)를 입력해 주세요.", "/machine/member/login");
 		}
 
-		Member member = memberService.getMemberByLoginId(loginId);
-
-		if (member == null) {
-//			return ResultData.from("F-3", "존재하지 않는 loginId입니다");
-			return Ut.jsReplace("존재하지 않는 loginId입니다", "/machine/member/login");
-		}
-
-//		if (member.getLoginPw().equals(loginPw) == false) {
-////			return ResultData.from("F-4", "비밀번호가 일치 하지 않습니다.");
+		
+		//--------------------------------------------------------다영님 서버연결로 변경
+//		Member member = memberService.getMemberByLoginId(loginId);
+//		if (member == null) {
+//			return Ut.jsReplace("존재하지 않는 loginId입니다", "/machine/member/login");
+//		}
+//
+//		if (!passwordEncoder.matches(loginPw, member.getLoginPw())) {
 //			return Ut.jsReplace("비밀번호가 일치 하지 않습니다.", "/machine/member/login");
 //		}
-		// 비밀번호 암호화 저장후 불러올때 암호화 해독후 비교
-		if (!passwordEncoder.matches(loginPw, member.getLoginPw())) {
-			return Ut.jsReplace("비밀번호가 일치 하지 않습니다.", "/machine/member/login");
+		
+		login result = restTemplateService.doLogin(loginId, loginPw);
+	
+		if(result.getResult().equals("FALSE")) {
+			return Ut.jsReplace("존재하지 않는 아이디 또는 비밀번호 입니다. 다시 확인해 주세요!", "/machine/member/login");
 		}
 
 		userLoginId = loginId;
 
-		httpSession.setAttribute("loginedMemberId", member.getId());
+//		httpSession.setAttribute("loginedMemberId", member.getId());
+		httpSession.setAttribute("loginedMemberId", loginId);
 
-//		return ResultData.from("S-1", Ut.f("%s님 횐영 합니다.", member.getNickname()));
-		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
+
+		//return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
+		return Ut.jsReplace(Ut.f("%s님 환영합니다.", loginId), "/");
+		
+		//--------------------------------------------------------다영님 서버연결로 변경
 
 	}
 

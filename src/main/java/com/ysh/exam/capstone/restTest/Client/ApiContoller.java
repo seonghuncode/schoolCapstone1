@@ -56,16 +56,16 @@ public class ApiContoller {
 	        return restTemplateService.naver();
 	    }
 	 
-	 @GetMapping("/test")
-	 public Object test() {
-		 return restTemplateService.test();
-	 }
+//	 @GetMapping("/test")
+//	 public Object test() {
+//		 return restTemplateService.test();
+//	 }
 	 
-	 //준석 서버
-	 @GetMapping("/login")
-	 public Object doLogin() {
-		 return restTemplateService.login();
-	 }
+//	 //준석 서버
+//	 @GetMapping("/login")
+//	 public Object doLogin() {
+//		 return restTemplateService.login();
+//	 }
 	 
 	 //다영님 서버
 	 @GetMapping("/join")
@@ -86,5 +86,19 @@ public class ApiContoller {
 		 System.out.println(restTemplateService.allRoomInfo());
 		 return restTemplateService.allRoomInfo();
 	 }
+	 
+	 //다영님 서버 로그인
+	 @GetMapping("/login")
+	 public login doLogin() {
+		 String login_id = "11";
+		 String login_pw = "11";
+		 return restTemplateService.doLogin(login_id, login_pw);
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
 
 }

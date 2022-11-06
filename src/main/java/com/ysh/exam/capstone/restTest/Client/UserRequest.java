@@ -20,15 +20,15 @@ public class UserRequest {
 }
 
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-class login{
-
-    private String loginId;
-    private String loginPw;
-}
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@ToString
+//class login{
+//
+//    private String loginId;
+//    private String loginPw;
+//}
 
 
 
