@@ -1,22 +1,21 @@
 package com.ysh.exam.capstone.restTest.Client;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.reactive.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ysh.exam.capstone.restTest.ignoreHttps;
 
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.build.Plugin.Engine.Summary;
 
 //Service!!!
 
@@ -280,6 +279,74 @@ public class RestTemplateService {
 		return result.getBody();
 		
 	}
+	
+	//다영님 서버 방이름 변경 기능(put 방식)
+	public Modify doModify(String old_room_name, String new_room_name) {
+		ignoreHttps.ignore();
+		
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+				.path("/update_roomName/{old_room_name}/{new_room_name}")
+				.encode()
+				.build()
+				.expand(old_room_name, new_room_name)
+				.toUri();
+		System.out.println(uri.toString());
+		
+		//----------------------------------------
+		//헤더 설정
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		
+		//수정할 정보 셋팅
+		modifyInfo info = new modifyInfo();
+		info.setOld_room_name(old_room_name);
+		info.setNew_room_name(new_room_name);
+		
+		Modify modify = new Modify();
+		
+		
+		HttpEntity<modifyInfo> request = new HttpEntity<>(info, headers);
+		//----------------------------------------
+		
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<Modify> result = restTemplate.exchange(uri,HttpMethod.PUT, request, Modify.class);
+		
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+		
+		return result.getBody();
+		
+	}
+	
+	//다영님 서버 특정 방이름 찾기
+	public allRoomInfo[] findRoom(String roomName) { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
+
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+		ignoreHttps.ignore();
+
+		// 데이터 보낼때 중복 값 보내면 에러
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+				.path("/findRoomInfo/{room_name}")
+				.encode()
+				.build()
+				.expand(roomName)
+				.toUri();
+		System.out.println(uri.toString());
+
+		RestTemplate restTemplate = new RestTemplate();
+//        String result = restTemplate.getForObject(uri, String.class);
+		// json 형태로 받자!
+
+		ResponseEntity<allRoomInfo[]> result = restTemplate.getForEntity(uri, allRoomInfo[].class);
+//        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+		
+		return result.getBody();
+	}
+	
 	
 	
 	

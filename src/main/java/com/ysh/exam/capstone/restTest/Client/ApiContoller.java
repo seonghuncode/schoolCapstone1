@@ -95,6 +95,21 @@ public class ApiContoller {
 		 return restTemplateService.doLogin(login_id, login_pw);
 	 }
 	 
+	 //다영님 서버 방이름 수정
+	 @GetMapping("/modify")
+	 public Modify doModify() {
+		 String oldRoomName = "방3";
+		 String newRoomName = "방1";
+		 return restTemplateService.doModify(oldRoomName, newRoomName);
+	 }
+	 
+	 //다영님 서버 특정 방 검색후 해당 방 가지고 오기
+	 @GetMapping("findRoom")
+	 public Object doFindroom() {
+		 String roomName = "방1";
+		 return restTemplateService.findRoom(roomName);
+	 }
+	 
 	 
 	 
 	 

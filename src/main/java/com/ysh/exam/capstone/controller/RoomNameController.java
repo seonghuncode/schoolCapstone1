@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ysh.exam.capstone.dto.PageDTO;
 import com.ysh.exam.capstone.dto.PageParam;
+import com.ysh.exam.capstone.restTest.Client.Modify;
 import com.ysh.exam.capstone.restTest.Client.RestTemplateService;
 import com.ysh.exam.capstone.restTest.Client.allRoomInfo;
 import com.ysh.exam.capstone.service.RoomNameService;
@@ -231,32 +232,47 @@ public class RoomNameController {
 	@RequestMapping("/machine/room/modify")
 	public String Modify(Model model, String roomname) {
 
-		Room room = roomNameService.getSameRooms(roomname);
-		List<Room> rooms = roomNameService.getRooms(); // 하단 현존하는 방 이름을 보여주기 위한 기능
-
-		model.addAttribute("rooms", rooms);
-
+		//다영님 서버로 수정 하기-----------------------------------------------------------------------------------------
+//		Room room = roomNameService.getSameRooms(roomname);
+		// ==>
+		allRoomInfo[] room = restTemplateService.findRoom(roomname);
 		model.addAttribute("room", room);
-
+		
+		//List<Room> rooms = roomNameService.getRooms(); // 하단 현존하는 방 이름을 보여주기 위한 기능
+		// ==>
+		allRoomInfo[] rooms = restTemplateService.allRoomInfo();
+		model.addAttribute("rooms", rooms);
+		
+		String nowRoomName = roomname;
+		model.addAttribute("nowRoomName", nowRoomName);
+		//다영님 서버로 수정 하기-----------------------------------------------------------------------------------------
+		
 		return "/machine/info/modify";
 
 	}
 
 	@RequestMapping("/machine/room/doModify")
 	@ResponseBody
-	public String doModify(String roomnameOld, String roomnameNew) {
-		int id = roomNameService.checkExist(roomnameNew);
-		if (id == -1) {
-//			return Ut.jsReplace(Ut.f("%s는 이미 존재 하는 방 이름 입니다.", roomnameNew), "/machine/room/modify");
+	public Object doModify(String roomnameOld, String roomnameNew) {
+		//--------------------------------------------------------------다영님 서버랑 연결하는 코드로 변경 하기
+//		int id = roomNameService.checkExist(roomnameNew);
+//		if (id == -1) {
+//			return Ut.test1("이미 존재 하는 방 이름 입니다.");
+//		}
+//		Room room = roomNameService.getSameRooms(roomnameOld);
+//		int roomId = room.getId();
+//		roomNameService.doModify(roomId, roomnameNew);
+//		return Ut.jsReplace(Ut.f("%s이(가)  %s로 수정 되었습니다.", roomnameOld, roomnameNew), "/machine/room/information");
+		
+		Modify result = restTemplateService.doModify(roomnameOld, roomnameNew);
+		if(result.getResult().equals("FALSE")) {
 			return Ut.test1("이미 존재 하는 방 이름 입니다.");
 		}
-
-		Room room = roomNameService.getSameRooms(roomnameOld);
-		int roomId = room.getId();
-
-		roomNameService.doModify(roomId, roomnameNew);
-
+		
 		return Ut.jsReplace(Ut.f("%s이(가)  %s로 수정 되었습니다.", roomnameOld, roomnameNew), "/machine/room/information");
+		
+	
+		//--------------------------------------------------------------다영님 서버랑 연결하는 코드로 변경 하기
 	}
 
 	// 검색 기능 만들기

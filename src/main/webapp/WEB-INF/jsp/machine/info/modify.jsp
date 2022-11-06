@@ -15,7 +15,7 @@
       <h3 style="text-align: center;">방 이름 변경</h3>
       <div class="input-group mb-3">
        <span class="input-group-text" id="basic-addon1">현재 방 이름 : </span>
-        <input  type="text" class="form-control" name="roomnameOld" maxlength="20" value="${room.roomName}">
+        <input  type="text" class="form-control" name="roomnameOld" maxlength="20" value="${nowRoomName}">
       </div>
       <div class="form-group mt-3">
         <input type="text" class="form-control" placeholder="변경할 방 이름을 입력해 주세요." name="roomnameNew" maxlength="20">
@@ -37,10 +37,10 @@
 
               <!--  중복되는 방이름이 있다면 출력 하지 마라!! -->
               <!-- id값을 오름차순으로 하기 때문에 나중에 이미나온 변수값이 나중에 다시 나와 누락될 일이 없다-->
-              <c:if test="${room.roomName ne checkRoomName}">
-                <span class="m-1 text-red-400">${room.roomName}</span>
+              <c:if test="${room.room_name ne checkRoomName}">
+                <span class="m-1 text-red-400">${room.room_name}</span>
               </c:if>
-              <c:set var="checkRoomName" value="${room.roomName}" />
+              <c:set var="checkRoomName" value="${room.room_name}" />
               <!-- 초기에는 checkRoomName에 값이 없기에 중복이 안되게 한후 한번 그 다음 부터 값을 넣어 중복이 않되도록 한다 -->
 
             </c:forEach>
