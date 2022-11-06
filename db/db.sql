@@ -240,7 +240,28 @@ WHERE memberId = 0;
 			ORDER BY A.id ASC
 	
 
-	
 
+SELECT A.*,
+			M.pm AS joinPm,
+			M.temperature AS joinTemperature,
+			M.humadity AS joinHumadity,
+			M.updateDate AS joinUpdateDate
+			FROM room AS A
+			LEFT JOIN info AS M
+			ON A.infoId = M.roomId
+			WHERE roomName = "거실"
+			ORDER BY A.id ASC
+			LIMIT 1, 5
+			
+			
+			SELECT *
+			FROM `member` AS M
+			WHERE M.loginId = "user1";
+			
+			SELECT *
+			FROM room
+			WHERE roomName = "거실"
+			
+			
 
 
