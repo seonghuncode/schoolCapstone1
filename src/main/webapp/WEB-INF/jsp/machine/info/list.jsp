@@ -54,29 +54,24 @@
 
             <c:if test="${roomId eq checkRoom.id}">
               <c:set var="cnt" value="${cnt + 1}" />
-              <c:set var="totalPm" value="${totalPm + checkRoom.joinPm}" />
-              <c:set var="totalTemperature" value="${totalTemperature + checkRoom.joinTemperature}" />
-              <c:set var="totalHumadity" value="${totalHumadity + checkRoom.joinHumadity}" />
+              <c:set var="totalPm" value="${totalPm + checkRoom.findedust}" />
+              <c:set var="totalTemperature" value="${totalTemperature + checkRoom.temp}" />
+              <c:set var="totalHumadity" value="${totalHumadity + checkRoom.humidify}" />
             </c:if>
           </c:forEach>
 
 
           <!--  중복되는 방이름이 있다면 출력 하지 마라!! -->
           <!-- id값을 오름차순으로 하기 때문에 나중에 이미나온 변수값이 나중에 다시 나와 누락될 일이 없다-->
-          <c:if test="${room.roomName ne checkRoomName}">
+          <c:if test="${room.room_name ne checkRoomName}">
 
             <tr class="table-info">
               <td scope="row">${room.id }</td>
               <td>
-                <a href="../room/doDetail?roomName=${room.roomName}"> ${room.roomName} </a>
+                <a href="../room/doDetail?roomName=${room.room_name}"> ${room.room_name} </a>
               </td>
-              <!-- 
-              <td>${room.regDate.substring(2, 16) }</td>
-              <td>${room.joinPm/cnt}</td>         
-              <td>${room.joinTemperature/cnt}</td>
-              <td>${room.joinHumadity/cnt}</td>
-               -->
-              <td>${room.regDate.substring(2, 16) }</td>
+             
+              <td>${room.created_at.substring(2, 16) }</td>
               <td>
                 <fmt:formatNumber value="${totalPm/cnt}" pattern=".00" />
               </td>
@@ -88,7 +83,7 @@
               </td>
               <td>${cnt}</td>
               <td>
-                <a href="/machine/room/showGraph?roomname=${room.roomName}" type="button" class="btn btn-success">
+                <a href="/machine/room/showGraph?roomname=${room.room_name}" type="button" class="btn btn-success">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pie-chart-fill" viewBox="0 0 16 16">
                     <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"></path>
                     </svg>
@@ -96,7 +91,7 @@
                 </a>
               </td>
               <td>
-                <a href="/machine/room/doDelete?roomname=${room.roomName}" type="button" class="btn btn-outline-danger">
+                <a href="/machine/room/doDelete?roomname=${room.room_name}" type="button" class="btn btn-outline-danger">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-trash3" viewBox="0 0 16 16">
                   <path
@@ -105,7 +100,7 @@
                 </a>
 
                 <!-- 수정허가  미완성-->
-                <a href="/machine/room/modify?roomname=${room.roomName}" type="button" class="btn btn-outline-primary">
+                <a href="/machine/room/modify?roomname=${room.room_name}" type="button" class="btn btn-outline-primary">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-ui-checks" viewBox="0 0 16 16">
                   <path
@@ -116,7 +111,7 @@
             </tr>
 
           </c:if>
-          <c:set var="checkRoomName" value="${room.roomName}" />
+          <c:set var="checkRoomName" value="${room.room_name}" />
           <!-- 초기에는 checkRoomName에 값이 없기에 중복이 안되게 한후 한번 그 다음 부터 값을 넣어 중복이 않되도록 한다 -->
 
           <!-- 위에서 선언한 변수에 중복된 값들을 모두 합친후 테이블에 출력후 다시 반복문을 돌때는 변수 초기화를 시켜준다 -->

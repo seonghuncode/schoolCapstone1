@@ -111,10 +111,15 @@ public class RoomNameController {
 
 	@RequestMapping("/machine/room/showRooms")
 	public String showRooms(Model model) {
+		//----------------------------------------------------------다영님 서버연결 해서 수정
 		// 전체 roomname에 대한 정보를 보여준다.
-		List<Room> rooms = roomNameService.getRooms();
-
+		//List<Room> rooms = roomNameService.getRooms();
+		// ==>
+		allRoomInfo[] rooms = restTemplateService.allRoomInfo();
+		
 		model.addAttribute("rooms", rooms);
+		
+		//----------------------------------------------------------다영님 서버연결 해서 수정
 
 		return "/machine/info/list";
 	}
