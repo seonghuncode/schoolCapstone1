@@ -382,6 +382,32 @@ public class RestTemplateService {
 	}
 	
 	
+	public userInfo[] showUserInfo(String userId) {
+	
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+				ignoreHttps.ignore();
+
+				// 데이터 보낼때 중복 값 보내면 에러
+				URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+						.path("/userInfo/{login_id}")
+						.encode()
+						.build()
+						.expand(userId)
+						.toUri();
+				System.out.println(uri.toString());
+
+				RestTemplate restTemplate = new RestTemplate();
+				
+				ResponseEntity<userInfo[]> result = restTemplate.getForEntity(uri,  userInfo[].class);
+//		        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+
+				System.out.println(result.getStatusCode());
+				System.out.println(result.getBody());
+				
+				return result.getBody();
+				
+	}
+	
 	
 	
 	

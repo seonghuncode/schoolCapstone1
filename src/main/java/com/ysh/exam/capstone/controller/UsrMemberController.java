@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ysh.exam.capstone.restTest.Client.RestTemplateService;
 import com.ysh.exam.capstone.restTest.Client.UserRequest;
 import com.ysh.exam.capstone.restTest.Client.login;
+import com.ysh.exam.capstone.restTest.Client.userInfo;
 import com.ysh.exam.capstone.restTest.Client.userJoin;
 import com.ysh.exam.capstone.service.MemberService;
 import com.ysh.exam.capstone.util.Ut;
@@ -192,10 +193,14 @@ public class UsrMemberController {
 
 //		httpSession.setAttribute("loginedMemberId", member.getId());
 		httpSession.setAttribute("loginedMemberId", loginId);
-
+		
+		//-----------------------------해당 id를 통해 서버에서 일치하는 id값에 대한 유저정보를 가지고 와서 닉네임으로 환영인사 하는 기능
+		userInfo[] user = restTemplateService.showUserInfo(loginId);
+		String nickname = user[0].getNickname(); //유저 정보가 배열에 담겨 오는대 항산 배열에 하나의 객체만 담기기 때문에 0변째
+		//------------------------------
 
 		//return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
-		return Ut.jsReplace(Ut.f("%s님 환영합니다.", loginId), "/");
+		return Ut.jsReplace(Ut.f("%s님 환영합니다.", nickname), "/");
 		
 		//--------------------------------------------------------다영님 서버연결로 변경
 

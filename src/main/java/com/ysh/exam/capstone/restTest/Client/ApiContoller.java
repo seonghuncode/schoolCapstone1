@@ -117,6 +117,13 @@ public class ApiContoller {
 		 return restTemplateService.deleteRoomData(roomName);
 	 }
 	 
+	 //다영님 서버랑 연결 : 유저 아이디를 넘겨 주면 해당 id와 일치 하는 유저 정보를 넘겨준다
+	 @GetMapping("/userInfo")
+	 public userInfo[] showUserInfo() {
+		 String userId = "111";
+		 return restTemplateService.showUserInfo(userId);
+	 }
+	 
 	 
 
 }
