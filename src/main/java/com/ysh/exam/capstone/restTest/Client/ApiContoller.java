@@ -110,9 +110,12 @@ public class ApiContoller {
 		 return restTemplateService.findRoom(roomName);
 	 }
 	 
-	 
-	 
-	 
+	 //다영님 서버 특정 방에 대해 데이터를 삭제 하는 기능
+	 @GetMapping("/delete")
+	 public Result doDelete() {
+		 String roomName = "eeee";
+		 return restTemplateService.deleteRoomData(roomName);
+	 }
 	 
 	 
 

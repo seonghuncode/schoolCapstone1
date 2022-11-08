@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import com.ysh.exam.capstone.dto.PageDTO;
 import com.ysh.exam.capstone.dto.PageParam;
 import com.ysh.exam.capstone.restTest.Client.Modify;
 import com.ysh.exam.capstone.restTest.Client.RestTemplateService;
+import com.ysh.exam.capstone.restTest.Client.Result;
 import com.ysh.exam.capstone.restTest.Client.allRoomInfo;
 import com.ysh.exam.capstone.service.RoomNameService;
 import com.ysh.exam.capstone.util.Ut;
@@ -23,7 +25,7 @@ import com.ysh.exam.capstone.vo.Room;
 
 @Controller
 public class RoomNameController {
-	
+
 	@Autowired
 	private RestTemplateService restTemplateService;
 
@@ -44,15 +46,16 @@ public class RoomNameController {
 
 	@RequestMapping("/machine/room/information")
 	public String add(Model model, HttpSession httpSession) {
-		//--------------------------------------------------------------------------------
+		// --------------------------------------------------------------------------------
 		// 현재 존재 하는 방 이름들을 보여주기 위해 넘겨 준다
 //		List<Room> rooms = roomNameService.getRooms();
 //		model.addAttribute("rooms", rooms);
-		//==>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>위의 내 서버 에서 다영님 서버에 저장된 방들을 불러오는 것으로 수정 하기
+		// ==>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>위의 내 서버 에서 다영님 서버에 저장된 방들을
+		// 불러오는 것으로 수정 하기
 		allRoomInfo[] rooms = restTemplateService.allRoomInfo();
 		model.addAttribute("rooms", rooms);
-		
-		//--------------------------------------------------------------------------------
+
+		// --------------------------------------------------------------------------------
 
 		// 유저 정보를 jsp파일로 보내준다.
 		Member user = (Member) usrMemberController.getUserInformation(httpSession, model);
@@ -111,15 +114,15 @@ public class RoomNameController {
 
 	@RequestMapping("/machine/room/showRooms")
 	public String showRooms(Model model) {
-		//----------------------------------------------------------다영님 서버연결 해서 수정
+		// ----------------------------------------------------------다영님 서버연결 해서 수정
 		// 전체 roomname에 대한 정보를 보여준다.
-		//List<Room> rooms = roomNameService.getRooms();
+		// List<Room> rooms = roomNameService.getRooms();
 		// ==>
 		allRoomInfo[] rooms = restTemplateService.allRoomInfo();
-		
+
 		model.addAttribute("rooms", rooms);
-		
-		//----------------------------------------------------------다영님 서버연결 해서 수정
+
+		// ----------------------------------------------------------다영님 서버연결 해서 수정
 
 		return "/machine/info/list";
 	}
@@ -130,21 +133,32 @@ public class RoomNameController {
 	@ResponseBody
 	public String doDelete(String roomname) {
 
-		int id = roomNameService.checkExist(roomname);
-
-		if (roomname == null || roomname.trim().length() == 0) {
-//			return "삭제할 방 이름을 입력해 주세요";
-			return Ut.jsReplace(Ut.f("삭제할 방 이름을 선택해 주세요"), "/machine/room/showRooms");
-		}
-		if (id != -1) {
-//			return roomname + "은 존재하지 않는 방 입니다.";
-			return Ut.jsReplace(Ut.f("%s방은 존재 하지 않는 방 입니다.", roomname), "/machine/room/showRooms");
-		}
-
-		roomNameService.doDelete(roomname);
+		// 다영님 서버랑 연결 하여 삭제 해당 방 삭제 하는 기능으로 수정-------------------------------------------
+//		int id = roomNameService.checkExist(roomname);
+//		if (roomname == null || roomname.trim().length() == 0) {
+//			return Ut.jsReplace(Ut.f("삭제할 방 이름을 선택해 주세요"), "/machine/room/showRooms");
+//		}
+//		if (id != -1) {
+//			return Ut.jsReplace(Ut.f("%s방은 존재 하지 않는 방 입니다.", roomname), "/machine/room/showRooms");
+//		}
+//		roomNameService.doDelete(roomname);
+		// 다영님 서버랑 연결 하여 삭제 해당 방 삭제 하는 기능으로 수정-------------------------------------------
 
 //		return roomname + "이 삭제 되었습니다";
+
+		if (roomname == null || roomname.trim().length() == 0) {
+			return Ut.jsReplace(Ut.f("삭제할 방 이름을 선택해 주세요"), "/machine/room/showRooms");
+		}
+		
+		Result result = restTemplateService.deleteRoomData(roomname);
+		if(result.getResult().equals("FALSE")) {
+			return Ut.jsReplace(Ut.f("존재 하지 않는 방이름 입니다. 존쟈하는 방을 입력 해주세요."), "/machine/room/showRooms");
+		}
+		
+		
+
 		return Ut.jsReplace(Ut.f("%s방이 삭제 되었습니다.", roomname), "/machine/room/showRooms");
+		
 	}
 
 //	@RequestMapping("/machine/room/doDetail")
@@ -237,21 +251,23 @@ public class RoomNameController {
 	@RequestMapping("/machine/room/modify")
 	public String Modify(Model model, String roomname) {
 
-		//다영님 서버로 수정 하기-----------------------------------------------------------------------------------------
+		// 다영님 서버로 수정
+		// 하기-----------------------------------------------------------------------------------------
 //		Room room = roomNameService.getSameRooms(roomname);
 		// ==>
 		allRoomInfo[] room = restTemplateService.findRoom(roomname);
 		model.addAttribute("room", room);
-		
-		//List<Room> rooms = roomNameService.getRooms(); // 하단 현존하는 방 이름을 보여주기 위한 기능
+
+		// List<Room> rooms = roomNameService.getRooms(); // 하단 현존하는 방 이름을 보여주기 위한 기능
 		// ==>
 		allRoomInfo[] rooms = restTemplateService.allRoomInfo();
 		model.addAttribute("rooms", rooms);
-		
+
 		String nowRoomName = roomname;
 		model.addAttribute("nowRoomName", nowRoomName);
-		//다영님 서버로 수정 하기-----------------------------------------------------------------------------------------
-		
+		// 다영님 서버로 수정
+		// 하기-----------------------------------------------------------------------------------------
+
 		return "/machine/info/modify";
 
 	}
@@ -259,7 +275,8 @@ public class RoomNameController {
 	@RequestMapping("/machine/room/doModify")
 	@ResponseBody
 	public Object doModify(String roomnameOld, String roomnameNew) {
-		//--------------------------------------------------------------다영님 서버랑 연결하는 코드로 변경 하기
+		// --------------------------------------------------------------다영님 서버랑 연결하는
+		// 코드로 변경 하기
 //		int id = roomNameService.checkExist(roomnameNew);
 //		if (id == -1) {
 //			return Ut.test1("이미 존재 하는 방 이름 입니다.");
@@ -268,16 +285,16 @@ public class RoomNameController {
 //		int roomId = room.getId();
 //		roomNameService.doModify(roomId, roomnameNew);
 //		return Ut.jsReplace(Ut.f("%s이(가)  %s로 수정 되었습니다.", roomnameOld, roomnameNew), "/machine/room/information");
-		
+
 		Modify result = restTemplateService.doModify(roomnameOld, roomnameNew);
-		if(result.getResult().equals("FALSE")) {
+		if (result.getResult().equals("FALSE")) {
 			return Ut.test1("이미 존재 하는 방 이름 입니다.");
 		}
-		
+
 		return Ut.jsReplace(Ut.f("%s이(가)  %s로 수정 되었습니다.", roomnameOld, roomnameNew), "/machine/room/information");
-		
-	
-		//--------------------------------------------------------------다영님 서버랑 연결하는 코드로 변경 하기
+
+		// --------------------------------------------------------------다영님 서버랑 연결하는
+		// 코드로 변경 하기
 	}
 
 	// 검색 기능 만들기
@@ -325,14 +342,14 @@ public class RoomNameController {
 		model.addAttribute("test", "test");
 		return "/machine/test/graph";
 	}
-	
+
 	@RequestMapping("/machine/room/showGraph")
 	public String showGraph(Model model, String roomname) {
 		List<Room> rooms = roomNameService.getRooms();
 
-		model.addAttribute("rooms", rooms); //전체 방에서 현재 방 데이터를 뽑아 통계할 예정
-		model.addAttribute("nowRoomName", roomname); //현재 방에 대한 이름을 넘겨 준다
-		
+		model.addAttribute("rooms", rooms); // 전체 방에서 현재 방 데이터를 뽑아 통계할 예정
+		model.addAttribute("nowRoomName", roomname); // 현재 방에 대한 이름을 넘겨 준다
+
 		return "/machine/info/showgraph";
 	}
 

@@ -347,6 +347,40 @@ public class RestTemplateService {
 		return result.getBody();
 	}
 	
+	//다영님 서버랑 연결 - 특정 방이름을 넘겨주면 해당방에 대한 데이터를 모두 삭제 해주는 역할
+	public Result deleteRoomData(String roomName) {
+		
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+		ignoreHttps.ignore();
+
+		// 데이터 보낼때 중복 값 보내면 에러
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+				.path("/delete_room/{room_name}")
+				.encode()
+				.build()
+				.expand(roomName)
+				.toUri();
+		System.out.println(uri.toString());
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		//--------------------------------------------------------------------
+		HttpHeaders headers = new HttpHeaders();
+		HttpEntity entity = new HttpEntity(headers);
+		
+		
+		//--------------------------------------------------------------------
+
+		ResponseEntity<Result> result = restTemplate.exchange(uri, HttpMethod.DELETE, entity,  Result.class);
+//        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+		
+		return result.getBody();
+		
+	}
+	
 	
 	
 	

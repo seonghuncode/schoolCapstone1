@@ -68,6 +68,7 @@
             <tr class="table-info">
               <td scope="row">${room.id }</td>
               <td>
+              <!-- 방이름을 클릭하면 해당 방에 대한 디테일 정보를 보여주는 페이지 이때 방이름을 같이 넘겨 준다. -->
                 <a href="../room/doDetail?roomName=${room.room_name}"> ${room.room_name} </a>
               </td>
              
