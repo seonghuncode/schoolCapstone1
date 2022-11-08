@@ -156,6 +156,22 @@ public class RoomNameController {
 		}
 		
 		
+		//다영님 서버 에서 삭제 요청을 하면 최근 순으로 여러개의 방 데이터 에서 나중것 부터 삭제 하기 때문에
+		//==> 요청을 보내서 false가 리턴될때 까지 서버애 요청을 하여 해당 방에 대한 모든 데이터를 삭제 하도록 한다.
+		Result value = result;
+		int cnt = 1;
+		while(true) {
+			value = restTemplateService.deleteRoomData(roomname);
+			cnt++;
+			if(value.getResult().equals("FALSE")) {
+				break;
+			}
+			System.out.println("==================================");
+			System.out.println("==================================");
+			System.out.println("==================================");
+			System.out.println(cnt);
+		}
+		
 
 		return Ut.jsReplace(Ut.f("%s방이 삭제 되었습니다.", roomname), "/machine/room/showRooms");
 		
