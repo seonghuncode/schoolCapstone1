@@ -1,5 +1,6 @@
 package com.ysh.exam.capstone.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +11,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ysh.exam.capstone.restTest.Client.RestTemplateService;
-import com.ysh.exam.capstone.restTest.Client.UserRequest;
 import com.ysh.exam.capstone.restTest.Client.login;
 import com.ysh.exam.capstone.restTest.Client.userInfo;
 import com.ysh.exam.capstone.restTest.Client.userJoin;
 import com.ysh.exam.capstone.service.MemberService;
 import com.ysh.exam.capstone.util.Ut;
-import com.ysh.exam.capstone.vo.Member;
+
+
 
 @Controller
 public class UsrMemberController {
+
+
+//	private UserNowId userNowId;
+//	 
+//    @Autowired(required = false)
+//    public void UsrMemberController(UserNowId userNowId) {
+//        this.userNowId = userNowId;
+//    }
+	
 	
 	@Autowired //@Autowired는 의존성 주입을 할 때 사용하는 Annotation으로 의존 객체의 타입에 해당하는 bean을 찾아 주입하는 역할을 한다.
 	private RestTemplateService restTemplateService;
@@ -32,6 +42,7 @@ public class UsrMemberController {
 	public UsrMemberController(MemberService memberService) {
 		this.memberService = memberService;
 	}
+	
 
 	// 로그인 하면 해당 로그인 아이디 변수에 넣어 두기 --> 추후 로그인한 유저 정보를 DB에서 가지고 올때 사용하기 위함
 	String userLoginId = "";
@@ -190,7 +201,8 @@ public class UsrMemberController {
 		}
 
 		userLoginId = loginId;
-
+		//userNowId.setLoginId(loginId); //로그인을 진행 하면서 현재 로그인 아이디를 class에 저장하여 다른 곳에서 현재 로그인 되어 있는 로그인 아이를 사용할 수 있도록 해준다.
+		
 //		httpSession.setAttribute("loginedMemberId", member.getId());
 		httpSession.setAttribute("loginedMemberId", loginId);
 		
@@ -230,5 +242,9 @@ public class UsrMemberController {
 		return memberService.getMemberByLoginId(loginId);
 
 	}
-
+	
+	
+	
+	
 }
+

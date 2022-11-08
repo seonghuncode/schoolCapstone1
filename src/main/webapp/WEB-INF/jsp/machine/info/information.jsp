@@ -50,7 +50,7 @@
         </div>
         <div class="col">
           유저 아이디
-          <div class="form-control grid text-center" aria-label="loginId">${user.loginId}</div>
+          <div class="form-control grid text-center" aria-label="loginId">${user.login_id}</div>
         </div>
         <div class="col">
           유저 닉네임
@@ -62,7 +62,7 @@
         </div>
         <div class="col">
           로그인 일시
-          <div class="form-control grid text-center" aria-label="regDate">${user.regDate}</div>
+          <div class="form-control grid text-center" aria-label="regDate">${user.created_at}</div>
         </div>
       </div>
     </fieldset>

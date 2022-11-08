@@ -18,13 +18,23 @@ import com.ysh.exam.capstone.restTest.Client.Modify;
 import com.ysh.exam.capstone.restTest.Client.RestTemplateService;
 import com.ysh.exam.capstone.restTest.Client.Result;
 import com.ysh.exam.capstone.restTest.Client.allRoomInfo;
+import com.ysh.exam.capstone.restTest.Client.userInfo;
 import com.ysh.exam.capstone.service.RoomNameService;
 import com.ysh.exam.capstone.util.Ut;
 import com.ysh.exam.capstone.vo.Member;
 import com.ysh.exam.capstone.vo.Room;
 
+
 @Controller
 public class RoomNameController {
+	
+//	UserNowId userNowId;
+//	 
+////    @Autowired(required = false)
+////    public void RoomNameController(UserNowId userNowId) {
+////        this.userNowId = userNowId;
+////    }
+
 
 	@Autowired
 	private RestTemplateService restTemplateService;
@@ -57,10 +67,24 @@ public class RoomNameController {
 
 		// --------------------------------------------------------------------------------
 
-		// 유저 정보를 jsp파일로 보내준다.
-		Member user = (Member) usrMemberController.getUserInformation(httpSession, model);
-		model.addAttribute("user", user);
-
+		//>>>>>>>>>다영님 서버로 수정(디비에 있는 유저 정보를 불러와서 jsp파일로 보내준다)--------------
+//		// 유저 정보를 jsp파일로 보내준다.
+//		Member user = (Member) usrMemberController.getUserInformation(httpSession, model);
+//		model.addAttribute("user", user);
+		
+		// ==>  usrMemberController에서 로그인을 하면 전역변수로 loginId들 저장해 두기 때문에 현재 세션에 저장되어 있는 아이디를 리턴받아 가지고 온다.
+//		String loginId = userNowId.getLoginId();
+		System.out.println("============================");
+		System.out.println("============================");
+//		System.out.println(loginId);
+		System.out.println("============================");
+		System.out.println("============================");
+//		userInfo[] user = restTemplateService.showUserInfo(loginId);
+//		model.addAttribute("user", user);
+		
+		//>>>>>>>>>다영님 서버로 수정(디비에 있는 유저 정보를 불러와서 jsp파일로 보내준다)--------------
+		
+		
 		// 현재 세션으로 로그인 여부를 판단한다
 		boolean isLogined = false;
 		if (httpSession.getAttribute("loginedMemberId") == null) {
