@@ -21,21 +21,21 @@
 <c:set var="roomId" value="${room.id}" />
 <c:set var="checkSameExistName" value="${nowRoomName}" />
 	   <c:set var="roomId" value="${room.id}" />
-		   <c:set var="regDate" value="${room.regDate.substring(2, 16)}" />	   
+		   <c:set var="regDate" value="${room.regDate.created_at(2, 16)}" />	   
        <c:set var="cnt" value="${cnt + 1}" />
-       <c:set var="totalPm" value="${totalPm + checkRoom.joinPm}" />
-       <c:set var="totalTemperature" value="${totalTemperature + checkRoom.joinTemperature}" />
-       <c:set var="totalHumadity" value="${totalHumadity + checkRoom.joinHumadity}" />
+       <c:set var="totalPm" value="${totalPm + checkRoom.findedust}" />
+       <c:set var="totalTemperature" value="${totalTemperature + checkRoom.temp}" />
+       <c:set var="totalHumadity" value="${totalHumadity + checkRoom.humidify}" />
 
 <c:forEach var="room" items="${rooms}" varStatus="status"> <!-- 상위 반복문 데이터가 끝날때 까지 반복문 -->
    <c:forEach var="checkRoom" items="${rooms}"> <!--  상위 반복문에서 첫 방에대해(실질적으로 해당 변수는 반복문으로만 사용하고 쓰지x)  -->
-     <c:if test="${nowRoomName eq room.roomName}">  <!-- 현재 방이름과 방이름이 동일 할때만 -->
+     <c:if test="${nowRoomName eq room.room_name}">  <!-- 현재 방이름과 방이름이 동일 할때만 -->
           <c:set var="roomId" value="${room.id}" />
-        	  <c:set var="regDate" value="${room.regDate.substring(2, 16)}" />
+        	  <c:set var="created_at" value="${room.created_at.substring(2, 16)}" />
           <c:set var="cnt" value="${cnt + 1}" />
-          <c:set var="totalPm" value="${totalPm + checkRoom.joinPm}" />
-          <c:set var="totalTemperature" value="${totalTemperature + checkRoom.joinTemperature}" />
-          <c:set var="totalHumadity" value="${totalHumadity + checkRoom.joinHumadity}" />
+          <c:set var="totalPm" value="${totalPm + checkRoom.findedust}" />
+          <c:set var="totalTemperature" value="${totalTemperature + checkRoom.temp}" />
+          <c:set var="totalHumadity" value="${totalHumadity + checkRoom.humidify}" />
         </c:if>
         </c:forEach>
          
@@ -43,7 +43,7 @@
       </c:forEach>
       console.log(${roomId})
       console.log("${nowRoomName}") 
-       console.log("${regDate}") 
+       console.log("${created_at}") 
       console.log(<fmt:formatNumber value="${totalPm/cnt}" pattern=".00" />)
       console.log(<fmt:formatNumber value="${totalTemperature/cnt}" pattern=".00" />)
       console.log(<fmt:formatNumber value="${totalHumadity/cnt}" pattern=".00" />)

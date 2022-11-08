@@ -345,10 +345,17 @@ public class RoomNameController {
 
 	@RequestMapping("/machine/room/showGraph")
 	public String showGraph(Model model, String roomname) {
-		List<Room> rooms = roomNameService.getRooms();
-
-		model.addAttribute("rooms", rooms); // 전체 방에서 현재 방 데이터를 뽑아 통계할 예정
-		model.addAttribute("nowRoomName", roomname); // 현재 방에 대한 이름을 넘겨 준다
+		//다영님 서버랑 연결해서 통계자료 보여주는 기능 으로 수정 하기---------------------------
+//		List<Room> rooms = roomNameService.getRooms();
+//		model.addAttribute("rooms", rooms); // 전체 방에서 현재 방 데이터를 뽑아 통계할 예정
+//		model.addAttribute("nowRoomName", roomname); // 현재 방에 대한 이름을 넘겨 준다
+		
+		// ===>>
+		allRoomInfo[] rooms = restTemplateService.findRoom(roomname);
+		model.addAttribute("rooms", rooms);
+		model.addAttribute("nowRoomName", roomname);
+		
+		//다영님 서버랑 연결해서 통계자료 보여주는 기능 으로 수정 하기---------------------------
 
 		return "/machine/info/showgraph";
 	}
