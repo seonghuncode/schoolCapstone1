@@ -42,7 +42,7 @@
       <div class="flex h-16 container mx-auto">
         <a href="/" class="flex items-center px-3">
           <span>
-            <i class="fa-solid fa-tree-city"></i>
+            <i class="bi bi-robot"></i>
             로봇 청정기
             <i class="fa-solid fa-tree-city"></i>
           </span>

@@ -11,11 +11,11 @@
 
 
 <section class="mt-5">
-  <div class="container mx-auto px-3 mb-3">캡스톤 주제 : 로봇 청소기, 롯봇 공기 청정기</div>
+  <div class="container mx-auto px-3 mb-3"><i class="bi bi-lightbulb"></i>캡스톤 주제 : 로봇 청소기와 로봇 공기 청정기의 결합</div>
 </section>
 
 <div class="container mx-auto px-3">
-  <p class="text-red-400">로그인전 기능 설명</p>
+  <p class="text-red-400"><i class="bi bi-bookmark-check-fill"></i>로그인전 기능 설명</p>
   <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingOne">
@@ -66,7 +66,7 @@
 
 
 
-    <p class="text-red-400 mt-3">로그인후 기능 설명</p>
+    <p class="text-red-400 mt-3"><i class="bi bi-bookmark-check-fill"></i>로그인후 기능 설명</p>
     <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingOne">
