@@ -239,7 +239,7 @@ public class RestTemplateService {
 
 		// 데이터 보낼때 중복 값 보내면 에러
 		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-				.path("/allRoomInfo")
+				.path("/webMethod/allRoomInfo")
 				.encode()
 				.build().toUri();
 		System.out.println(uri.toString());
@@ -285,7 +285,7 @@ public class RestTemplateService {
 		ignoreHttps.ignore();
 		
 		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-				.path("/update_roomName/{old_room_name}/{new_room_name}")
+				.path("/webMethod/update_roomName/{old_room_name}/{new_room_name}")
 				.encode()
 				.build()
 				.expand(old_room_name, new_room_name)
@@ -327,7 +327,7 @@ public class RestTemplateService {
 
 		// 데이터 보낼때 중복 값 보내면 에러
 		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-				.path("/findRoomInfo/{room_name}")
+				.path("/webMethod/findRoomInfo/{room_name}")
 				.encode()
 				.build()
 				.expand(roomName)
@@ -389,7 +389,7 @@ public class RestTemplateService {
 
 				// 데이터 보낼때 중복 값 보내면 에러
 				URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-						.path("/userInfo/{login_id}")
+						.path("/webMethod/userInfo/{login_id}")
 						.encode()
 						.build()
 						.expand(userId)

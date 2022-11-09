@@ -73,14 +73,15 @@ public class RoomNameController {
 //		model.addAttribute("user", user);
 		
 		// ==>  usrMemberController에서 로그인을 하면 전역변수로 loginId들 저장해 두기 때문에 현재 세션에 저장되어 있는 아이디를 리턴받아 가지고 온다.
-//		String loginId = userNowId.getLoginId();
+		String loginId = "";
+//		userNowId.getLoginId();
 		System.out.println("============================");
 		System.out.println("============================");
-//		System.out.println(loginId);
+		System.out.println(loginId);
 		System.out.println("============================");
 		System.out.println("============================");
-//		userInfo[] user = restTemplateService.showUserInfo(loginId);
-//		model.addAttribute("user", user);
+		userInfo[] user = restTemplateService.showUserInfo(loginId);
+		model.addAttribute("user", user);
 		
 		//>>>>>>>>>다영님 서버로 수정(디비에 있는 유저 정보를 불러와서 jsp파일로 보내준다)--------------
 		
