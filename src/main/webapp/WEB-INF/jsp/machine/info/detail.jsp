@@ -11,8 +11,8 @@
 
 <!-- 방이름을 상단에 보여 주기 위한 코드 -->
 <c:forEach var="room" items="${room}">
-  <c:set var="room1Name" value="${room.roomName }" />
-  <c:set var="room1RegDate" value="${room.regDate.substring(2, 16) }" />
+  <c:set var="room1Name" value="${room.room_name }" />
+  <c:set var="room1RegDate" value="${room.created_at.substring(2, 16) }" />
 </c:forEach>
 
 <!-- 검색 기능 만들기 -->
@@ -60,15 +60,15 @@
 
 
     <c:forEach var="room" items="${room}">
-      <c:set var="room1" value="${room.roomName }" />
+      <c:set var="room1" value="${room.room_name }" />
       <div class="inline-flex mr-4">
         <div class="card border-secondary mb-3 " style="max-width: 18rem;">
-          <div class="card-header">날짜 : ${room.regDate.substring(2, 16) }</div>
+          <div class="card-header">날짜 : ${room.created_at.substring(2, 16) }</div>
           <div class="card-body text-secondary">
-            <h5 class="card-title">${room.roomName }</h5>
-            <p class="card-text">미세먼지 : ${room.joinPm}</p>
-            <p class="card-text">온도 : ${room.joinTemperature}</p>
-            <p class="card-text">습도 : ${room.joinHumadity}</p>
+            <h5 class="card-title">${room.room_name }</h5>
+            <p class="card-text">미세먼지 : ${room.findedust}</p>
+            <p class="card-text">온도 : ${room.temp}</p>
+            <p class="card-text">습도 : ${room.humidify}</p>
           </div>
         </div>
       </div>

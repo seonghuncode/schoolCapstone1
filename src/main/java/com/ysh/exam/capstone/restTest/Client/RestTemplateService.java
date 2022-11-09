@@ -410,6 +410,36 @@ public class RestTemplateService {
 	
 	
 	
+	//다영님 서버랑 연결 : 디데일 에서 해당 방에 대한 정보를 페이징 기능을 위해 해당 페이징에 맞게 5개 데이터씩만 보내주기
+	public allRoomInfo[] showDetailData(String roomName, int start, int amount) { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
+
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+		ignoreHttps.ignore();
+
+		// 데이터 보낼때 중복 값 보내면 에러
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+				.path("/webMethod/stat_web/{room_name}/{start}/{amount}")
+				.encode()
+				.build()
+				.expand(roomName, start, amount)
+				.toUri();
+		System.out.println(uri.toString());
+
+		RestTemplate restTemplate = new RestTemplate();
+//        String result = restTemplate.getForObject(uri, String.class);
+		// json 형태로 받자!
+
+		ResponseEntity<allRoomInfo[]> result = restTemplate.getForEntity(uri, allRoomInfo[].class);
+//        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+		
+		return result.getBody();
+	}
+	
+	
+	
 	
 
 }

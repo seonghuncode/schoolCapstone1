@@ -124,6 +124,15 @@ public class ApiContoller {
 		 return restTemplateService.showUserInfo(userId);
 	 }
 	 
+	 //다영님 서버랑 연결 : 디데일 하게 보는 기능 해당 방에 대해 5개 데이터만 보내주는 역할
+	 @GetMapping("/stat_web")
+	 public allRoomInfo[] showDetailData() {
+		 String roomName = "방10";
+		 int start = 1;
+		 int amount = 2;
+		 return restTemplateService.showDetailData(roomName, start, amount);
+	 }
+	 
 	 
 
 }

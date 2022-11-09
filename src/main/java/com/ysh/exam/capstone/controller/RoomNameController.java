@@ -234,10 +234,27 @@ public class RoomNameController {
 			return "자세히 보고 싶은 방 이름을 입력해 주세요";
 		}
 
-		int total = roomNameService.getTotalCount(roomName, page);
+		//----------------------------------------------------------다영님 서버랑 연결한 것으로 수정하기
+		//int total = roomNameService.getTotalCount(roomName, page);  //현재 서버에서 카운트 해주는 기능이 없기 때문에 방이름으로 해당 전체 방을 불러와서 직접 카운트 하기
+		//===>
+		allRoomInfo[] rooms = restTemplateService.findRoom(roomName);
+		int cnt = 0;
+		for(int i = 0; i < rooms.length; i++) {
+			cnt++;
+		}
+		System.out.println("======================================");
+		System.out.println("======================================");
+		System.out.println("======================================");
+		System.out.println(cnt);
+		System.out.println("======================================");
+		System.out.println("======================================");
+		System.out.println("======================================");
+		int total = cnt;
+		//----------------------------------------------------------다영님 서버랑 연결한 것으로 수정하기
 
 		PageDTO pageDTO = new PageDTO(page, total);
 		model.addAttribute("page", pageDTO);
+		
 
 //		List<Room> room = roomNameService.getRoomInfo(roomName);
 //		model.addAttribute("room", room);
@@ -291,10 +308,18 @@ public class RoomNameController {
 			return "/machine/info/detail";
 			// 원래 페이지 기능 으로 기본적으로 선택이 안되어 있을 경우 전체 데이터를 불러오는 코드
 		} else {
-			List<Room> room = roomNameService.getRoomInfoPaging(roomName, page.getStart(), page.getAmount());
+			//----------------------------------------------------------다영님 서버랑 연결한 것으로 수정하기
+			
+//			List<Room> room = roomNameService.getRoomInfoPaging(roomName, page.getStart(), page.getAmount());
+//			model.addAttribute("room", room);
+			//==>
+			//서버에 시작이 1부터 인데 start , amount ==> 0 ~ 6이기 때문에 +1 씩해서 서버로 보내준다.
+			allRoomInfo[] room = restTemplateService.showDetailData(roomName, page.getStart()+ 1, page.getAmount() + 1);
 			model.addAttribute("room", room);
 
 			return "/machine/info/detail";
+			
+			//----------------------------------------------------------다영님 서버랑 연결한 것으로 수정하기
 		}
 	}
 
