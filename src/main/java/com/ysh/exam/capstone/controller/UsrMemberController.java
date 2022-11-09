@@ -16,6 +16,7 @@ import com.ysh.exam.capstone.restTest.Client.userInfo;
 import com.ysh.exam.capstone.restTest.Client.userJoin;
 import com.ysh.exam.capstone.service.MemberService;
 import com.ysh.exam.capstone.util.Ut;
+import com.ysh.exam.capstone.vo.UserNowId;
 
 
 
@@ -29,6 +30,8 @@ public class UsrMemberController {
 //    public void UsrMemberController(UserNowId userNowId) {
 //        this.userNowId = userNowId;
 //    }
+	
+	UserNowId userNowId = new UserNowId(); // ==> 로그인을 성공 하면 UserNowId객체에 로그인한 id를 저장해서 정보 기능에서 현재 로그인한 id를 통해 유저 정보를 불러와 사용하기 위함s
 	
 	
 	@Autowired //@Autowired는 의존성 주입을 할 때 사용하는 Annotation으로 의존 객체의 타입에 해당하는 bean을 찾아 주입하는 역할을 한다.
@@ -201,7 +204,14 @@ public class UsrMemberController {
 		}
 
 		userLoginId = loginId;
-		//userNowId.setLoginId(loginId); //로그인을 진행 하면서 현재 로그인 아이디를 class에 저장하여 다른 곳에서 현재 로그인 되어 있는 로그인 아이를 사용할 수 있도록 해준다.
+		
+		userNowId.setLoginId(loginId); //로그인을 진행 하면서 현재 로그인 아이디를 class에 저장하여 다른 곳에서 현재 로그인 되어 있는 로그인 아이를 사용할 수 있도록 해준다.
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		System.out.println(userNowId.getLoginId());
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+	
 		
 //		httpSession.setAttribute("loginedMemberId", member.getId());
 		httpSession.setAttribute("loginedMemberId", loginId);

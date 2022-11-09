@@ -98,7 +98,7 @@ public class ApiContoller {
 	 //다영님 서버 방이름 수정
 	 @GetMapping("/modify")
 	 public Modify doModify() {
-		 String oldRoomName = "방3";
+		 String oldRoomName = "eee";
 		 String newRoomName = "방1";
 		 return restTemplateService.doModify(oldRoomName, newRoomName);
 	 }
@@ -120,7 +120,7 @@ public class ApiContoller {
 	 //다영님 서버랑 연결 : 유저 아이디를 넘겨 주면 해당 id와 일치 하는 유저 정보를 넘겨준다
 	 @GetMapping("/userInfo")
 	 public userInfo[] showUserInfo() {
-		 String userId = "111";
+		 String userId = "11";
 		 return restTemplateService.showUserInfo(userId);
 	 }
 	 

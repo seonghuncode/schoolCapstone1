@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 import com.ysh.exam.capstone.dto.PageDTO;
 import com.ysh.exam.capstone.dto.PageParam;
 import com.ysh.exam.capstone.restTest.Client.Modify;
@@ -21,8 +20,8 @@ import com.ysh.exam.capstone.restTest.Client.allRoomInfo;
 import com.ysh.exam.capstone.restTest.Client.userInfo;
 import com.ysh.exam.capstone.service.RoomNameService;
 import com.ysh.exam.capstone.util.Ut;
-import com.ysh.exam.capstone.vo.Member;
 import com.ysh.exam.capstone.vo.Room;
+import com.ysh.exam.capstone.vo.UserNowId;
 
 
 @Controller
@@ -34,6 +33,9 @@ public class RoomNameController {
 ////    public void RoomNameController(UserNowId userNowId) {
 ////        this.userNowId = userNowId;
 ////    }
+	
+	
+
 
 
 	@Autowired
@@ -64,7 +66,8 @@ public class RoomNameController {
 		// 불러오는 것으로 수정 하기
 		allRoomInfo[] rooms = restTemplateService.allRoomInfo();
 		model.addAttribute("rooms", rooms);
-
+		
+		
 		// --------------------------------------------------------------------------------
 
 		//>>>>>>>>>다영님 서버로 수정(디비에 있는 유저 정보를 불러와서 jsp파일로 보내준다)--------------
@@ -73,16 +76,24 @@ public class RoomNameController {
 //		model.addAttribute("user", user);
 		
 		// ==>  usrMemberController에서 로그인을 하면 전역변수로 loginId들 저장해 두기 때문에 현재 세션에 저장되어 있는 아이디를 리턴받아 가지고 온다.
-		String loginId = "";
-//		userNowId.getLoginId();
+		String findLoginId = usrMemberController.userNowId.getLoginId();
+		String loginId = findLoginId;
+		if(loginId == null) {
+			return Ut.jsReplace("현재 로그인 아이디를 불러 올수 없습니다.(RoomNameController -> information부분을 확인해 주세요).", "/");
+		}
+	
+		
+//		loginId = userNowId.getLoginId();
 		System.out.println("============================");
 		System.out.println("============================");
 		System.out.println(loginId);
 		System.out.println("============================");
 		System.out.println("============================");
 		userInfo[] user = restTemplateService.showUserInfo(loginId);
-		model.addAttribute("user", user);
 		
+		userInfo realUser = user[0];  //배열에 넣어서 오기 때문에 배열안에 있는 객체로 jsp로 보내주어야 사용 가능 하다.
+		model.addAttribute("user", realUser);
+		System.out.println(user);
 		//>>>>>>>>>다영님 서버로 수정(디비에 있는 유저 정보를 불러와서 jsp파일로 보내준다)--------------
 		
 		
@@ -144,7 +155,6 @@ public class RoomNameController {
 		// List<Room> rooms = roomNameService.getRooms();
 		// ==>
 		allRoomInfo[] rooms = restTemplateService.allRoomInfo();
-
 		model.addAttribute("rooms", rooms);
 
 		// ----------------------------------------------------------다영님 서버연결 해서 수정
