@@ -61,8 +61,8 @@
           <div class="form-control grid text-center" aria-label="email">${user.email}</div>
         </div>
         <div class="col">
-          로그인 일시
-          <div class="form-control grid text-center" aria-label="regDate">${user.created_at}</div>
+          회원 가입 일시
+          <div class="form-control grid text-center" aria-label="regDate">${user.created_at.substring(2, 10)}</div>
         </div>
       </div>
     </fieldset>

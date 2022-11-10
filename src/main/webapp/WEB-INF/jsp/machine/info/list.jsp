@@ -72,7 +72,7 @@
                 <a href="../room/doDetail?roomName=${room.room_name}"> ${room.room_name} </a>
               </td>
              
-              <td>${room.created_at.substring(2, 16) }</td>
+              <td>${room.created_at.substring(2, 10) }</td>
               <td>
                 <fmt:formatNumber value="${totalPm/cnt}" pattern=".00" />
               </td>
