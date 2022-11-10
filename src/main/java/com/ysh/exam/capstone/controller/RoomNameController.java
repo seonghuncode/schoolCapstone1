@@ -263,10 +263,18 @@ public class RoomNameController {
 		// 검색 기능에서 객체를 전달할 수 없기 때문에 searchText만 보내서 여기서 계산한다
 //		if (searchRegDate != null) {
 		if (searchText != null && searchField.equals("regDate")) {
-			List<Room> searchRegdate = roomNameService.findRegDate(searchText, roomName, page.getStart(),
+			//다영님 서버로 수정 하기--------------------------------------------------------------------------------------
+//			List<Room> searchRegdate = roomNameService.findRegDate(searchText, roomName, page.getStart(),
+//					page.getAmount());
+			// ==>
+			allRoomInfo[] searchRegdate = restTemplateService.showSearchReDate(searchText, roomName, page.getStart(),
 					page.getAmount());
+			
+			//다영님 서버로 수정 하기--------------------------------------------------------------------------------------
+			
 			model.addAttribute("room", searchRegdate);
-			if (searchRegdate.isEmpty()) {
+			
+			if (searchRegdate == null) {
 				// 값이 없을 경우 jsp의 오류 페이지를 띄우고 다시 detail화면으로 해당 값을 가지고 보내주기 위해서
 				String msg = "[" + searchText + "] 가 포함되는 정보는 존재 하지 않습니다.";
 				model.addAttribute("msg", msg);
@@ -274,10 +282,17 @@ public class RoomNameController {
 			}
 			return "/machine/info/detail";
 		} else if (searchText != null && searchField.equals("joinPm")) {
-			List<Room> searchjoinPm = roomNameService.findjoinPm(searchText, roomName, page.getStart(),
+			//다영님 서버랑 연결 하기-----------------------------------------------------------------------------
+//			List<Room> searchjoinPm = roomNameService.findjoinPm(searchText, roomName, page.getStart(),
+//					page.getAmount());
+			// ==> 
+			
+			allRoomInfo[] searchjoinPm = restTemplateService.showSearchFindDust(searchText, roomName, page.getStart(),
 					page.getAmount());
+			
+			//다영님 서버랑 연결 하기-----------------------------------------------------------------------------
 			model.addAttribute("room", searchjoinPm);
-			if (searchjoinPm.isEmpty()) {
+			if (searchjoinPm == null) {
 				// 값이 없을 경우 jsp의 오류 페이지를 띄우고 다시 detail화면으로 해당 값을 가지고 보내주기 위해서
 				String msg = "[" + searchText + "] 가 포함되는 정보는 존재 하지 않습니다.";
 				model.addAttribute("msg", msg);
@@ -285,10 +300,17 @@ public class RoomNameController {
 			}
 			return "/machine/info/detail";
 		} else if (searchText != null && searchField.equals("joinTemperature")) {
-			List<Room> searchjoinTemperature = roomNameService.findjoinTemperature(searchText, roomName,
+			//다영님 서버랑 연결 하기-------------------------------------------------------------------------------------
+//			List<Room> searchjoinTemperature = roomNameService.findjoinTemperature(searchText, roomName,
+//					page.getStart(), page.getAmount());
+			
+			allRoomInfo[] searchjoinTemperature = restTemplateService.showSearchFindTemp(searchText, roomName,
 					page.getStart(), page.getAmount());
+			
+			//다영님 서버랑 연결 하기-------------------------------------------------------------------------------------
+			
 			model.addAttribute("room", searchjoinTemperature);
-			if (searchjoinTemperature.isEmpty()) {
+			if (searchjoinTemperature == null) {
 				// 값이 없을 경우 jsp의 오류 페이지를 띄우고 다시 detail화면으로 해당 값을 가지고 보내주기 위해서
 				String msg = "[" + searchText + "] 가 포함되는 정보는 존재 하지 않습니다.";
 				model.addAttribute("msg", msg);
@@ -296,10 +318,16 @@ public class RoomNameController {
 			}
 			return "/machine/info/detail";
 		} else if (searchText != null && searchField.equals("joinHumidity")) {
-			List<Room> searchjoinHumidity = roomNameService.findjoinHumidity(searchText, roomName, page.getStart(),
+			//다영님 서버랑 연결 하기-----------------------------------------------------------------------------------------
+//			List<Room> searchjoinHumidity = roomNameService.findjoinHumidity(searchText, roomName, page.getStart(),
+//					page.getAmount());
+			
+			allRoomInfo[] searchjoinHumidity = restTemplateService.showSearchFindHumidity(searchText, roomName, page.getStart(),
 					page.getAmount());
+			
+			//다영님 서버랑 연결 하기-----------------------------------------------------------------------------------------
 			model.addAttribute("room", searchjoinHumidity);
-			if (searchjoinHumidity.isEmpty()) {
+			if (searchjoinHumidity == null) {
 				// 값이 없을 경우 jsp의 오류 페이지를 띄우고 다시 detail화면으로 해당 값을 가지고 보내주기 위해서
 				String msg = "[" + searchText + "] 가 포함되는 정보는 존재 하지 않습니다.";
 				model.addAttribute("msg", msg);
