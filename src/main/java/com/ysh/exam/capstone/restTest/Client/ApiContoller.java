@@ -133,6 +133,46 @@ public class ApiContoller {
 		 return restTemplateService.showDetailData(roomName, start, amount);
 	 }
 	 
+	 //다영님 서버 연결 : 검색 기능 날짜에 대한 검색 기능
+	 @GetMapping("/searchRegDate")
+	 public allRoomInfo[] showSearchRegDate() {
+		 String searchText = "05";
+		 String roomName = "방10";
+		 int start = 1;
+		 int amount = 3;
+		 return restTemplateService.showSearchReDate(searchText, roomName, start, amount);
+	 }
+	 
+	 //다영님 서버 연결 : 검색 기능 미세먼지에 관한 검색 기능
+	 @GetMapping("/searchFindDust")
+	 public allRoomInfo[] showSearchFindDust() {
+		 String searchText = "2";
+		 String roomName = "방10";
+		 int start = 1;
+		 int amount = 3;
+		 return restTemplateService.showSearchFindDust(searchText, roomName, start, amount);
+	 }
+	 
+	 //다영님 서버 연결 : 검섹기능 온도에 관한 검색 하기
+	 @GetMapping("/searchFindTemp")
+	 public allRoomInfo[] showSearchFindTemp() {
+		 String searchText = "2";
+		 String roomName = "방10";
+		 int start = 1;
+		 int amount = 3;
+		 return restTemplateService.showSearchFindTemp(searchText, roomName, start, amount);
+	 }
+	 
+	 //다영님 서버 연결 : 검색기능 -> 습도에 대한 검색
+	 @GetMapping("/searchFindHumidity")
+	 public allRoomInfo[] showSearchFindHumidity() {
+		 String searchText = "2";
+		 String roomName = "방10";
+		 int start = 1;
+		 int amount = 3;
+		 return restTemplateService.showSearchFindHumidity(searchText, roomName, start, amount);
+	 }
+	 
 	 
 
 }

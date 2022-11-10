@@ -103,8 +103,6 @@ public class RestTemplateService {
 		return response.getBody();
 	}
 
-
-
 //	public Object test() {
 //		URI uri = UriComponentsBuilder.fromUriString("http://localhost:8081")
 //				.path("/api/server/machine/member/doLogin?loginId={loginId}&loginPw={loginPw}").encode().build()
@@ -177,9 +175,9 @@ public class RestTemplateService {
 
 		return response;
 	}
-	
-	
-	//-------------------------------------------------------------------------------------------------------------------------다영님 서버 연결 부분
+
+	// -------------------------------------------------------------------------------------------------------------------------다영님
+	// 서버 연결 부분
 	// 다영님 서버 연결 https://203.250.133.171:8000/register ==> // 다시 전송할때는 모든 정보가 달라야
 	// 오류가X
 //	{
@@ -193,8 +191,13 @@ public class RestTemplateService {
 
 //	/register/{login_id}/{login_pw}/{nickname}/{name}/{email}/{phone}
 
-	
-	public userJoin join(String login_id, String login_pw, String nickname, String name, String email, String phone) { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
+	public userJoin join(String login_id, String login_pw, String nickname, String name, String email, String phone) { // userJoin이라는
+																														// 리턴
+																														// 받을
+																														// class를
+																														// 만들어
+																														// 주어야
+																														// 된다
 
 		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
 		ignoreHttps.ignore();
@@ -204,10 +207,8 @@ public class RestTemplateService {
 //				.path("/register/{login_id}/{login_pw}/{nickname}/{name}/{email}/{phone}")
 //				.encode().build().expand("유성dfdfㅀㅎㅎdfㄹfㄱddddf훈", "12dffddㄱfㅎdffㅎddgㅀㅀfdf3", "123fㅀㅀdㄱfㅎㅎgfgddffddf",
 //						"seonㅀㄹㅀddfdfdㅎdffdg", "tesddㅎfdfddㄹfㅀㅀdft@naver.fcom", "01ㄹdfㅎ0dddfㅀfdf2df")
-				.path("/register/{login_id}/{login_pw}/{nickname}/{name}/{email}/{phone}")
-				.encode().build().expand(login_id, login_pw, nickname,
-						name, email, phone)
-				.toUri();
+				.path("/register/{login_id}/{login_pw}/{nickname}/{name}/{email}/{phone}").encode().build()
+				.expand(login_id, login_pw, nickname, name, email, phone).toUri();
 		System.out.println(uri.toString());
 
 		login req = new login();
@@ -225,23 +226,20 @@ public class RestTemplateService {
 		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		System.out.println(result.getStatusCode());
 		System.out.println(result.getBody());
-		
 
 		return result.getBody();
 	}
 
 	// 다영님 서버 allroominfo기능 --> https://203.250.133.171:8000/allRoomInfo/
-	//현재 받아올 경우 json형태가 다르다고 오류 발생 -> 받아오는 것을 [] 배열로 감싸 배열 형태로 받고 리턴해주면 오류 해결
+	// 현재 받아올 경우 json형태가 다르다고 오류 발생 -> 받아오는 것을 [] 배열로 감싸 배열 형태로 받고 리턴해주면 오류 해결
 	public allRoomInfo[] allRoomInfo() { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
 
 		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
 		ignoreHttps.ignore();
 
 		// 데이터 보낼때 중복 값 보내면 에러
-		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-				.path("/webMethod/allRoomInfo")
-				.encode()
-				.build().toUri();
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000").path("/webMethod/allRoomInfo")
+				.encode().build().toUri();
 		System.out.println(uri.toString());
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -253,73 +251,63 @@ public class RestTemplateService {
 
 		System.out.println(result.getStatusCode());
 		System.out.println(result.getBody());
-		
+
 		return result.getBody();
 	}
-	
-	//다영님 서버 로그인 기능
+
+	// 다영님 서버 로그인 기능
 	public login doLogin(String login_id, String login_pw) {
 		ignoreHttps.ignore();
-		
+
 		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-				.path("/login/{login_id}/{login_pw}")
-				.encode()
-				.build()
-				.expand(login_id, login_pw)
-				.toUri();
+				.path("/login/{login_id}/{login_pw}").encode().build().expand(login_id, login_pw).toUri();
 		System.out.println(uri.toString());
-		
+
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<login> result = restTemplate.getForEntity(uri, login.class);
-		
 
 		System.out.println(result.getStatusCode());
 		System.out.println(result.getBody());
-		
+
 		return result.getBody();
-		
+
 	}
-	
-	//다영님 서버 방이름 변경 기능(put 방식)
+
+	// 다영님 서버 방이름 변경 기능(put 방식)
 	public Modify doModify(String old_room_name, String new_room_name) {
 		ignoreHttps.ignore();
-		
+
 		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-				.path("/webMethod/update_roomName/{old_room_name}/{new_room_name}")
-				.encode()
-				.build()
-				.expand(old_room_name, new_room_name)
-				.toUri();
+				.path("/webMethod/update_roomName/{old_room_name}/{new_room_name}").encode().build()
+				.expand(old_room_name, new_room_name).toUri();
 		System.out.println(uri.toString());
-		
-		//----------------------------------------
-		//헤더 설정
+
+		// ----------------------------------------
+		// 헤더 설정
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		
-		//수정할 정보 셋팅
+
+		// 수정할 정보 셋팅
 		modifyInfo info = new modifyInfo();
 		info.setOld_room_name(old_room_name);
 		info.setNew_room_name(new_room_name);
-		
+
 		Modify modify = new Modify();
-		
-		
+
 		HttpEntity<modifyInfo> request = new HttpEntity<>(info, headers);
-		//----------------------------------------
-		
+		// ----------------------------------------
+
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<Modify> result = restTemplate.exchange(uri,HttpMethod.PUT, request, Modify.class);
-		
+		ResponseEntity<Modify> result = restTemplate.exchange(uri, HttpMethod.PUT, request, Modify.class);
 
 		System.out.println(result.getStatusCode());
 		System.out.println(result.getBody());
-		
+
 		return result.getBody();
-		
+
 	}
-	
-	//다영님 서버 특정 방이름 찾기
+
+	// 다영님 서버 특정 방이름 찾기
 	public allRoomInfo[] findRoom(String roomName) { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
 
 		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
@@ -327,11 +315,7 @@ public class RestTemplateService {
 
 		// 데이터 보낼때 중복 값 보내면 에러
 		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-				.path("/webMethod/findRoomInfo/{room_name}")
-				.encode()
-				.build()
-				.expand(roomName)
-				.toUri();
+				.path("/webMethod/findRoomInfo/{room_name}").encode().build().expand(roomName).toUri();
 		System.out.println(uri.toString());
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -343,74 +327,62 @@ public class RestTemplateService {
 
 		System.out.println(result.getStatusCode());
 		System.out.println(result.getBody());
-		
+
 		return result.getBody();
 	}
-	
-	//다영님 서버랑 연결 - 특정 방이름을 넘겨주면 해당방에 대한 데이터를 모두 삭제 해주는 역할
+
+	// 다영님 서버랑 연결 - 특정 방이름을 넘겨주면 해당방에 대한 데이터를 모두 삭제 해주는 역할
 	public Result deleteRoomData(String roomName) {
-		
+
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+		ignoreHttps.ignore();
+
+		// 데이터 보낼때 중복 값 보내면 에러
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000").path("/delete_room/{room_name}")
+				.encode().build().expand(roomName).toUri();
+		System.out.println(uri.toString());
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		// --------------------------------------------------------------------
+		HttpHeaders headers = new HttpHeaders();
+		HttpEntity entity = new HttpEntity(headers);
+
+		// --------------------------------------------------------------------
+
+		ResponseEntity<Result> result = restTemplate.exchange(uri, HttpMethod.DELETE, entity, Result.class);
+//        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+
+		return result.getBody();
+
+	}
+
+	public userInfo[] showUserInfo(String userId) {
+
 		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
 		ignoreHttps.ignore();
 
 		// 데이터 보낼때 중복 값 보내면 에러
 		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-				.path("/delete_room/{room_name}")
-				.encode()
-				.build()
-				.expand(roomName)
-				.toUri();
+				.path("/webMethod/userInfo/{login_id}").encode().build().expand(userId).toUri();
 		System.out.println(uri.toString());
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		//--------------------------------------------------------------------
-		HttpHeaders headers = new HttpHeaders();
-		HttpEntity entity = new HttpEntity(headers);
-		
-		
-		//--------------------------------------------------------------------
-
-		ResponseEntity<Result> result = restTemplate.exchange(uri, HttpMethod.DELETE, entity,  Result.class);
-//        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+		ResponseEntity<userInfo[]> result = restTemplate.getForEntity(uri, userInfo[].class);
+//		        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
 
 		System.out.println(result.getStatusCode());
 		System.out.println(result.getBody());
-		
+
 		return result.getBody();
-		
+
 	}
-	
-	
-	public userInfo[] showUserInfo(String userId) {
-	
-		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
-				ignoreHttps.ignore();
 
-				// 데이터 보낼때 중복 값 보내면 에러
-				URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-						.path("/webMethod/userInfo/{login_id}")
-						.encode()
-						.build()
-						.expand(userId)
-						.toUri();
-				System.out.println(uri.toString());
-
-				RestTemplate restTemplate = new RestTemplate();
-				
-				ResponseEntity<userInfo[]> result = restTemplate.getForEntity(uri,  userInfo[].class);
-//		        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
-
-				System.out.println(result.getStatusCode());
-				System.out.println(result.getBody());
-				
-				return result.getBody();
-				
-	}
-	
-	
-	
-	//다영님 서버랑 연결 : 디데일 에서 해당 방에 대한 정보를 페이징 기능을 위해 해당 페이징에 맞게 5개 데이터씩만 보내주기
+	// 다영님 서버랑 연결 : 디데일 에서 해당 방에 대한 정보를 페이징 기능을 위해 해당 페이징에 맞게 5개 데이터씩만 보내주기
 	public allRoomInfo[] showDetailData(String roomName, int start, int amount) { // userJoin이라는 리턴 받을 class를 만들어 주어야 된다
 
 		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
@@ -418,11 +390,8 @@ public class RestTemplateService {
 
 		// 데이터 보낼때 중복 값 보내면 에러
 		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
-				.path("/webMethod/stat_web/{room_name}/{start}/{amount}")
-				.encode()
-				.build()
-				.expand(roomName, start, amount)
-				.toUri();
+				.path("/webMethod/stat_web/{room_name}/{start}/{amount}").encode().build()
+				.expand(roomName, start, amount).toUri();
 		System.out.println(uri.toString());
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -434,12 +403,118 @@ public class RestTemplateService {
 
 		System.out.println(result.getStatusCode());
 		System.out.println(result.getBody());
-		
+
 		return result.getBody();
+	}
+
+	// 다영님 서버랑 연결 하기 : 날짜 검색 기능
+	public allRoomInfo[] showSearchReDate(String searchText, String roomName, int start, int amount) {
+
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+		ignoreHttps.ignore();
+
+		// 데이터 보낼때 중복 값 보내면 에러
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+				.path("/webMethod/findDate/{searchText}/{room_name}/{start}/{amount}").encode().build()
+				.expand(searchText, roomName, start, amount).toUri();
+		System.out.println(uri.toString());
+
+		RestTemplate restTemplate = new RestTemplate();
+//		        String result = restTemplate.getForObject(uri, String.class);
+		// json 형태로 받자!
+
+		ResponseEntity<allRoomInfo[]> result = restTemplate.getForEntity(uri, allRoomInfo[].class);
+//		        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+
+		return result.getBody();
+
+	}
+
+	// 다영님 서버 연결 미세먼지 검색 기능
+	public allRoomInfo[] showSearchFindDust(String searchText, String roomName, int start, int amount) {
+
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+		ignoreHttps.ignore();
+
+		// 데이터 보낼때 중복 값 보내면 에러
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+				.path("/webMethod/findFinedust/{searchText}/{room_name}/{start}/{amount}").encode().build()
+				.expand(searchText, roomName, start, amount).toUri();
+		System.out.println(uri.toString());
+
+		RestTemplate restTemplate = new RestTemplate();
+//		        String result = restTemplate.getForObject(uri, String.class);
+		// json 형태로 받자!
+
+		ResponseEntity<allRoomInfo[]> result = restTemplate.getForEntity(uri, allRoomInfo[].class);
+//		        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+
+		return result.getBody();
+
 	}
 	
 	
 	
+	//다영님 서버 온도 검색 기능 
+	public allRoomInfo[] showSearchFindTemp(String searchText, String roomName, int start, int amount) {
+
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+		ignoreHttps.ignore();
+
+		// 데이터 보낼때 중복 값 보내면 에러
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+				.path("/webMethod/findTemp/{searchText}/{room_name}/{start}/{amount}").encode().build()
+				.expand(searchText, roomName, start, amount).toUri();
+		System.out.println(uri.toString());
+
+		RestTemplate restTemplate = new RestTemplate();
+//		        String result = restTemplate.getForObject(uri, String.class);
+		// json 형태로 받자!
+
+		ResponseEntity<allRoomInfo[]> result = restTemplate.getForEntity(uri, allRoomInfo[].class);
+//		        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+
+		return result.getBody();
+
+	}
+	
+	
+	
+	
+	//다영님 서버연결 : 습도에 대한 검섹 
+	public allRoomInfo[] showSearchFindHumidity(String searchText, String roomName, int start, int amount) {
+
+		// https인증 무시 하는 코드를 선언하여 먼저 연결전 실행 시켜야 한다.
+		ignoreHttps.ignore();
+
+		// 데이터 보낼때 중복 값 보내면 에러
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000")
+				.path("/webMethod/findHumidity/{searchText}/{room_name}/{start}/{amount}").encode().build()
+				.expand(searchText, roomName, start, amount).toUri();
+		System.out.println(uri.toString());
+
+		RestTemplate restTemplate = new RestTemplate();
+//		        String result = restTemplate.getForObject(uri, String.class);
+		// json 형태로 받자!
+
+		ResponseEntity<allRoomInfo[]> result = restTemplate.getForEntity(uri, allRoomInfo[].class);
+//		        UserResponse result = restTemplate.getForObject(uri, UserResponse.class);
+
+		System.out.println(result.getStatusCode());
+		System.out.println(result.getBody());
+
+		return result.getBody();
+
+	}
 	
 
 }
