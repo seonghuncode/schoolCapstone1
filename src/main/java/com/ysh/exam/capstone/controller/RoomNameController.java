@@ -267,8 +267,11 @@ public class RoomNameController {
 //			List<Room> searchRegdate = roomNameService.findRegDate(searchText, roomName, page.getStart(),
 //					page.getAmount());
 			// ==>
-			allRoomInfo[] searchRegdate = restTemplateService.showSearchReDate(searchText, roomName, page.getStart(),
-					page.getAmount());
+			allRoomInfo[] searchRegdate = restTemplateService.showSearchReDate(searchText, roomName, page.getStart() + 1,
+					page.getAmount() + 1);
+			
+			
+		
 			
 			//다영님 서버로 수정 하기--------------------------------------------------------------------------------------
 			
@@ -287,8 +290,8 @@ public class RoomNameController {
 //					page.getAmount());
 			// ==> 
 			
-			allRoomInfo[] searchjoinPm = restTemplateService.showSearchFindDust(searchText, roomName, page.getStart(),
-					page.getAmount());
+			allRoomInfo[] searchjoinPm = restTemplateService.showSearchFindDust(searchText, roomName, page.getStart() + 1,
+					page.getAmount() + 1);
 			
 			//다영님 서버랑 연결 하기-----------------------------------------------------------------------------
 			model.addAttribute("room", searchjoinPm);
@@ -305,7 +308,7 @@ public class RoomNameController {
 //					page.getStart(), page.getAmount());
 			
 			allRoomInfo[] searchjoinTemperature = restTemplateService.showSearchFindTemp(searchText, roomName,
-					page.getStart(), page.getAmount());
+					page.getStart() + 1, page.getAmount() + 1);
 			
 			//다영님 서버랑 연결 하기-------------------------------------------------------------------------------------
 			
@@ -322,8 +325,8 @@ public class RoomNameController {
 //			List<Room> searchjoinHumidity = roomNameService.findjoinHumidity(searchText, roomName, page.getStart(),
 //					page.getAmount());
 			
-			allRoomInfo[] searchjoinHumidity = restTemplateService.showSearchFindHumidity(searchText, roomName, page.getStart(),
-					page.getAmount());
+			allRoomInfo[] searchjoinHumidity = restTemplateService.showSearchFindHumidity(searchText, roomName, page.getStart() + 1,
+					page.getAmount() + 1);
 			
 			//다영님 서버랑 연결 하기-----------------------------------------------------------------------------------------
 			model.addAttribute("room", searchjoinHumidity);
