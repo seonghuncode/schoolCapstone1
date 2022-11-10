@@ -12,7 +12,7 @@
 <!-- 방이름을 상단에 보여 주기 위한 코드 -->
 <c:forEach var="room" items="${room}">
   <c:set var="room1Name" value="${room.room_name }" />
-  <c:set var="room1RegDate" value="${room.created_at.substring(2, 16) }" />
+  <c:set var="room1RegDate" value="${room.created_at.substring(2, 10) }" />
 </c:forEach>
 
 <!-- 검색 기능 만들기 -->
@@ -49,7 +49,7 @@
 
 
 <div class="container mx-auto px-3 mt-5 alert alert-primary justify-between" role="alert">
-  <h3 class="inline-block align-middle">위치 : ${room1Name}</h3>
+  <h3 class="inline-block align-middle">방 이름 : ${room1Name}</h3>
   <span class="float-right inline-block align-middle mt-2">방 생성 날짜 : ${room1RegDate}</span>
 </div>
 
@@ -63,12 +63,13 @@
       <c:set var="room1" value="${room.room_name }" />
       <div class="inline-flex mr-4">
         <div class="card border-secondary mb-3 " style="max-width: 18rem;">
-          <div class="card-header">날짜 : ${room.created_at.substring(2, 16) }</div>
+          <div class="card-header">날짜 : ${room.created_at.substring(2, 10) }</div>
           <div class="card-body text-secondary">
             <h5 class="card-title">${room.room_name }</h5>
             <p class="card-text">미세먼지 : ${room.findedust}</p>
             <p class="card-text">온도 : ${room.temp}</p>
             <p class="card-text">습도 : ${room.humidify}</p>
+            <p class="card-text">LED<i class="bi bi-lightbulb"></i> : ${room.ledcolor}</p>
           </div>
         </div>
       </div>
