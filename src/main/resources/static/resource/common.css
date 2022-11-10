@@ -1,4 +1,6 @@
 /*폰트*/
+
+/*
 @font-face {
   font-family: 'LotteMartDream';
   font-style: normal;
@@ -19,6 +21,32 @@
 }
 html > body * {
  font-family: 'LotteMartDream', sans-serif;
+}
+
+html > body * {
+ font-family: 'LotteMartDream', sans-serif;
+}
+*/
+@font-face {
+    font-family: 'twayair';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+  font-family: 'twayair';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+}
+@font-face {
+  font-family: 'twayair';
+  font-style: normal;
+  font-weight: 300;
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+}
+html > body * {
+ font-family: 'twayair', sans-serif;
 }
 
 /* 라이브러리 */
