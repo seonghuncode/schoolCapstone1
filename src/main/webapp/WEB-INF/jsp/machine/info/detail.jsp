@@ -60,6 +60,7 @@
 
 
     <c:forEach var="room" items="${room}">
+      <c:set var="ledcolor" value="${room.ledcolor}" />
       <c:set var="room1" value="${room.room_name }" />
       <div class="inline-flex mr-4">
         <div class="card border-secondary mb-3 " style="max-width: 18rem;">
@@ -69,7 +70,7 @@
             <p class="card-text">미세먼지 : ${room.findedust}</p>
             <p class="card-text">온도 : ${room.temp}</p>
             <p class="card-text">습도 : ${room.humidify}</p>
-            <p class="card-text">LED<i class="bi bi-lightbulb"></i> : ${room.ledcolor}</p>
+            <p class="card-text">LED<i class="bi bi-lightbulb"></i> : ${room.ledcolor}<span style="width: 20px; height :20px; border-radius:50%; background: ${ledcolor};"><i class="bi bi-brightness-high"></i></span></p>
           </div>
         </div>
       </div>
