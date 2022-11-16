@@ -65,8 +65,9 @@
   </div>
 
 
+<!--  ======================   -->
 
-    <p class="text-red-400 mt-3"><i class="bi bi-bookmark-check-fill"></i>로그인후 기능 설명</p>
+ <p class="text-red-400 mt-3"><i class="bi bi-bookmark-check-fill"></i>로그인후 기능 설명</p>
     <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingOne">
@@ -139,6 +140,13 @@
     
 
   </div>
+  
+
+  
+</div>
+
+
+   
   
 
 </div class="mb-10">

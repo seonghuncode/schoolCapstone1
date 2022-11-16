@@ -338,7 +338,7 @@ public class RestTemplateService {
 		ignoreHttps.ignore();
 
 		// 데이터 보낼때 중복 값 보내면 에러
-		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000").path("/delete_room/{room_name}")
+		URI uri = UriComponentsBuilder.fromUriString("https://203.250.133.171:8000").path("webMethod/delete_room/{room_name}")
 				.encode().build().expand(roomName).toUri();
 		System.out.println(uri.toString());
 

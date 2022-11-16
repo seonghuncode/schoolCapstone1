@@ -7,6 +7,8 @@
 
 
 
+
+
 <c:set var="pageTitle" value="데이터 리스트" />
 
 <!-- 불러오기 -->
@@ -31,7 +33,7 @@
           <th scope="col">습도</th>
           <th scope="col">데이터 갯수</th>
           <th scope="col">통계 보기</th>
-          <th scope="col">삭제 / 수정</th>
+          <th scope="col">삭제</th>
         </tr>
       </thead>
       <tbody>
@@ -68,10 +70,10 @@
             <tr class="table-info">
               <td scope="row">${room.id }</td>
               <td>
-              <!-- 방이름을 클릭하면 해당 방에 대한 디테일 정보를 보여주는 페이지 이때 방이름을 같이 넘겨 준다. -->
+                <!-- 방이름을 클릭하면 해당 방에 대한 디테일 정보를 보여주는 페이지 이때 방이름을 같이 넘겨 준다. -->
                 <a href="../room/doDetail?roomName=${room.room_name}"> ${room.room_name} </a>
               </td>
-             
+
               <td>${room.created_at.substring(2, 10) }</td>
               <td>
                 <fmt:formatNumber value="${totalPm/cnt}" pattern=".00" />
@@ -82,13 +84,30 @@
               <td>
                 <fmt:formatNumber value="${totalHumadity/cnt}" pattern=".00" />
               </td>
-              <td>${cnt}</td>
+              <td>
+              <!-- 방이름은 존재 하는데 데이터가 존재 하지 않을 경우 데이터 갯수가 1개로 표시 되어 데이터가 모두 없다면 0으로 표시 나머지는 cnt로 표시 하기 -->
+                <c:choose>
+                  <c:when test="${totalPm/cnt == 0 && totalTemperature/cnt == 0 && totalHumadity/cnt == 0 }">
+                    0
+                  </c:when>
+                  <c:otherwise>
+                    ${cnt}
+                  </c:otherwise>
+                </c:choose>
+
+
+
+
+
+              </td>
               <td>
                 <a href="/machine/room/showGraph?roomname=${room.room_name}" type="button" class="btn btn-success">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pie-chart-fill" viewBox="0 0 16 16">
-                    <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"></path>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-pie-chart-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"></path>
                     </svg>
-                  
+
                 </a>
               </td>
               <td>
@@ -100,14 +119,6 @@
                   </svg>
                 </a>
 
-                <!-- 수정허가  미완성-->
-                <a href="/machine/room/modify?roomname=${room.room_name}" type="button" class="btn btn-outline-primary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-ui-checks" viewBox="0 0 16 16">
-                  <path
-                      d="M7 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1zM2 1a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2zm0 8a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2H2zm.854-3.646a.5.5 0 0 1-.708 0l-1-1a.5.5 0 1 1 .708-.708l.646.647 1.646-1.647a.5.5 0 1 1 .708.708l-2 2zm0 8a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647 1.646-1.647a.5.5 0 0 1 .708.708l-2 2zM7 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1zm0-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
-                  </svg>
-                </a>
               </td>
             </tr>
 

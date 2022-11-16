@@ -70,7 +70,7 @@
             <p class="card-text">미세먼지 : ${room.findedust}</p>
             <p class="card-text">온도 : ${room.temp}</p>
             <p class="card-text">습도 : ${room.humidify}</p>
-            <p class="card-text">LED<span style="width: 20px; height :20px; border-radius:50%; background: ${ledcolor};"><i class="bi bi-lightbulb"></i></span> : ${room.ledcolor}</p>
+            <p class="card-text">LED<i class="bi bi-lightbulb"></i> : <span style="width: 20px; height :20px; background: ${ledcolor}; color : black">${room.ledcolor}</span></p>
           </div>
         </div>
       </div>

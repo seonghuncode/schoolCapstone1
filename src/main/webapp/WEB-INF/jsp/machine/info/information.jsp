@@ -54,7 +54,7 @@
         </div>
         <div class="col">
           유저 닉네임
-          <div class="form-control" grid text-center aria-label="nickname">${user.nickname}</div>
+          <div class="form-control grid text-center" aria-label="nickname">${user.nickname}</div>
         </div>
         <div class="col">
           유저 이메일
