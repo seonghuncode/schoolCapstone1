@@ -67,7 +67,7 @@
 <td align="center">Raider Sensor</td>
 <td align="left">
   하드웨어의 맵핑 기술을 위해 Raider센서를 이용한 맵핑, 집안 내 하드웨어 위치 확인을 위한 Raider센서 네비게이션, 리눅스 마스터
-  <div><a href="https://github.com/사용자명/리포지토리명">♾️Raider Sensor GitHub 리포지토리</a></div>
+  <div><a href="https://github.com/dotdotot/pcuCapstoneArduino">♾️Raider Sensor GitHub 리포지토리</a></div>
 </td>
 </tr>
 <tr>
