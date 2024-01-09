@@ -163,8 +163,8 @@
 <table>
 <thead>
 <tr>
-<th align="center">https요청에 대한 인증서 문제를 무시하고 요청을 보내는 코드<br>
-(해결 방안에 대한 추가 자료)
+<th align="center" colspan="2">https요청에 대한 인증서 문제를 무시하고 요청을 보내는 코드<br>
+(※해결 방안에 대한 추가 자료)
 </th>
 </tr>
 </thead>
