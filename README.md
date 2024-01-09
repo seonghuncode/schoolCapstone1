@@ -51,7 +51,7 @@
 <td align="center">Web</td>
 <td align="left">
   서버에 저장된 데이터를 자세하게 통계 형식으로 보여주기 위한 웹 사이트 제작, 집안 내 하드웨어의 위치를 확인할 수 있는 웹 사이트 제작 
-  <div><a href="https://github.com/dotdotot/pcuCapstoneWeb">Web GitHub 리포지토리</a></div>
+  <div><a href="https://github.com/dotdotot/pcuCapstoneWeb">♾️Web GitHub 리포지토리</a></div>
 </td>
 </tr>
 <tr>
@@ -59,7 +59,7 @@
 <td align="center">Server, H/W</td>
 <td align="left">
   하드웨어를 이용하여 아두이노 및 아날로그 센서를 이용하여 하드웨어 구현, 집안 내 온습도, 미세먼지 측, 하드웨어와 서버 연동
-  <div><a href="https://github.com/dotdotot/pcuCapstoneSever">Server GitHub 리포지토리</a></div>
+  <div><a href="https://github.com/dotdotot/pcuCapstoneSever">♾️Server GitHub 리포지토리</a></div>
 </td>
 </tr>
 <tr>
@@ -67,7 +67,7 @@
 <td align="center">Raider Sensor</td>
 <td align="left">
   하드웨어의 맵핑 기술을 위해 Raider센서를 이용한 맵핑, 집안 내 하드웨어 위치 확인을 위한 Raider센서 네비게이션, 리눅스 마스터
-  <div><a href="https://github.com/사용자명/리포지토리명">Raider Sensor GitHub 리포지토리</a></div>
+  <div><a href="https://github.com/사용자명/리포지토리명">♾️Raider Sensor GitHub 리포지토리</a></div>
 </td>
 </tr>
 <tr>
@@ -75,7 +75,7 @@
 <td align="center">DB</td>
 <td align="left">
   mySQL을 통해 데이터베이스 설계 및 구축, Fast Api를 활용하여 서버 제작, 안드로이드와 웹에 보내주는 데이터를 위한 메소드 제작, 하드웨어에서 보내주는 데이터를 가져오는 메소드 제작
-  <div><a href="https://github.com/dotdotot/pcuCapstoneRestServer">DB GitHub 리포지토리</a></div>
+  <div><a href="https://github.com/dotdotot/pcuCapstoneRestServer">♾️DB GitHub 리포지토리</a></div>
 </td>
 </tr>
 <tr>
@@ -83,7 +83,7 @@
 <td align="center">Android</td>
 <td align="left">
   서버에 저장된 데이터를 간단하게 통계 형식으로 보여주기 위한 안드로이드 UI, 사용자가 하드웨어를 안드로이드에서 조작할 수 있는 UI
-  <div><a href="https://github.com/dotdotot/pcuCapstoneArduino">Android GitHub 리포지토리</a></div>
+  <div><a href="https://github.com/dotdotot/pcuCapstoneArduino">♾️Android GitHub 리포지토리</a></div>
 </td>
 </tr>
 </tbody>
