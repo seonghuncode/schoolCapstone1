@@ -83,7 +83,7 @@
 <td align="center">Android</td>
 <td align="left">
   서버에 저장된 데이터를 간단하게 통계 형식으로 보여주기 위한 안드로이드 UI, 사용자가 하드웨어를 안드로이드에서 조작할 수 있는 UI
-  <div><a href="https://github.com/dotdotot/pcuCapstoneArduino">♾️Android GitHub 리포지토리</a></div>
+  <div><a href="https://github.com/dotdotot/pcuCapstoneAndroid">♾️Android GitHub 리포지토리</a></div>
 </td>
 </tr>
 </tbody>
